@@ -1,0 +1,34 @@
+body{
+    height:100%;
+    width: 100%;
+    background-color: rebeccapurple;
+    /* overflow: hidden; */
+    margin: auto;
+    position:relative;
+}
+.game-container{
+    height: 95vh;
+    width: 95vw;
+    background-color: coral;
+    margin: auto;
+    position: absolute;
+    top: 1.5vh;
+    left: 2.5vw;
+    display:flex;
+    flex-wrap: wrap;
+}
+header{
+    width: 100vw;
+    height: 10%;
+    background-color: aquamarine;
+}
+.stats-container{
+    height: 90%;
+    width: 20%;
+    background-color: forestgreen;
+}
+.card-area{
+    height: 90%;
+    width: 80%;
+    background-color: slategray;
+}
