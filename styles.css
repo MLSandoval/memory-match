@@ -6,6 +6,63 @@ body{
     margin: auto;
     position:relative;
 }
+.container{
+    width: 100%;
+    margin: auto;
+}
+.slider .image:not(:first-child){
+    display:none;
+}
+.slider .image:first-child{
+    background: url("./assets/BGs/Arches.jpg") no-repeat center center;
+    background-size:cover;
+    height: 500px;
+}
+.slider .image:nth-child(2){
+    background: url("./assets/BGs/CaliforniaCoast.jpg") no-repeat center center;
+    background-size:cover;
+    height: 500px;
+}
+.slider .image:nth-child(3){
+    background: url("./assets/BGs/Denali.jpg") no-repeat center center;
+    background-size:cover;
+    height: 500px;
+}
+.slider .image:nth-child(4){
+    background: url("./assets/BGs/GrandCanyon.jpg") no-repeat center center;
+    background-size:cover;
+    height: 500px;
+}
+.slider .image:nth-child(5){
+    background: url("./assets/BGs/GreatSmokyMountains.jpg") no-repeat center center;
+    background-size:cover;
+    height: 500px;
+}
+.slider .image:nth-child(6){
+    background: url("./assets/BGs/Rockies.jpg") no-repeat center center;
+    background-size:cover;
+    height: 500px;
+}
+.slider .image:nth-child(7){
+    background: url("./assets/BGs/PurpleMountains.jpg") no-repeat center center;
+    background-size:cover;
+    height: 500px;
+}
+.slider .image:nth-child(8){
+    background: url("./assets/BGs/VolcanoesNationalPark.jpg") no-repeat center center;
+    background-size:cover;
+    height: 500px;
+}
+.slider .image:nth-child(9){
+    background: url("./assets/BGs/Yellowstone.jpg") no-repeat center center;
+    background-size:cover;
+    height: 500px;
+}
+.slider .image:nth-child(10){
+    background: url("./assets/BGs/Yosemite.jpg") no-repeat center center;
+    background-size:cover;
+    height: 500px;
+}
 .game-container{
     height: 95vh;
     width: 95vw;
@@ -14,10 +71,12 @@ body{
     position: absolute;
     top: 1.5vh;
     left: 2.5vw;
-    display:flex;
+    /* display:flex; */
+    display:none;
     flex-wrap: wrap;
 }
 header{
+    display:none;
     width: 100vw;
     height: 10%;
     background-color: aquamarine;
