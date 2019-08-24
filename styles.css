@@ -59,7 +59,7 @@ body{
     height: 375px;
 }
 .slider .image:nth-child(10){
-    background: url("./assets/imagesBGs/Yosemite.jpg") no-repeat center center;
+    background: url("./assets/images/BGs/Yosemite.jpg") no-repeat center center;
     background-size:cover;
     height: 375px;
 }
