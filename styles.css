@@ -14,54 +14,54 @@ body{
     display:none;
 }
 .slider .image:first-child{
-    background: url("./assets/BGs/Arches.jpg") no-repeat center center;
+    background: url("./assets/images/BGs/Arches.jpg") no-repeat center center;
     background-size:cover;
-    height: 500px;
+    height: 375px;
 }
 .slider .image:nth-child(2){
-    background: url("./assets/BGs/CaliforniaCoast.jpg") no-repeat center center;
+    background: url("./assets/images/BGs/CaliforniaCoast.jpg") no-repeat center center;
     background-size:cover;
-    height: 500px;
+    height: 375px;
 }
 .slider .image:nth-child(3){
-    background: url("./assets/BGs/Denali.jpg") no-repeat center center;
+    background: url("./assets/images/BGs/Denali.jpg") no-repeat center center;
     background-size:cover;
-    height: 500px;
+    height: 375px;
 }
 .slider .image:nth-child(4){
-    background: url("./assets/BGs/GrandCanyon.jpg") no-repeat center center;
+    background: url("./assets/images/BGs/GrandCanyon.jpg") no-repeat center center;
     background-size:cover;
-    height: 500px;
+    height: 375px;
 }
 .slider .image:nth-child(5){
-    background: url("./assets/BGs/GreatSmokyMountains.jpg") no-repeat center center;
+    background: url("./assets/images/BGs/GreatSmokyMountains.jpg") no-repeat center center;
     background-size:cover;
-    height: 500px;
+    height: 375px;
 }
 .slider .image:nth-child(6){
-    background: url("./assets/BGs/Rockies.jpg") no-repeat center center;
+    background: url("./assets/images/BGs/Rockies.jpg") no-repeat center center;
     background-size:cover;
-    height: 500px;
+    height: 375px;
 }
 .slider .image:nth-child(7){
-    background: url("./assets/BGs/PurpleMountains.jpg") no-repeat center center;
+    background: url("./assets/images/BGs/PurpleMountains.jpg") no-repeat center center;
     background-size:cover;
-    height: 500px;
+    height: 375px;
 }
 .slider .image:nth-child(8){
-    background: url("./assets/BGs/VolcanoesNationalPark.jpg") no-repeat center center;
+    background: url("./assets/images/BGs/VolcanoesNationalPark.jpg") no-repeat center center;
     background-size:cover;
-    height: 500px;
+    height: 375px;
 }
 .slider .image:nth-child(9){
-    background: url("./assets/BGs/Yellowstone.jpg") no-repeat center center;
+    background: url("./assets/images/BGs/Yellowstone.jpg") no-repeat center center;
     background-size:cover;
-    height: 500px;
+    height: 375px;
 }
 .slider .image:nth-child(10){
-    background: url("./assets/BGs/Yosemite.jpg") no-repeat center center;
+    background: url("./assets/imagesBGs/Yosemite.jpg") no-repeat center center;
     background-size:cover;
-    height: 500px;
+    height: 375px;
 }
 .game-container{
     height: 95vh;
