@@ -71,7 +71,7 @@ body{
     position: absolute;
     top: 1.5vh;
     left: 2.5vw;
-    /* display:flex; */
+    display:flex;
     display:none;
     flex-wrap: wrap;
 }
