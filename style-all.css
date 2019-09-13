@@ -1,11 +1,55 @@
 body{
-    height:100%;
-    width: 100%;
+    height:100vh;
+    width: 100vw;
     background-color: rgba(87, 87, 87, 0.603);
     /* overflow: hidden; */
     margin: auto;
     position:relative;
 }
+header{
+    display:none;
+    width: 100vw;
+    height: 10%;
+    background-color: aquamarine;
+}
+.game-container{
+    height: 95vh;
+    width: 97vw;
+    background-color: coral;
+    position: absolute;
+    top: 2.5vh;
+    left: 2vw;
+    display:flex;
+    flex-wrap: wrap;
+} 
+.stats-container{
+    height: 90%;
+    width: 20%;
+    background-color: forestgreen;
+}
+.card-area{
+    height: 90%;
+    width: 80%;
+    background-color: slategray;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*image slider css code*/
 /* .container{
     width: 100%;
     margin: auto;
@@ -63,31 +107,4 @@ body{
     background-size:cover;
     height: 375px;
 }
-.game-container{
-    height: 95vh;
-    width: 95vw;
-    background-color: coral;
-    margin: auto;
-    position: absolute;
-    top: 1.5vh;
-    left: 2.5vw;
-    display:flex;
-    display:none;
-    flex-wrap: wrap;
-}
-header{
-    display:none;
-    width: 100vw;
-    height: 10%;
-    background-color: aquamarine;
-}
-.stats-container{
-    height: 90%;
-    width: 20%;
-    background-color: forestgreen;
-}
-.card-area{
-    height: 90%;
-    width: 80%;
-    background-color: slategray;
-} */
+*/
