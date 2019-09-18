@@ -8,10 +8,9 @@ body{
     position:relative;
     max-width: 100%;
     max-height: 100%;
-    padding: 10px;
+    padding: 5px;
 }
 header{
-    /* display:none; */
     text-align: center;
     width: 90vw;
     height: 10%;
@@ -35,13 +34,15 @@ header{
 }
 .stats-bubble{
    background-color: rgb(41, 12, 12);
-   width: 33.3%;
+   width: 33.33%;
    text-align: center;
 }
-.info-area{
+.info-container{
     width: 33.3%;
     height: 80%;
     background-color: greenyellow;
+    display: flex;
+    flex-direction: column;
 }
 /* .square {
   width: 50%;
@@ -71,16 +72,21 @@ header{
 }
 .info-div{
     background-color: rgb(41, 30, 41);
-    flex: 1 1 auto;  
+    flex: 1 1 auto;
 }
 .info-div-text-container{
     display:flex;
     justify-content: space-around;
     height:100%;
 }
+.info-columns{
+    text-align: left;
+}
+.info-column1{}
+.info-column2{}
 .card-area{
     height: 80%;
-    width: 66.67%;
+    width: 66.69%;
     background-color: rgba(112, 128, 144, 0.774);
 }
 .vertical-align{
