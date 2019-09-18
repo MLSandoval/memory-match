@@ -1,7 +1,7 @@
 body{
     color: white;
-    /* height:100vh;
-    width: 100vw; */
+    height:100vh;
+    width: 100vw;
     background-color: rgba(87, 87, 87, 0.788);
     overflow: hidden;
     /* margin: auto; */
@@ -9,17 +9,22 @@ body{
     max-width: 100%;
     max-height: 100%;
     padding: 5px;
+    font-size: .5rem;
+    background: url("./assets/images/BGs/PurpleMountains.jpg") no-repeat center center;
+    margin: 0;
+    padding: 0;
 }
 header{
     text-align: center;
-    width: 90vw;
+    width: 100vw;
     height: 10%;
-    background-color: rgba(127, 255, 212, 0.788);
+    background-color: rgba(127, 255, 212, 0.438);
+    margin-top:2.5%;
 }
 .game-container{
     height: 93vh;
     width: 90vw;
-    background-color: rgba(255, 127, 80, 0.788);
+    /* background-color: rgba(255, 127, 80, 0.788); */
     display:flex;
     flex-wrap: wrap;
     margin: auto;
@@ -27,20 +32,20 @@ header{
 .stats-container{
     height: 10%;
     width: 100%;
-    background-color: rgba(34, 139, 34, 0.801);
+    /* background-color: rgba(34, 139, 34, 0.801); */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 .stats-bubble{
-   background-color: rgb(41, 12, 12);
+   background-color: rgba(41, 12, 12, 0.568);
    width: 33.33%;
    text-align: center;
 }
 .info-container{
     width: 33.3%;
     height: 80%;
-    background-color: greenyellow;
+    /* background-color: greenyellow; */
     display: flex;
     flex-direction: column;
 }
@@ -61,17 +66,17 @@ header{
     content: "";
     display:block;
     padding-bottom: 100%;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.356);
     border-radius: 18px;
 }
 .image-caption{
     position: absolute;
     color: black;
-    bottom: 0;
-    right: 0;
+    bottom: 5%;
+    left: 5%;
 }
 .info-div{
-    background-color: rgb(41, 30, 41);
+    background-color: rgba(41, 30, 41, 0.452);
     flex: 1 1 auto;
 }
 .info-div-text-container{
@@ -87,13 +92,13 @@ header{
 .card-area{
     height: 80%;
     width: 66.69%;
-    background-color: rgba(112, 128, 144, 0.774);
+    background-color: rgba(112, 128, 144, 0.432);
 }
 .vertical-align{
     vertical-align: middle;
 }
 .rounded-corners{
-    border-radius: 18px;
+    border-radius: 15px;
 }
 
 /*image slider css code*/

@@ -1,3 +1,42 @@
+const cardImageURLArray = [];
+const parkImageURLArray = [];
+const DOMElements = {};
+
+
+$(document).ready(function(){
+    createCardElements(cardImageURLArray);
+
+});
+
+const createCards = (cardImages) => {
+    let elementsArray = [];
+
+    for(let i = 0; i < cardImages.length; i++){
+        let tempCardBack = $("<div>").addClass('card-back');
+        
+
+        elementsArray.push(tempCard);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//image slider code//
 // $(function(){
 //     autoslide();
 // });
