@@ -14,21 +14,22 @@ body{
     margin: 0;
     padding: 0;
 }
-header{
-    text-align: center;
-    width: 100vw;
-    height: 10%;
-    background-color: rgba(127, 255, 212, 0.438);
-    margin-top:2.5%;
-}
 .game-container{
     height: 93vh;
-    width: 90vw;
+    width: 98vw;
     /* background-color: rgba(255, 127, 80, 0.788); */
     display:flex;
     flex-wrap: wrap;
     margin: auto;
 } 
+header{
+    text-align: center;
+    width: 100%;
+    height: 10%;
+    background-color: rgba(127, 255, 212, 0.438);
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
 .stats-container{
     height: 10%;
     width: 100%;
@@ -36,28 +37,20 @@ header{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-bottom: 1%;
 }
 .stats-bubble{
-   background-color: rgba(41, 12, 12, 0.568);
-   width: 33.33%;
+   background-color: rgba(150, 140, 140, 0.568);
+   width: 33%;
    text-align: center;
 }
 .info-container{
-    width: 33.3%;
+    width: 33%;
     height: 80%;
     /* background-color: greenyellow; */
     display: flex;
     flex-direction: column;
 }
-/* .square {
-  width: 50%;
-}
-
-.square:after {
-  content: "";
-  display: block;
-  padding-bottom: 100%;
-} */
 .image-square{
     width:100%;
     position:relative;
@@ -68,16 +61,17 @@ header{
     padding-bottom: 100%;
     background-color: rgba(255, 255, 255, 0.356);
     border-radius: 18px;
+    margin-bottom: 2.5%;
 }
 .image-caption{
     position: absolute;
-    color: black;
     bottom: 5%;
     left: 5%;
 }
 .info-div{
-    background-color: rgba(41, 30, 41, 0.452);
+    background-color: rgba(161, 159, 161, 0.452);
     flex: 1 1 auto;
+    margin-bottom: 0;
 }
 .info-div-text-container{
     display:flex;
@@ -91,8 +85,9 @@ header{
 .info-column2{}
 .card-area{
     height: 80%;
-    width: 66.69%;
-    background-color: rgba(112, 128, 144, 0.432);
+    width: 66%;
+    background-color: rgba(112, 128, 144, 0.7);
+    margin-left: .7%;
 }
 .vertical-align{
     vertical-align: middle;
