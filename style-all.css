@@ -1,25 +1,30 @@
 html{
     background-color: orange;
+    display:flex;
+    justify-content: space-around;
+    align-content: center;
 }
 body{
     color: white;
     height:100vh;
     width: 100vw;
-    background-color: rgba(87, 87, 87, 0.788);
+    max-width: 1400px;
+    max-height: 817px;
+    /* max-width: 100%;
+    max-height: 100%; */
+    /* background-color: rgba(87, 87, 87, 0.788); */
     overflow: hidden;
-    /* margin: auto; */
     position:relative;
-    max-width: 100%;
-    max-height: 100%;
     padding: 5px;
     font-size: .75rem;
-    background: url("./assets/images/BGs/PurpleMountains.jpg") no-repeat center center;
-    margin: 0;
+    background: url("./assets/images/BGs/VolcanoesNationalPark.jpg") no-repeat center center;
+    margin: auto;
     padding: 0;
+
 }
 .game-container{
-    height: 93vh;
-    width: 98vw;
+    height: 93%;
+    width: 98%;
     /* background-color: rgba(255, 127, 80, 0.788); */
     display:flex;
     flex-wrap: wrap;
@@ -32,6 +37,11 @@ header{
     background-color: rgba(127, 255, 212, 0.438);
     margin-top: 1%;
     margin-bottom: 1%;
+    align-content: center;
+    vertical-align: center;
+}
+.header-text{
+    margin:0;
 }
 .stats-container{
     height: 10%;
@@ -92,12 +102,53 @@ header{
     background-color: rgba(112, 128, 144, 0.7);
     margin-left: .7%;
 }
-.vertical-align{
-    vertical-align: middle;
+.card-container{
+    height: 25px;
+    width: 25px;
 }
+.card-back{
+    background-image: url('assets/images/CardImages/CardBack1.png');
+}
+.arches{
+    background-image: url('assets/images/CardImages/Arches1.png');
+}
+.crater-lake{
+    background-image: url('assets/images/CardImages/CraterLake1.png');
+}
+.death-valley{
+    background-image: url('assets/images/CardImage/DeathValley1.png');
+}
+.grand-canyon{
+    background-image: url('assets/images/CardImages/GrandCanyon1.png');
+}
+.joshua-tree{
+    background-image: url('assets/images/CardImages/JoshuaTree1.png');
+}
+.seqioa{
+    background-image: url('assets/images/CardImages/Seqoia1.png');
+}
+.smoky-mountains{
+    background-image: url('assets/images/CardImages/SmokyMountains1.png');
+}
+.yellowstone{
+    background-image: url('assets/images/CardImages/YellowstoneLogo1.png');
+}
+.smoky-mountains{
+    background-image: url('assets/images/CardImages/Yosemite1.png');
+}
+
+
+
+
 .rounded-corners{
     border-radius: 15px;
 }
+.text-small{
+    font-size: .5rem;
+}
+
+
+
 
 /*image slider css code*/
 /* .container{
