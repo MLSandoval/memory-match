@@ -1,4 +1,15 @@
-const cardImageURLArray = [];
+const cardImageURLArray = [
+    'assets/images/CardImages/Arches1.png',
+    'assets/images/CardImages/CraterLake1.png',
+    'assets/images/CardImages/DeathValley1.png',
+    'assets/images/CardImages/GrandCanyon1.png',
+    'assets/images/CardImages/GrandTeton1.png',
+    'assets/images/CardImages/JoshuaTree1.png',
+    'assets/images/CardImages/Seqoia1.png',
+    'assets/images/CardImages/SmokyMountains1.png',
+    'assets/images/CardImages/YellowstoneLogo1.png',
+    'assets/images/CardImages/Yosemite1.png'
+];
 const parkImageURLArray = [];
 const DOMElements = {};
 
@@ -11,21 +22,15 @@ $(document).ready(function(){
 const createCards = (cardImages) => {
     let elementsArray = [];
 
-    for(let i = 0; i < cardImages.length; i++){
-        let tempCardBack = $("<div>").addClass('card-back');
+    for(let i = 0; i < 9; i++){
+        let cardContainer = $("<div>").addClass('card-container');
+        let cardBack = $("<div>").addClass('card-back');
+        let cardReverse = $("<div>").css('background-image', `${cardImages[i]}`)
         
 
         elementsArray.push(tempCard);
     }
 }
-
-
-
-
-
-
-
-
 
 
 
