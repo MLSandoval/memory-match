@@ -15,7 +15,7 @@ const DOMElements = {};
 
 
 $(document).ready(function(){
-    createCardElements(cardImageURLArray);
+    createCards(cardImageURLArray);
 
 });
 
@@ -25,11 +25,45 @@ const createCards = (cardImages) => {
     for(let i = 0; i < 9; i++){
         let cardContainer = $("<div>").addClass('card-container');
         let cardBack = $("<div>").addClass('card-back');
-        let cardReverse = $("<div>").css('background-image', `${cardImages[i]}`)
+        let cardReverse = $("<div>").css('background-image', `url('${cardImages[i]}')`)
         
-
-        elementsArray.push(tempCard);
+        cardContainer.append(cardBack, cardReverse);
+        elementsArray.push(cardContainer);
     }
+
+    DOMElements.cards = elementsArray;
+    DOMElements.cardRows = [];
+    DOMElements.cardRows.push($('.card-row1'), $('.card-row2'), $('.card-row3'));
+    console.log(DOMElements);
+
+    //must double cards before appending, and add shuffle feature
+    for(let i = 0; i < elementsArray.length; i++){
+        switch(i){
+            case 0:
+            case 1: 
+            case 2:
+            case 3:
+            case 4:
+            case 5: DOMElements.cardRows[0].append(DOMElements.cards[i]);
+                break;
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+            case 11: DOMElements.cardRows[1].append(DOMElements.cards[i]);
+                break;
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+            case 16:
+            case 17: DOMElements.cardRows[2].append(DOMElements.cards[i]);
+                break;
+        }
+    }
+
+
 }
 
 
