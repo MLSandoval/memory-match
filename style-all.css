@@ -109,6 +109,8 @@ header{
 .card-back{
     background-image: url('assets/images/CardImages/CardBack1.png');
 }
+
+
 .arches{
     background-image: url('assets/images/CardImages/Arches1.png');
 }
@@ -124,7 +126,7 @@ header{
 .joshua-tree{
     background-image: url('assets/images/CardImages/JoshuaTree1.png');
 }
-.seqioa{
+.seqoia{
     background-image: url('assets/images/CardImages/Seqoia1.png');
 }
 .smoky-mountains{
