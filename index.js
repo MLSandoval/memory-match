@@ -10,7 +10,20 @@ const cardImageURLArray = [
     'assets/images/CardImages/YellowstoneLogo1.png',
     'assets/images/CardImages/Yosemite1.png'
 ];
-const parkImageURLArray = [];
+const parkImageURLArray = [
+    'assets/images/MatchImages/ArchesImage600.png',
+    'assets/images/MatchImages/CraterLakeImage600.png',
+    'assets/images/MatchImages/DeathValley600.png',
+    'assets/images/MatchImages/GrandCanyon600.png',
+    'assets/images/MatchImages/GrandTeton600.png',
+    'assets/images/MatchImages/JoshuaTreeImage600.png',
+    'assets/images/MatchImages/SeqoiaImage600.png',
+    'assets/images/MatchImages/SmokyMountainsImage600.png',
+    'assets/images/MatchImages/YellowstoneImage600.png',
+    'assets/images/MatchImages/YosemiteImage600.png'
+];
+
+//holds references as the dom elements are created
 const DOMElements = {};
 
 
@@ -25,19 +38,24 @@ const createCards = (cardImages) => {
     for(let i = 0; i < 9; i++){
         let cardContainer = $("<div>").addClass('card-container');
         let cardBack = $("<div>").addClass('card-back');
-        let cardReverse = $("<div>").css('background-image', `url('${cardImages[i]}')`)
+        let cardReverse = $("<div>").css('background-image', `url('${cardImages[i]}')`);
         
         cardContainer.append(cardBack, cardReverse);
         elementsArray.push(cardContainer);
     }
 
-    DOMElements.cards = elementsArray;
+    let doubledCardsArr = elementsArray.concat([...elementsArray]);
+    console.log('elementsArray: ', elementsArray);
+    console.log('doubledCardsArr: ', doubledCardsArr);
+    
+
+    DOMElements.cards = doubledCardsArr;
     DOMElements.cardRows = [];
     DOMElements.cardRows.push($('.card-row1'), $('.card-row2'), $('.card-row3'));
-    console.log(DOMElements);
+    console.log('DOMElements: ', DOMElements);
 
     //must double cards before appending, and add shuffle feature
-    for(let i = 0; i < elementsArray.length; i++){
+    for(let i = 0; i < doubledCardsArr.length; i++){
         switch(i){
             case 0:
             case 1: 
