@@ -38,49 +38,74 @@ const createCards = (cardImages) => {
     for(let i = 0; i < 9; i++){
         let cardContainer = $("<div>").addClass('card-container');
         let cardBack = $("<div>").addClass('card-back');
-        let cardReverse = $("<div>").css('background-image', `url('${cardImages[i]}')`);
-        
+        let cardReverse = $("<div>").addClass('card-reverse').css('background-image', `url('${cardImages[i]}')`);
         cardContainer.append(cardBack, cardReverse);
-        elementsArray.push(cardContainer);
+        let cardDouble = cardContainer.clone(true, true);
+        // let cardDuplicate = JSON.parse(JSON.stringify(cardContainer));
+        // console.log('cardDuplicate: ', cardDuplicate);
+        elementsArray.push(cardContainer, cardDouble);
     }
 
-    let doubledCardsArr = elementsArray.concat([...elementsArray]);
+    // let deepCopyElements = JSON.parse(JSON.stringify(elementsArray));
+    // console.log('deepCopyElements: ', deepCopyElements);
+
+    // let doubledCardsArr = elementsArray.concat([...elementsArray]);
+    // let doubledCardsArr = elementsArray.concat(deepCopyElements);
+    
+    // let doubledCardsArr = elementsArray.clone(true, true);
     console.log('elementsArray: ', elementsArray);
     console.log('doubledCardsArr: ', doubledCardsArr);
     
 
-    DOMElements.cards = doubledCardsArr;
-    DOMElements.cardRows = [];
-    DOMElements.cardRows.push($('.card-row1'), $('.card-row2'), $('.card-row3'));
+    DOMElements.cards = elementsArray;
+    DOMElements.cardRows = [
+        $('.card-row1'), 
+        $('.card-row2'), 
+        $('.card-row3')
+    ];
     console.log('DOMElements: ', DOMElements);
+    console.log('DOMElements.cards: ', DOMElements.cards);
 
     //must double cards before appending, and add shuffle feature
     for(let i = 0; i < doubledCardsArr.length; i++){
-        switch(i){
-            case 0:
-            case 1: 
-            case 2:
-            case 3:
-            case 4:
-            case 5: DOMElements.cardRows[0].append(DOMElements.cards[i]);
-                break;
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-            case 11: DOMElements.cardRows[1].append(DOMElements.cards[i]);
-                break;
-            case 12:
-            case 13:
-            case 14:
-            case 15:
-            case 16:
-            case 17: DOMElements.cardRows[2].append(DOMElements.cards[i]);
-                break;
-        }
+        console.log('card append loop i: ', i);
+        // switch(i){
+        //     case 0:
+        //     case 1: 
+        //     case 2:
+        //     case 3:
+        //     case 4:
+        //     case 5: DOMElements.cardRows[0].append(DOMElements.cards[i]);
+        //         break;
+        //     case 6:
+        //     case 7:
+        //     case 8:
+        //     case 9:
+        //     case 10:
+        //     case 11: DOMElements.cardRows[1].append(DOMElements.cards[i]);
+        //         break;
+        //     case 12:
+        //     case 13:
+        //     case 14:
+        //     case 15:
+        //     case 16:
+        //     case 17: DOMElements.cardRows[2].append(DOMElements.cards[i]);
+        //         break;
+        // }
+        // switch(true){
+        //     case i < 6: DOMElements.cardRows[0].append(DOMElements.cards[i]);
+        //         break;
+        //     case i < 12: DOMElements.cardRows[1].append(DOMElements.cards[i]);
+        //         break;
+        //     case i < 18: DOMElements.cardRows[2].append(DOMElements.cards[i]);
+        //         break;
+        // }
+        console.log('current card: ', DOMElements.cards[i]);
+        DOMElements.cardRows[0].append(DOMElements.cards[i]);
     }
-
+    console.log('DOMElements.cardRows[0]', DOMElements.cardRows[0]);
+    console.log('DOMElements.cardRows[1]', DOMElements.cardRows[1]);
+    console.log('DOMElements.cardRows[2]', DOMElements.cardRows[2]);
 
 }
 
