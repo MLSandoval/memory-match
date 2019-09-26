@@ -101,13 +101,34 @@ header{
     width: 66%;
     background-color: rgba(112, 128, 144, 0.7);
     margin-left: .7%;
+    display: flex;
+    flex-direction: column;
+}
+.card-row{
+    width:100%;
+    height: 33.3%;
+    /* background-color: aliceblue; */
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 .card-container{
-    height: 25px;
-    width: 25px;
+    margin: auto;
 }
 .card-back{
-    background-image: url('assets/images/CardImages/CardBack1.png');
+    height: 72px;
+    width: 72px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.card-reverse{
+    height: 72px;
+    width: 72px;
+    /* background: url('assets/images/CardImages/Arches1.png'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 
@@ -147,6 +168,9 @@ header{
 }
 .text-small{
     font-size: .5rem;
+}
+.hidden{
+    display: none;
 }
 
 
