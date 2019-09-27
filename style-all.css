@@ -114,21 +114,31 @@ header{
 }
 .card-container{
     margin: auto;
+    position: relative;
 }
 .card-back{
+    position: absolute;
+    top: 0;
+    left: 0;
     height: 72px;
     width: 72px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    transform: translate(-50%, -50%);
 }
 .card-reverse{
     height: 72px;
     width: 72px;
     /* background: url('assets/images/CardImages/Arches1.png'); */
+    display: none;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    position:  absolute;
+    top: 0;
+    left:  0;
+    transform: translate(-50%, -50%);
 }
 
 
