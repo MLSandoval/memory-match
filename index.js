@@ -36,7 +36,10 @@ const assignClickHandlers = () => {
     $('.card-row').on('click', '.card-container', function(event){
         console.log('this on click: ', this);
         console.log('event.currenttarget on click: ', event.currentTarget);
-        $($(event.currentTarget).children()[0]).addClass('hidden');
+        $($(event.currentTarget).children()[1]).addClass('hidden');
+        console.log('event.currentTarget: ' ,event.currentTarget);
+        $($(event.currentTarget).children()[0]).removeClass('hidden');
+
     })
 }
 
@@ -47,8 +50,8 @@ const createCards = (cardImages) => {
     for(let i = 0; i < cardImages.length; i++){
         let cardContainer = $("<div>").addClass('card-container');
         let cardBack = $("<div>").addClass('card-back').css('background-image', `url('assets/images/CardImages/CardBack1.png')`);
-        let cardReverse = $("<div>").addClass('card-reverse').css('background-image', `url('${cardImages[i]}')`);
-        cardContainer.append(cardBack, cardReverse);
+        let cardReverse = $("<div>").addClass('card-reverse hidden').css('background-image', `url('${cardImages[i]}')`);
+        cardContainer.append(cardReverse, cardBack);
         flipCardsArr.push(cardContainer);
     }
 

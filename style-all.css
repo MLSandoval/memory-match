@@ -16,10 +16,11 @@ body{
     overflow: hidden;
     position:relative;
     padding: 5px;
-    font-size: .75rem;
+    font-size: 1rem;
     background: url("./assets/images/BGs/VolcanoesNationalPark.jpg") no-repeat center center;
     margin: auto;
     padding: 0;
+    font-family: 'Oxygen', sans-serif;
 
 }
 .game-container{
@@ -39,9 +40,14 @@ header{
     margin-bottom: 1%;
     align-content: center;
     vertical-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 .header-text{
     margin:0;
+    font-size: 2rem;
+
 }
 .stats-container{
     height: 10%;
@@ -51,11 +57,16 @@ header{
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 1%;
+    align-items: center;
 }
 .stats-bubble{
    background-color: rgba(150, 140, 140, 0.568);
-   width: 33%;
+   width: 30%;
    text-align: center;
+   padding: 8px;
+}
+.stats-text{
+    margin: auto;
 }
 .info-container{
     width: 33%;
@@ -80,11 +91,13 @@ header{
     position: absolute;
     bottom: 5%;
     left: 5%;
+    font-size: .75rem;
 }
 .info-div{
     background-color: rgba(161, 159, 161, 0.452);
     flex: 1 1 auto;
     margin-bottom: 0;
+    overflow: scroll;
 }
 .info-div-text-container{
     display:flex;
@@ -131,7 +144,7 @@ header{
     height: 72px;
     width: 72px;
     /* background: url('assets/images/CardImages/Arches1.png'); */
-    display: none;
+    /* display: none; */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -177,7 +190,7 @@ header{
     border-radius: 15px;
 }
 .text-small{
-    font-size: .5rem;
+    font-size: .75rem;
 }
 .hidden{
     display: none;
