@@ -133,23 +133,28 @@ header{
     justify-content: space-around;
 }
 .card-container{
+    /* background-color: transparent; */
     margin: auto;
+    /* position: relative; */
+    perspective: 1000px;
+}
+.card-container-inner{
     position: relative;
-}
-.card-back{
-    position: absolute;
-    top: 0;
-    left: 0;
     height: 72px;
     width: 72px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    transform: translate(-50%, -50%);
+    /* text-align: center; */
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
 }
+
+.card-container:hover .card-container-inner{
+    transform: rotateY(180deg);
+}
+
 .card-reverse{
-    height: 72px;
-    width: 72px;
+    background-color: #bbb;
+    height: 100%;
+    width: 100%;
     /* background: url('assets/images/CardImages/Arches1.png'); */
     /* display: none; */
     background-size: cover;
@@ -159,7 +164,30 @@ header{
     top: 0;
     left:  0;
     transform: translate(-50%, -50%);
+
+    /* position: absolute;
+    width: 100%;
+    height: 100%; */
+    /* backface-visibility: hidden; */
 }
+.card-back{
+    background-color: #bbbbbb;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: translate(-50%, -50%);
+
+    /* position: absolute; */
+    /* width: 100%;
+    height: 100%; */
+    backface-visibility: hidden;
+}
+
 
 
 .arches{
@@ -205,9 +233,13 @@ header{
 
 
 
+/* flip-card = card-container */
+/* flip-card-inner = card-container-inner */
+
 
 /* card flip css example */
-/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect
+/* The flip card container - set the width and height to whatever you want. We have added the border property to 
+demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect
 .flip-card {
   background-color: transparent;
   width: 300px;
