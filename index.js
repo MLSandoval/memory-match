@@ -42,10 +42,11 @@ const assignClickHandlers = () => {
 
     // })
 
-    $('.card-container').on('click', function(event){
-        console.log(event);
-        $(event.currentTarget).toggleClass('is-flipped');
-    })
+    //click handler to try to solve card flip animation
+    // $('.card-container').on('click', function(event){
+    //     console.log(event);
+    //     $(event.currentTarget).toggleClass('is-flipped');
+    // })
 }
 
 const createCards = (cardImages) => {
@@ -55,10 +56,10 @@ const createCards = (cardImages) => {
     for(let i = 0; i < cardImages.length; i++){
         let cardContainer = $("<div>").addClass('card-container');
         let cardContainerInner = $("<div>").addClass('card-container-inner');
-        let cardBack = $("<div>").addClass('card-back').css('background-image', `url('assets/images/CardImages/CardBack1.png')`);
+        let cardBack = $("<div>").addClass('card card-back').css('background-image', `url('assets/images/CardImages/CardBack1.png')`);
         let cardImage = $("<img>").text('text');
         //addClass hidden back to card reverse
-        let cardFace = $("<div>").addClass('card-face').css('background-image', `url('${cardImages[i]}')`);
+        let cardFace = $("<div>").addClass('card card-face').css('background-image', `url('${cardImages[i]}')`);
 
         cardContainerInner.append(cardFace, cardBack);
         cardContainer.append(cardContainerInner);
