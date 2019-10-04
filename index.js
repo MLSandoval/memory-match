@@ -42,31 +42,32 @@ const assignClickHandlers = () => {
 
     // })
 
-    //click handler to try to solve card flip animation
-    // $('.card-container').on('click', function(event){
-    //     console.log(event);
-    //     $(event.currentTarget).toggleClass('is-flipped');
-    // })
+    // click handler to try to solve card flip animation
+    $('.card-container').on('click', function(event){
+        console.log(event);
+        $(event.currentTarget).toggleClass('is-flipped');
+    })
 }
 
 const createCards = (cardImages) => {
     cardImages = cardImages.concat(cardImages);
 
-    let flipCardsArr = [];
+    let cardsArr = [];
     for(let i = 0; i < cardImages.length; i++){
         let cardContainer = $("<div>").addClass('card-container');
-        let cardContainerInner = $("<div>").addClass('card-container-inner');
+        // let cardContainerInner = $("<div>").addClass('card-container-inner');
         let cardBack = $("<div>").addClass('card card-back').css('background-image', `url('assets/images/CardImages/CardBack1.png')`);
         let cardImage = $("<img>").text('text');
         //addClass hidden back to card reverse
         let cardFace = $("<div>").addClass('card card-face').css('background-image', `url('${cardImages[i]}')`);
 
-        cardContainerInner.append(cardFace, cardBack);
-        cardContainer.append(cardContainerInner);
-        flipCardsArr.push(cardContainer);
+        // cardContainerInner.append(cardFace, cardBack);
+        // cardContainer.append(cardContainerInner);
+        cardContainer.append(cardBack, cardFace);
+        cardsArr.push(cardContainer);
     }
 
-    DOMElements.cards = flipCardsArr;
+    DOMElements.cards = cardsArr;
     DOMElements.cardRows = [
         $('.card-row1'), 
         $('.card-row2'), 
