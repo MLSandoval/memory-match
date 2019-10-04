@@ -33,13 +33,18 @@ $(document).ready(function(){
 
 const assignClickHandlers = () => {
     
-    $('.card-row').on('click', '.card-container', function(event){
-        console.log('this on click: ', this);
-        console.log('event.currenttarget on click: ', event.currentTarget);
-        $($(event.currentTarget).children()[1]).addClass('hidden');
-        console.log('event.currentTarget: ' ,event.currentTarget);
-        $($(event.currentTarget).children()[0]).removeClass('hidden');
+    // $('.card-row').on('click', '.card-container-inner', function(event){
+    //     console.log('this on click: ', this);
+    //     console.log('event.currenttarget on click: ', event.currentTarget);
+    //     $($(event.currentTarget).children()[1]).addClass('hidden');
+    //     console.log('event.currentTarget: ' ,event.currentTarget);
+    //     $($(event.currentTarget).children()[0]).removeClass('hidden');
 
+    // })
+
+    $('.card-container').on('click', function(event){
+        console.log(event);
+        $(event.currentTarget).toggleClass('is-flipped');
     })
 }
 
@@ -49,9 +54,14 @@ const createCards = (cardImages) => {
     let flipCardsArr = [];
     for(let i = 0; i < cardImages.length; i++){
         let cardContainer = $("<div>").addClass('card-container');
+        let cardContainerInner = $("<div>").addClass('card-container-inner');
         let cardBack = $("<div>").addClass('card-back').css('background-image', `url('assets/images/CardImages/CardBack1.png')`);
-        let cardReverse = $("<div>").addClass('card-reverse hidden').css('background-image', `url('${cardImages[i]}')`);
-        cardContainer.append(cardReverse, cardBack);
+        let cardImage = $("<img>").text('text');
+        //addClass hidden back to card reverse
+        let cardFace = $("<div>").addClass('card-face').css('background-image', `url('${cardImages[i]}')`);
+
+        cardContainerInner.append(cardFace, cardBack);
+        cardContainer.append(cardContainerInner);
         flipCardsArr.push(cardContainer);
     }
 
