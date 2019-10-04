@@ -151,18 +151,25 @@ header{
     transform: rotateY(180deg);
 }
 
-.card-face{
-    position:  absolute;
+.card{
+    position: absolute;
     top: 0;
     left:  0;
-    /* background-color: #bbb; */
     height: 100%;
     width: 100%;
-    /* background: url('assets/images/CardImages/Arches1.png'); */
-    /* display: none; */
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+}
+.card-face{
+    
+    /* background-color: #bbb; */
+   
+    /* background: url('assets/images/CardImages/Arches1.png'); */
+    /* display: none; */
+    /* background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; */
   
     /* transform: translate(-50%, -50%); */
     /* position: absolute;
@@ -173,14 +180,8 @@ header{
 }
 .card-back{
     /* background-color: #bbbbbb; */
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+   
+   
     /* transform: translate(-50%, -50%); */
     /* position: absolute; */
     /* width: 100%;
@@ -254,15 +255,6 @@ This container is needed to position the front and back side
   color: white;
   transform: rotateY(180deg);
 } */
-
-
-
-
-
-
-
-
-
 
 
 
