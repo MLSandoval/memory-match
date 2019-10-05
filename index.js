@@ -44,11 +44,10 @@ const createCards = (cardImages) => {
 
     let cardsArr = [];
     for(let i = 0; i < cardImages.length; i++){
-        let cardContainer = $("<div>").addClass('card-container');
+        let cardContainer = $("<div>").addClass('card-container').attr('match-image', parkImageURLArray[i]);
         let cardBack = $("<div>").addClass('card card-back').css('background-image', `url('assets/images/CardImages/CardBack1.png')`);
-        let cardImage = $("<img>").text('text');
         let cardFace = $("<div>").addClass('card card-face').css('background-image', `url('${cardImages[i]}')`);
-
+        console.log('cardFace: ', cardFace);
         cardContainer.append(cardBack, cardFace);
         cardsArr.push(cardContainer);
     }
@@ -120,14 +119,22 @@ const checkMatch = (flippedCards) => {
         stats.attempts++;
 
     }else{
-        console.log('they match!')
+        console.log('they match!', flippedCards)
         $(flippedCards[0]).off('click', flipCard);
         $(flippedCards[1]).off('click', flipCard);
         stats.attempts++;
         stats.matches++;
+        displayMatchImage(card1.attr('match-image'));
     }
     flippedStatus = [];
     updateStats();
+}
+
+const displayMatchImage = (imageURL) => {
+    if(!DOMElements.matchImage){
+        DOMElements.matchImage = $('#image-square');
+    }
+    console.log('imageURL: ', imageURL);
 }
 
 const updateStats = () =>{
@@ -141,7 +148,6 @@ const updateStats = () =>{
         DOMElements.stats.attempts = $('#attempts-text');
         DOMElements.stats.gamesPlayed = $('#games-played-text');
         DOMElements.stats.matches = $('#matches-text');
-        id = "games-played-text"
     }
 
     if (stats.matches === 9) {
