@@ -21,13 +21,13 @@
         </header>
         <div class="stats-container">
             <div class="stats-attempts rounded-corners stats-bubble">
-                <p class="stats-text">Attempts: 40</p>
+                <p class="stats-text" id="attempts-text">Attempts: null</p>
             </div>
             <div class="stats-accuracy rounded-corners stats-bubble">
-                <p class="stats-text">Accuracy: 56%</p>
+                <p class="stats-text" id="matches-text">Matches: null</p>
             </div>
             <div class="stats-games-played rounded-corners stats-bubble">
-                <p class="stats-text">Games Played: 10</p>
+                <p class="stats-text" id="games-played-text">Games Played: null</p>
             </div>
         </div>
         <div class="info-container">
@@ -114,6 +114,16 @@
         <img src="assets/images/CardImages/Yosemite1.png" alt="">
     </div> -->
 
+    <div class="modal hidden">
+        <div class="modal-body">
+            <p class="modal-text">
+                Oh heck yea, check that out. Unreal beauty. 
+                You definitely want some of that.
+                Now get out there, and explore your national parks.
+            </p>
+            <button class="modal-button">Play again?</button>
+        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="index.js"></script>

@@ -24,29 +24,19 @@ const parkImageURLArray = [
 ];
 
 const DOMElements = {};
+let flippedStatus = [];
+let stats = null;
+
+
 
 $(document).ready(function(){
     createCards(cardImageURLArray);
     assignClickHandlers();
-
+    updateStats();
 });
 
 const assignClickHandlers = () => {
-    
-    // $('.card-row').on('click', '.card-container-inner', function(event){
-    //     console.log('this on click: ', this);
-    //     console.log('event.currenttarget on click: ', event.currentTarget);
-    //     $($(event.currentTarget).children()[1]).addClass('hidden');
-    //     console.log('event.currentTarget: ' ,event.currentTarget);
-    //     $($(event.currentTarget).children()[0]).removeClass('hidden');
-
-    // })
-
-    // click handler to try to solve card flip animation
-    $('.card-container').on('click', function(event){
-        console.log(event);
-        $(event.currentTarget).toggleClass('is-flipped');
-    })
+    $('.card-container').on('click', flipCard); 
 }
 
 const createCards = (cardImages) => {
@@ -55,14 +45,10 @@ const createCards = (cardImages) => {
     let cardsArr = [];
     for(let i = 0; i < cardImages.length; i++){
         let cardContainer = $("<div>").addClass('card-container');
-        // let cardContainerInner = $("<div>").addClass('card-container-inner');
         let cardBack = $("<div>").addClass('card card-back').css('background-image', `url('assets/images/CardImages/CardBack1.png')`);
         let cardImage = $("<img>").text('text');
-        //addClass hidden back to card reverse
         let cardFace = $("<div>").addClass('card card-face').css('background-image', `url('${cardImages[i]}')`);
 
-        // cardContainerInner.append(cardFace, cardBack);
-        // cardContainer.append(cardContainerInner);
         cardContainer.append(cardBack, cardFace);
         cardsArr.push(cardContainer);
     }
@@ -94,8 +80,6 @@ const shuffleCardsArr = () => {
 
 const appendCardsToDom = () => {
     for (let i = 0; i < DOMElements.cards.length; i++) {
-        console.log('card append loop i: ', i);
-
         switch (true) {
             case i < 6: DOMElements.cardRows[0].append(DOMElements.cards[i]);
                 break;
@@ -107,9 +91,75 @@ const appendCardsToDom = () => {
     }
 }
 
+const flipCard = (event) => {
+    switch(flippedStatus.length){
+        case 0:
+            if(!$(event.currentTarget).hasClass('is-flipped')){
+                $(event.currentTarget).toggleClass('is-flipped');
+                flippedStatus[0] = event.currentTarget;
+            }
+            break;
+        case 1: 
+            if(!$(event.currentTarget).hasClass('is-flipped')) {
+                $(event.currentTarget).toggleClass('is-flipped');
+                flippedStatus[1] = event.currentTarget;
+                setTimeout(() => {checkMatch(flippedStatus)}, 1000);
+            }
+            break;
+        default: 
+            console.log('flipped status error');
+    }
+}
+const checkMatch = (flippedCards) => {
+    let card1 = flippedCards[0].children[1];
+    let card2 = flippedCards[1].children[1];
 
+    if ($(card1).css('background-image') !== $(card2).css('background-image')){
+        $(flippedCards[0]).toggleClass('is-flipped');
+        $(flippedCards[1]).toggleClass('is-flipped');
+        stats.attempts++;
 
+    }else{
+        console.log('they match!')
+        $(flippedCards[0]).off('click', flipCard);
+        $(flippedCards[1]).off('click', flipCard);
+        stats.attempts++;
+        stats.matches++;
+    }
+    flippedStatus = [];
+    updateStats();
+}
 
+const updateStats = () =>{
+    if(stats === null){
+        stats = {
+            attempts: 0,
+            gamesPlayed: 0,
+            matches: 0
+        };
+        DOMElements.stats = {};
+        DOMElements.stats.attempts = $('#attempts-text');
+        DOMElements.stats.gamesPlayed = $('#games-played-text');
+        DOMElements.stats.matches = $('#matches-text');
+        id = "games-played-text"
+    }
+
+    if (stats.matches === 9) {
+        stats.gamesPlayed++;
+        displayModal();
+    }
+
+    DOMElements.stats.attempts.text(`Attempts: ${stats.attempts}`);
+    DOMElements.stats.gamesPlayed.text(`Games Played: ${stats.gamesPlayed}`);
+    DOMElements.stats.matches.text(`Matches: ${stats.matches}`);
+
+   
+}
+
+const displayModal = () => {
+    $('.game-container').fadeOut(2000).delay(1000);
+    $('.modal').fadeIn(2000).toggleClass('hidden');
+}
 
 
 //image slider code//
