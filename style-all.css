@@ -86,6 +86,8 @@ header{
 .image-square{
     width:100%;
     position:relative;
+    margin-bottom: 2.5%;
+    background-size: contain;
 }
 .image-square:after{
     content: "";

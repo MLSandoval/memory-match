@@ -3,7 +3,6 @@ const cardImageURLArray = [
     'assets/images/CardImages/CraterLake1.png',
     'assets/images/CardImages/DeathValley1.png',
     'assets/images/CardImages/GrandCanyon1.png',
-    // 'assets/images/CardImages/GrandTeton1.png',
     'assets/images/CardImages/JoshuaTree1.png',
     'assets/images/CardImages/Seqoia1.png',
     'assets/images/CardImages/SmokyMountains1.png',
@@ -15,7 +14,6 @@ const parkImageURLArray = [
     'assets/images/MatchImages/CraterLakeImage600.png',
     'assets/images/MatchImages/DeathValley600.png',
     'assets/images/MatchImages/GrandCanyon600.png',
-    // 'assets/images/MatchImages/GrandTeton600.png',
     'assets/images/MatchImages/JoshuaTreeImage600.png',
     'assets/images/MatchImages/SeqoiaImage600.png',
     'assets/images/MatchImages/SmokyMountainsImage600.png',
@@ -30,7 +28,9 @@ let stats = null;
 
 
 $(document).ready(function(){
-    createCards(cardImageURLArray);
+    createCards(cardImageURLArray, parkImageURLArray);
+    shuffleCardsArr();
+    appendCardsToDom();
     assignClickHandlers();
     updateStats();
 });
@@ -39,15 +39,18 @@ const assignClickHandlers = () => {
     $('.card-container').on('click', flipCard); 
 }
 
-const createCards = (cardImages) => {
+const createCards = (cardImages, matchImages) => {
     cardImages = cardImages.concat(cardImages);
+    matchImages = matchImages.concat(matchImages);
 
     let cardsArr = [];
     for(let i = 0; i < cardImages.length; i++){
-        let cardContainer = $("<div>").addClass('card-container').attr('match-image', parkImageURLArray[i]);
+        let cardContainer = $("<div>").addClass('card-container').attr('match-image', matchImages[i]);
         let cardBack = $("<div>").addClass('card card-back').css('background-image', `url('assets/images/CardImages/CardBack1.png')`);
         let cardFace = $("<div>").addClass('card card-face').css('background-image', `url('${cardImages[i]}')`);
-        console.log('cardFace: ', cardFace);
+        // console.log('cardFace: ', cardFace);
+        console.log('cardContainer: ', cardContainer);
+        console.log('$(cardContainer).attr("match-image"): ', $(cardContainer).attr('match-image'));
         cardContainer.append(cardBack, cardFace);
         cardsArr.push(cardContainer);
     }
@@ -58,9 +61,6 @@ const createCards = (cardImages) => {
         $('.card-row2'), 
         $('.card-row3')
     ];
-
-    shuffleCardsArr();
-    appendCardsToDom();
 }
 
 const shuffleCardsArr = () => {
@@ -102,6 +102,7 @@ const flipCard = (event) => {
             if(!$(event.currentTarget).hasClass('is-flipped')) {
                 $(event.currentTarget).toggleClass('is-flipped');
                 flippedStatus[1] = event.currentTarget;
+                // console.log('flippedStatus Elements: ', flippedStatus);
                 setTimeout(() => {checkMatch(flippedStatus)}, 1000);
             }
             break;
@@ -119,12 +120,12 @@ const checkMatch = (flippedCards) => {
         stats.attempts++;
 
     }else{
-        console.log('they match!', flippedCards)
+        // console.log('they match!', flippedCards)
         $(flippedCards[0]).off('click', flipCard);
         $(flippedCards[1]).off('click', flipCard);
         stats.attempts++;
         stats.matches++;
-        displayMatchImage(card1.attr('match-image'));
+        displayMatchImage($(flippedCards[1]).attr('match-image'));
     }
     flippedStatus = [];
     updateStats();
@@ -132,9 +133,10 @@ const checkMatch = (flippedCards) => {
 
 const displayMatchImage = (imageURL) => {
     if(!DOMElements.matchImage){
-        DOMElements.matchImage = $('#image-square');
+        DOMElements.matchImage = $('.image-square').after();
     }
     console.log('imageURL: ', imageURL);
+    DOMElements.matchImage.css('background-image', `url(${imageURL})`);
 }
 
 const updateStats = () =>{
