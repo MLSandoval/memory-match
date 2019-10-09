@@ -29,7 +29,7 @@ let stats = null;
 
 $(document).ready(function(){
     createCards(cardImageURLArray, parkImageURLArray);
-    shuffleCardsArr();
+    // shuffleCardsArr();
     appendCardsToDom();
     assignClickHandlers();
     updateStats();
@@ -136,7 +136,11 @@ const displayMatchImage = (imageURL) => {
         DOMElements.matchImage = $('.image-square').after();
     }
     console.log('imageURL: ', imageURL);
-    DOMElements.matchImage.css('background-image', `url(${imageURL})`);
+    DOMElements.matchImage.css({
+        'background-image': `url(${imageURL})`,
+        'background-color': 'transparent',
+        
+    });
 }
 
 const updateStats = () =>{
