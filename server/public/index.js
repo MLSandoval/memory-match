@@ -126,6 +126,9 @@ const checkMatch = (flippedCards) => {
         stats.attempts++;
         stats.matches++;
         displayMatchImage($(flippedCards[1]).attr('match-image'));
+        //decide a match target
+        let match;
+        fetchMatchData(match);
     }
     flippedStatus = [];
     updateStats();
@@ -139,8 +142,25 @@ const displayMatchImage = (imageURL) => {
     DOMElements.matchImage.css({
         'background-image': `url(${imageURL})`,
         'background-color': 'transparent',
-        
+        border: '1px solid white'
     });
+}
+
+const fetchMatchData = (searchTarget) =>{
+    fetch('../proxy.php', {
+        method: 'get',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+    .then(result => result.json())
+    .then(result => {
+        console.log('fetch success result: ', result);
+    })
+    .catch(error => console.log('fetch error: ', error)
+        
+    );
+    console.log('fetchMatchData data: ', searchTarget);
 }
 
 const updateStats = () =>{
