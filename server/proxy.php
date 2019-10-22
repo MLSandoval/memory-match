@@ -1,80 +1,38 @@
 <?php
+header('Content-Type: application/json');
+set_exception_handler('error_handler');
+require_once('./api_creds.php');
 
-    require_once('api_creds.php');
-    
-    $curl = curl_init();
+function error_handler($error, $code = 500){
+    $output = [
+        'success' => false,
+        'error' => $error->getMessage()
+    ];
 
-    header('Content-Type: application/json');
-    set_exception_handler('error_handler');
+    $jsonObj = json_encode($output, JSON_PRETTY_PRINT);
+    http_response_code($code);
+    print_r($jsonObj);
+}
 
-    
-    
-    // Set options
-    $dataURL = 'https://developer.nps.gov/api/v1/parks?stateCode=me';
-    curl_setopt_array($curl, array(
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_URL => $dataURL,
-        CURLOPT_USERAGENT => $_SERVER['HTTP_USER_AGENT'],
-        CURLOPT_HTTPHEADER => array('Authorization: INSERT_API_KEY_HERE')
-    ));
-    // Additional code would follow
-
-
-
-    function error_handler($error, $code = 500){
-        $output = [
-            'success' => false,
-            'error' => $error->getMessage()
-        ];
-    
-        $jsonObj = json_encode($output, JSON_PRETTY_PRINT);
-        http_response_code($code);
-        print_r($jsonObj);
-    }
-    function CallAPI($method, $url, $data = false){
-
-    }
-
-    if (!isset($_GET["id"])) {
-        CallAPI();
-    }else{
-
-    }
+if (!isset($_GET['lat'])) {
+    throw new Exception('Must provide latitude.');
+} else if (!isset($_GET['lon'])) {
+    throw new Exception('Must provide longitude.');
+}
+$lat = $_GET['lat'];
+$lon = $_GET['lon'];
 
 
-    // example cURL call with php
-    function CallAPI($method, $url, $data = false){
-        $curl = curl_init();
+$curl = curl_init();
+$dataURL = 'https://www.hikingproject.com/data/get-campgrounds?lat=' . $lat . '&lon=' . $lon . '&maxDistance=30&maxResults=10&key=' . $ReiApiKey;
 
-        switch ($method)
-        {   
-            case 'GET':
-            case 'Get':
-            case 'get':
-                curl_setopt($curl, CURLOPT_POST, 1);
+curl_setopt_array($curl, array(
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_URL => $dataURL,
+));
 
-                if ($data)
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-                break;
-   
-            default:
-                if ($data)
-                    $url = sprintf("%s?%s", $url, http_build_query($data));
-        }
+$output = curl_exec($curl);
+curl_close($curl);
 
-        // Optional Authentication:
-        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($curl, CURLOPT_USERPWD, "username:password");
-
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-
-        $result = curl_exec($curl);
-
-        curl_close($curl);
-
-        return $result;
-    }
-
-
+print($output);
 ?>
