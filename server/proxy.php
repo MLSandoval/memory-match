@@ -24,7 +24,8 @@ $lon = $_GET['lon'];
 
 
 $curl = curl_init();
-$dataURL = 'https://www.hikingproject.com/data/get-campgrounds?lat=' . $lat . '&lon=' . $lon . '&maxDistance=30&maxResults=10&key=' . $ReiApiKey;
+$dataURL = 'https://www.hikingproject.com/data/get-campgrounds?lat=' . $lat . 
+    '&lon=' . $lon . '&maxDistance=40&maxResults=10&key=' . $ReiApiKey;
 
 curl_setopt_array($curl, array(
     CURLOPT_RETURNTRANSFER => true,
