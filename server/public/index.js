@@ -147,8 +147,50 @@ const displayMatchImage = (imageURL) => {
 }
 
 const fetchMatchData = (searchTarget) =>{
-    fetch('../proxy.php', {
-        method: 'get',
+    // switch(searchTarget){
+    //     case 'arches':
+    //         let lat = ;
+    //         let lon = ;
+    //         break;
+    //     case 'crater':
+    //         let lat = ;
+    //         let lon = ;
+    //         break;
+    //     case 'death':
+    //         let lat = ;
+    //         let lon = ;
+    //         break;
+    //     case 'grand':
+    //         let lat = ;
+    //         let lon = ;
+    //         break;
+    //     case 'joshua':
+    //         let lat = ;
+    //         let lon = ;
+    //         break;
+    //     case 'sequoia':
+    //         let lat = ;
+    //         let lon = ;
+    //         break;
+    //     case 'smoky': 
+    //         let lat = ;
+    //         let lon = ;
+    //         break;
+    //     case 'yellow':
+    //         let lat = ;
+    //         let lon = ;
+    //         break;
+    //     case 'yosemite':
+    //         let lat = ;
+    //         let lon = ;
+    //         break;
+    //     default: console.log('No matching search target.');
+    // }
+    let lat = 33.8818;
+    let lon = -116.9325;
+
+    fetch(`../proxy.php?lat=${lat}&lon=${lon}`, {
+        method: 'GET',
         headers: {
             'content-type': 'application/json'
         }

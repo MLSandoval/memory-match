@@ -1,5 +1,8 @@
 <?php
+header('Content-Type: application/json');
 set_exception_handler('error_handler');
+require_once('./api_creds.php');
+
 function error_handler($error, $code = 500){
     $output = [
         'success' => false,
@@ -11,43 +14,25 @@ function error_handler($error, $code = 500){
     print_r($jsonObj);
 }
 
-require_once('api_creds.php');
-
-function CallAPI($park){
-    $curl = curl_init();
-    $dataURL = 'https://developer.nps.gov/api/v1/parks?stateCode=me';
-    curl_setopt_array($curl, array(
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_URL => $dataURL,
-    ));
-
-    $output = curl_exec($curl);
-    curl_close($curl);
+if (!isset($_GET['lat'])) {
+    throw new Exception('Must provide latitude.');
+} else if (!isset($_GET['lon'])) {
+    throw new Exception('Must provide longitude.');
 }
-
-if (!isset($_GET["id"])) {
-    Throw new Exception('Error with query: ' . $_GET.error());
-} else {
-    // $ReiApiKey
-    // $NpsApiKey
-    $parkName = $_GET['id'];
-    CallAPI($parkName);
-}
+$lat = $_GET['lat'];
+$lon = $_GET['lon'];
 
 
-?>
+$curl = curl_init();
+$dataURL = 'https://www.hikingproject.com/data/get-campgrounds?lat=' . $lat . '&lon=' . $lon . '&maxDistance=30&maxResults=10&key=' . $ReiApiKey;
 
+curl_setopt_array($curl, array(
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_URL => $dataURL,
+));
 
+$output = curl_exec($curl);
+curl_close($curl);
 
-<?php
-// create curl resource
-$ch = curl_init();
-// set url 
-curl_setopt($ch, CURLOPT_URL, "https://api.genderize.io/?name=Baron");
-// $output contains the output json
-$output = curl_exec($ch);
-// close curl resource to free up system resources 
-curl_close($ch);
-// {"name":"Baron","gender":"male","probability":0.88,"count":26}
-var_dump(json_decode($output, true));
+print($output);
 ?>
