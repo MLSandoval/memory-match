@@ -49,8 +49,7 @@ const createCards = (cardImages, matchImages) => {
         let cardBack = $("<div>").addClass('card card-back').css('background-image', `url('assets/images/CardImages/CardBack1.png')`);
         let cardFace = $("<div>").addClass('card card-face').css('background-image', `url('${cardImages[i]}')`);
         // console.log('cardFace: ', cardFace);
-        console.log('cardContainer: ', cardContainer);
-        console.log('$(cardContainer).attr("match-image"): ', $(cardContainer).attr('match-image'));
+     
         cardContainer.append(cardBack, cardFace);
         cardsArr.push(cardContainer);
     }
@@ -102,8 +101,8 @@ const flipCard = (event) => {
             if(!$(event.currentTarget).hasClass('is-flipped')) {
                 $(event.currentTarget).toggleClass('is-flipped');
                 flippedStatus[1] = event.currentTarget;
-                // console.log('flippedStatus Elements: ', flippedStatus);
-                setTimeout(() => {checkMatch(flippedStatus)}, 1000);
+              
+                setTimeout(() => {checkMatch(flippedStatus)}, 800);
             }
             break;
         default: 
@@ -125,9 +124,8 @@ const checkMatch = (flippedCards) => {
         $(flippedCards[1]).off('click', flipCard);
         stats.attempts++;
         stats.matches++;
-        displayMatchImage($(flippedCards[1]).attr('match-image'));
-        //decide a match target
-        let match;
+        let match = displayMatchImage($(flippedCards[1]).attr('match-image'));
+        
         fetchMatchData(match);
     }
     flippedStatus = [];
@@ -137,59 +135,67 @@ const checkMatch = (flippedCards) => {
 const displayMatchImage = (imageURL) => {
     if(!DOMElements.matchImage){
         DOMElements.matchImage = $('.image-square').after();
+        console.log($('.image-square').after());
     }
-    console.log('imageURL: ', imageURL);
+
     DOMElements.matchImage.css({
         'background-image': `url(${imageURL})`,
         'background-color': 'transparent',
         border: '1px solid white'
     });
+    return imageURL;
 }
 
 const fetchMatchData = (searchTarget) =>{
-    // switch(searchTarget){
-    //     case 'arches':
-    //         let lat = ;
-    //         let lon = ;
-    //         break;
-    //     case 'crater':
-    //         let lat = ;
-    //         let lon = ;
-    //         break;
-    //     case 'death':
-    //         let lat = ;
-    //         let lon = ;
-    //         break;
-    //     case 'grand':
-    //         let lat = ;
-    //         let lon = ;
-    //         break;
-    //     case 'joshua':
-    //         let lat = ;
-    //         let lon = ;
-    //         break;
-    //     case 'sequoia':
-    //         let lat = ;
-    //         let lon = ;
-    //         break;
-    //     case 'smoky': 
-    //         let lat = ;
-    //         let lon = ;
-    //         break;
-    //     case 'yellow':
-    //         let lat = ;
-    //         let lon = ;
-    //         break;
-    //     case 'yosemite':
-    //         let lat = ;
-    //         let lon = ;
-    //         break;
-    //     default: console.log('No matching search target.');
-    // }
-    let lat = 33.8818;
-    let lon = -116.9325;
+    if(!DOMElements.infoCampgrounds){
+        DOMElements.infoCampgrounds = $('#campgrounds-ul');
+        DOMElements.infoTrails = $('#trails-ul');
+    }
 
-    fetch(`../proxy.php?lat=${lat}&lon=${lon}`, {
+    let lat;
+    let lon;
+
+    switch(searchTarget){
+        case 'assets/images/MatchImages/ArchesImage600.png':
+            lat = 38.733;
+            lon = -109.592514;
+            break;
+        case 'assets/images/MatchImages/CraterLakeImage600.png':
+            lat = 42.9446;
+            lon = -122.1090;
+            break;
+        case 'assets/images/MatchImages/DeathValley600.png':
+            lat = 36.5323;
+            lon = -116.9325;
+            break;
+        case 'assets/images/MatchImages/GrandCanyon600.png':
+            lat = 36.1070;
+            lon = -112.1130;
+            break;
+        case 'assets/images/MatchImages/JoshuaTreeImage600.png':
+            lat = 33.8818;
+            lon = -115.9006;
+            break;
+        case 'assets/images/MatchImages/SeqoiaImage600.png':
+            lat = 36.4864;
+            lon = -118.5658;
+            break;
+        case 'assets/images/MatchImages/SmokyMountainsImage600.png':
+            lat = 35.6117;
+            lon = -83.4895;
+            break;
+        case 'assets/images/MatchImages/YellowstoneImage600.png':
+            lat = 44.4280;
+            lon = -110.5885;
+            break;
+        case 'assets/images/MatchImages/YosemiteImage600.png':
+            lat = 37.8651;
+            lon = -119.5383;
+            break;
+        default: console.log('No matching search target.');
+    }
+  
+    fetch(`../proxy_campgrounds.php?lat=${lat}&lon=${lon}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json'
@@ -197,12 +203,45 @@ const fetchMatchData = (searchTarget) =>{
     })
     .then(result => result.json())
     .then(result => {
-        console.log('fetch success result: ', result);
+      
+        result.campgrounds.forEach((element)=>{
+            const name = element.name;
+            const hyperlink = element.url;
+            
+            let li = $('<li>');
+            let anchor = $('<a>').text(name).attr({
+                'href': hyperlink,
+                'target': '_blank'
+            });
+            li.append(anchor);
+            DOMElements.infoCampgrounds.append(li);
+        });
     })
-    .catch(error => console.log('fetch error: ', error)
+    .catch(error => console.log(' campgrounds fetch error: ', error));
+
+    fetch(`../proxy_trails.php?lat=${lat}&lon=${lon}`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+    .then(result => result.json())
+    .then(result => {
         
-    );
-    console.log('fetchMatchData data: ', searchTarget);
+        result.trails.forEach((element) => {
+            const name = element.name;
+            const hyperlink = element.url;
+            
+            let li = $('<li>');
+            let anchor = $('<a>').text(name).attr({
+                'href': hyperlink,
+                'target': '_blank'
+            });
+            li.append(anchor);
+            DOMElements.infoTrails.append(li);
+        });
+    })
+    .catch(error => console.log('trails fetch error: ', error));
 }
 
 const updateStats = () =>{
