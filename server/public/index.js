@@ -102,7 +102,7 @@ const flipCard = (event) => {
                 $(event.currentTarget).toggleClass('is-flipped');
                 flippedStatus[1] = event.currentTarget;
               
-                setTimeout(() => {checkMatch(flippedStatus)}, 1000);
+                setTimeout(() => {checkMatch(flippedStatus)}, 800);
             }
             break;
         default: 
@@ -135,6 +135,7 @@ const checkMatch = (flippedCards) => {
 const displayMatchImage = (imageURL) => {
     if(!DOMElements.matchImage){
         DOMElements.matchImage = $('.image-square').after();
+        console.log($('.image-square').after());
     }
 
     DOMElements.matchImage.css({
@@ -146,7 +147,11 @@ const displayMatchImage = (imageURL) => {
 }
 
 const fetchMatchData = (searchTarget) =>{
-    console.log('fetchMatchData target: ', searchTarget);
+    if(!DOMElements.infoCampgrounds){
+        DOMElements.infoCampgrounds = $('#campgrounds-ul');
+        DOMElements.infoTrails = $('#trails-ul');
+    }
+
     let lat;
     let lon;
 
@@ -190,7 +195,7 @@ const fetchMatchData = (searchTarget) =>{
         default: console.log('No matching search target.');
     }
   
-    fetch(`../proxy.php?lat=${lat}&lon=${lon}`, {
+    fetch(`../proxy_campgrounds.php?lat=${lat}&lon=${lon}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json'
@@ -198,10 +203,45 @@ const fetchMatchData = (searchTarget) =>{
     })
     .then(result => result.json())
     .then(result => {
-        console.log('fetch success result: ', result);
-        //add code to change text in info display area
+      
+        result.campgrounds.forEach((element)=>{
+            const name = element.name;
+            const hyperlink = element.url;
+            
+            let li = $('<li>');
+            let anchor = $('<a>').text(name).attr({
+                'href': hyperlink,
+                'target': '_blank'
+            });
+            li.append(anchor);
+            DOMElements.infoCampgrounds.append(li);
+        });
     })
-    .catch(error => console.log('fetch error: ', error));
+    .catch(error => console.log(' campgrounds fetch error: ', error));
+
+    fetch(`../proxy_trails.php?lat=${lat}&lon=${lon}`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+    .then(result => result.json())
+    .then(result => {
+        
+        result.trails.forEach((element) => {
+            const name = element.name;
+            const hyperlink = element.url;
+            
+            let li = $('<li>');
+            let anchor = $('<a>').text(name).attr({
+                'href': hyperlink,
+                'target': '_blank'
+            });
+            li.append(anchor);
+            DOMElements.infoTrails.append(li);
+        });
+    })
+    .catch(error => console.log('trails fetch error: ', error));
 }
 
 const updateStats = () =>{
