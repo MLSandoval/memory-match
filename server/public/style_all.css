@@ -120,7 +120,7 @@ header{
     justify-content: space-around;
     height:100%;
 }
-.info-columns{
+.info-box{
     text-align: left;
 }
 .card-area{
@@ -200,7 +200,7 @@ header{
 }
 
 .rounded-corners{
-    border-radius: 15px;
+    border-radius: 10px;
 }
 .text-small{
     font-size: .75rem;

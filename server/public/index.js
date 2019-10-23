@@ -150,6 +150,9 @@ const fetchMatchData = (searchTarget) =>{
     if(!DOMElements.infoCampgrounds){
         DOMElements.infoCampgrounds = $('#campgrounds-ul');
         DOMElements.infoTrails = $('#trails-ul');
+    }else{
+        DOMElements.infoTrails.html('');
+        DOMElements.infoCampgrounds.html('');
     }
 
     let lat;
@@ -203,19 +206,7 @@ const fetchMatchData = (searchTarget) =>{
     })
     .then(result => result.json())
     .then(result => {
-      
-        result.campgrounds.forEach((element)=>{
-            const name = element.name;
-            const hyperlink = element.url;
-            
-            let li = $('<li>');
-            let anchor = $('<a>').text(name).attr({
-                'href': hyperlink,
-                'target': '_blank'
-            });
-            li.append(anchor);
-            DOMElements.infoCampgrounds.append(li);
-        });
+        appendCampgrounds(result);
     })
     .catch(error => console.log(' campgrounds fetch error: ', error));
 
@@ -227,21 +218,39 @@ const fetchMatchData = (searchTarget) =>{
     })
     .then(result => result.json())
     .then(result => {
-        
-        result.trails.forEach((element) => {
-            const name = element.name;
-            const hyperlink = element.url;
-            
-            let li = $('<li>');
-            let anchor = $('<a>').text(name).attr({
-                'href': hyperlink,
-                'target': '_blank'
-            });
-            li.append(anchor);
-            DOMElements.infoTrails.append(li);
-        });
+        appendTrails(result);
     })
     .catch(error => console.log('trails fetch error: ', error));
+}
+
+const appendCampgrounds = (campground) =>{
+    campground.campgrounds.forEach((element) => {
+        const name = element.name;
+        const hyperlink = element.url;
+
+        let li = $('<li>');
+        let anchor = $('<a>').text(name).attr({
+            'href': hyperlink,
+            'target': '_blank'
+        });
+        li.append(anchor);
+        DOMElements.infoCampgrounds.append(li);
+    });
+}
+
+const appendTrails = (trail) =>{
+    trail.trails.forEach((element) => {
+        const name = element.name;
+        const hyperlink = element.url;
+
+        let li = $('<li>');
+        let anchor = $('<a>').text(name).attr({
+            'href': hyperlink,
+            'target': '_blank'
+        });
+        li.append(anchor);
+        DOMElements.infoTrails.append(li);
+    });
 }
 
 const updateStats = () =>{
