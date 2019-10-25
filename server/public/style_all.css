@@ -131,6 +131,17 @@ header{
 }
 .info-box{
     text-align: left;
+    position:relative;
+    width: 100%;
+}.list-container{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.list-headers{
+    width:100%;
+
 }
 .card-area{
     height: 80%;

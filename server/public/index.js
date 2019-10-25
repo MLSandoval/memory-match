@@ -123,10 +123,12 @@ const checkMatch = (flippedCards) => {
         $(flippedCards[1]).off('click', flipCard);
         stats.attempts++;
         stats.matches++;
-        hideInitialText();
+        
         fetchMatchData(match);
+        
         console.log('console.log directly before displayMatchImage is called.');
         displayMatchImage(match);
+        // hideInitialText();
         
     }
     flippedStatus = [];
@@ -138,17 +140,18 @@ const hideInitialText = () => {
         DOMElements.imageCaption = $('#image-caption');
         DOMElements.initialInstructionsText = $('#initial-instructions-text');
         DOMElements.initialInfoBox = $('#initial-info-box');
-        DOMElements.infoDisplay = $('#info-display');
+        DOMElements.infoDisplay = $('#info-box');
     }
 
     DOMElements.initialInstructionsText.fadeOut(500, () => {
         DOMElements.imageCaption.fadeIn(500);
     });
+    // DOMElements.initialInstructionsText.fadeOut(250);
 
     DOMElements.initialInfoBox.fadeOut(500, () => {
         DOMElements.infoDisplay.fadeIn(500);
     });
-
+    // DOMElements.initialInfoBox.fadeOut(250);
 }
 
 const displayMatchImage = (imageURL) => {
@@ -156,21 +159,21 @@ const displayMatchImage = (imageURL) => {
     if(!DOMElements.matchImage){
         DOMElements.matchImage = $('#image-square');
         console.log($('#image-square').after());
-        DOMElements.matchImage.fadeOut(500, ()=>{
+        DOMElements.matchImage.fadeOut(350, ()=>{
             DOMElements.matchImage.css({
                 'background-image': `url(${imageURL})`,
                 'background-color': 'white',
                 'border': '1px solid white'
             });
-            DOMElements.matchImage.fadeIn(500, () => {
+            DOMElements.matchImage.fadeIn(350, () => {
                 console.log('inside the if condition fade in callback for image square, before the backround image is changed.');
             })
         })
         
     }else{
-        DOMElements.matchImage.fadeOut(500, ()=>{
+        DOMElements.matchImage.fadeOut(350, ()=>{
             console.log('inside the else condition fadein callback');
-            DOMElements.matchImage.fadeIn(500).css({
+            DOMElements.matchImage.fadeIn(350).css({
                 'background-image': `url(${imageURL})`,
                 'border': '1px solid white'
             });
@@ -178,8 +181,6 @@ const displayMatchImage = (imageURL) => {
     }
 
     console.log('DOMElements.matchImage', DOMElements.matchImage);
-    
-    
     return imageURL;
 }
 
@@ -272,7 +273,7 @@ const fetchMatchData = (searchTarget) =>{
 }
 
 const appendCampgrounds = (data) =>{
-    DOMElements.infoCampgrounds.fadeOut(500, () => {
+    DOMElements.infoCampgrounds.fadeOut(400, () => {
         DOMElements.infoCampgrounds.html('');
 
         data.campgrounds.forEach((element) => {
@@ -285,16 +286,17 @@ const appendCampgrounds = (data) =>{
                 'target': '_blank'
             });
             li.append(anchor);
-            DOMElements.infoCampgrounds.append(li);
+            DOMElements.infoCampgrounds.append(li); 
         });
-        DOMElements.infoCampgrounds.fadeIn(500);
+
+        
     })
-    
+    // hideInitialText();
 }
 
 const appendTrails = (data) =>{
     DOMElements.infoTrails.html('');
-    DOMElements.infoTrails.fadeOut(500, () => {
+    DOMElements.infoTrails.fadeOut(400, () => {
         data.trails.forEach((element) => {
             const name = element.name;
             const hyperlink = element.url;
@@ -307,13 +309,23 @@ const appendTrails = (data) =>{
             li.append(anchor);
             DOMElements.infoTrails.append(li);
         });
+        if(!DOMElements.trailsAndCampgrounds){
+            DOMElements.trailsAndCampgrounds = $('ul');
+            console.log('trails and campgrounds element: ', DOMElements.trailsAndCampgrounds);
+        }
+        // DOMElements.infoCampgrounds.fadeIn(400);
+        // DOMElements.infoTrails.fadeIn(400);
+        DOMElements.trailsAndCampgrounds.fadeIn(400);
     });
-    DOMElements.infoTrails.fadeIn(500);
+    
+    if(stats.matches === 1){
+        hideInitialText();
+    };
 }
 
 const displayParkCaption = (caption) => {
     
-    DOMElements.imageCaption.fadeIn(400, () => {
+    DOMElements.imageCaption.fadeIn(250, () => {
         DOMElements.imageCaption.text(caption);
     })
 }
@@ -333,7 +345,7 @@ const updateStats = () =>{
 
     if (stats.matches === 9) {
         stats.gamesPlayed++;
-        displayModal();
+        setTimeout(displayModal, 1500);
     }
 
     DOMElements.stats.attempts.text(`Attempts: ${stats.attempts}`);
@@ -344,10 +356,16 @@ const updateStats = () =>{
 }
 
 const displayModal = () => {
-    $('.game-container').fadeOut(2000).delay(1000);
-    $('.modal').fadeIn(2000).toggleClass('hidden');
+    $('.game-container').fadeOut(1000).delay(1500, ()=>{
+        $('.modal').fadeIn(2000, showFinalMatchData).toggleClass('hidden');
+        
+    });
+    
 }
 
+const showFinalMatchData = () =>{
+    console.log('show final match function reached');
+}
 
 //image slider code//
 // $(function(){
