@@ -32,24 +32,28 @@
             </div>
         </div>
         <div class="info-container">
-            <div class="image-square rounded-corners" id="image-square">
-                <div class="image-caption">This is caption text! This is long long long long longer caption text!</div>
+            <div class="image-square rounded-corners background-square">
+                <div class="image-square rounded-corners" id="image-square">
+                    <div id="initial-instructions-text">Click cards to reveal their face, match two cards to reveal a picture of the corresponding national park and learn about their top campsites and trails in the box below.</div>
+                    <div id="image-caption" class="image-caption hidden"></div>
+                </div>
             </div>
             <div class="info-div rounded-corners">
                 <div class="info-div-text-container">
-                    <div class='hidden'>When you match a park, information about htat park will appear here</div>
-                    <div class="info-columns text-small">
-                        <div class="">Campgrounds
-                            <ul id="campgrounds-ul">
-                                <li>placeholder LI</li>
-                            </ul>
-                        </div>
-                        <div id="">Trails
-                            <ul id="trails-ul">
-                                <li>placeholder LI</li>
-                            </ul>
+                    <div id="initial-info-box">Information will display here upon a successful match.</div>
+                    <div id="info-box" class="info-box hidden">
+                        <div id="info-display" class="info-box text-small">
+                            <div class="list-container">
+                                <div class="list-headers">Campgrounds
+                                    <ul id="campgrounds-ul"></ul>
+                                </div>
+                                <div class="list-headers">Trails
+                                    <ul id="trails-ul"></ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
