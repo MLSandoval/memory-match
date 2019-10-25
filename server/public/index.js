@@ -133,26 +133,44 @@ const checkMatch = (flippedCards) => {
     updateStats();
 }
 
+const hideInitialText = () => {
+    if (!DOMElements.imageCaption) {
+        DOMElements.imageCaption = $('#image-caption');
+        DOMElements.initialInstructionsText = $('#initial-instructions-text');
+        DOMElements.initialInfoBox = $('#initial-info-box');
+        DOMElements.infoDisplay = $('#info-display');
+    }
+
+    DOMElements.initialInstructionsText.fadeOut(500, () => {
+        DOMElements.imageCaption.fadeIn(500);
+    });
+
+    DOMElements.initialInfoBox.fadeOut(500, () => {
+        DOMElements.infoDisplay.fadeIn(500);
+    });
+
+}
+
 const displayMatchImage = (imageURL) => {
     // debugger;
     if(!DOMElements.matchImage){
         DOMElements.matchImage = $('#image-square');
         console.log($('#image-square').after());
-        DOMElements.matchImage.fadeOut(750, ()=>{
+        DOMElements.matchImage.fadeOut(500, ()=>{
             DOMElements.matchImage.css({
                 'background-image': `url(${imageURL})`,
                 'background-color': 'white',
                 'border': '1px solid white'
             });
-            DOMElements.matchImage.fadeIn(750, () => {
+            DOMElements.matchImage.fadeIn(500, () => {
                 console.log('inside the if condition fade in callback for image square, before the backround image is changed.');
             })
         })
         
     }else{
-        DOMElements.matchImage.fadeOut(400, ()=>{
+        DOMElements.matchImage.fadeOut(500, ()=>{
             console.log('inside the else condition fadein callback');
-            DOMElements.matchImage.fadeIn(400).css({
+            DOMElements.matchImage.fadeIn(500).css({
                 'background-image': `url(${imageURL})`,
                 'border': '1px solid white'
             });
@@ -163,22 +181,6 @@ const displayMatchImage = (imageURL) => {
     
     
     return imageURL;
-}
-
-const hideInitialText = () => {
-    if (!DOMElements.imageCaption) {
-        DOMElements.imageCaption = $('#image-caption');
-        DOMElements.initialInstructionsText = $('#initial-instructions-text');
-        DOMElements.initialInfoBox = $('#initial-info-box');
-        DOMElements.infoDisplay = $('#info-display');
-    }
-
-    DOMElements.initialInstructionsText.fadeOut(1500);
-    DOMElements.imageCaption.fadeIn(1500);
-    DOMElements.initialInfoBox.fadeOut(750, ()=>{
-        DOMElements.infoDisplay.fadeIn(750);
-    });
-    
 }
 
 const fetchMatchData = (searchTarget) =>{
@@ -248,11 +250,11 @@ const fetchMatchData = (searchTarget) =>{
     })
     .then(result => result.json())
     .then(result => {
-        DOMElements.infoCampgrounds.html('');
+        
         appendCampgrounds(result);
         // displayParkCaption(caption);
     })
-    .catch(error => console.log(' campgrounds fetch error: ', error));
+    .catch(error => console.log('Campgrounds fetch error: ', error));
 
     fetch(`../proxy_trails.php?lat=${lat}&lon=${lon}`, {
         method: 'GET',
@@ -262,46 +264,58 @@ const fetchMatchData = (searchTarget) =>{
     })
     .then(result => result.json())
     .then(result => {
-        DOMElements.infoTrails.html('');
+        
         appendTrails(result);
         displayParkCaption(caption);
     })
-    .catch(error => console.log('trails fetch error: ', error));
+    .catch(error => console.log('Trails fetch error: ', error));
 }
 
 const appendCampgrounds = (data) =>{
-    data.campgrounds.forEach((element) => {
-        const name = element.name;
-        const hyperlink = element.url;
+    DOMElements.infoCampgrounds.fadeOut(500, () => {
+        DOMElements.infoCampgrounds.html('');
 
-        let li = $('<li>');
-        let anchor = $('<a>').text(name).attr({
-            'href': hyperlink,
-            'target': '_blank'
+        data.campgrounds.forEach((element) => {
+            const name = element.name;
+            const hyperlink = element.url;
+
+            let li = $('<li>');
+            let anchor = $('<a>').text(name).attr({
+                'href': hyperlink,
+                'target': '_blank'
+            });
+            li.append(anchor);
+            DOMElements.infoCampgrounds.append(li);
         });
-        li.append(anchor);
-        DOMElements.infoCampgrounds.append(li);
-    });
+        DOMElements.infoCampgrounds.fadeIn(500);
+    })
+    
 }
 
 const appendTrails = (data) =>{
-    data.trails.forEach((element) => {
-        const name = element.name;
-        const hyperlink = element.url;
+    DOMElements.infoTrails.html('');
+    DOMElements.infoTrails.fadeOut(500, () => {
+        data.trails.forEach((element) => {
+            const name = element.name;
+            const hyperlink = element.url;
 
-        let li = $('<li>');
-        let anchor = $('<a>').text(name).attr({
-            'href': hyperlink,
-            'target': '_blank'
+            let li = $('<li>');
+            let anchor = $('<a>').text(name).attr({
+                'href': hyperlink,
+                'target': '_blank'
+            });
+            li.append(anchor);
+            DOMElements.infoTrails.append(li);
         });
-        li.append(anchor);
-        DOMElements.infoTrails.append(li);
     });
+    DOMElements.infoTrails.fadeIn(500);
 }
 
 const displayParkCaption = (caption) => {
     
-    DOMElements.imageCaption.removeClass('hidden').text(caption);
+    DOMElements.imageCaption.fadeIn(400, () => {
+        DOMElements.imageCaption.text(caption);
+    })
 }
 
 const updateStats = () =>{
