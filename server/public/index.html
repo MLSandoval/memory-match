@@ -33,17 +33,20 @@
         </div>
         <div class="info-container">
             <div class="image-square rounded-corners" id="image-square">
-                <div class="image-caption">This is caption text! This is long long long long longer caption text!</div>
+                <div id="initial-instructions-text">Click cards to reveal their face, match two cards to reveal a picture of the corresponding national park and learn about their top campsites and trails in the box below.</div>
+                <div id="image-caption" class="image-caption hidden"></div>
             </div>
             <div class="info-div rounded-corners">
                 <div class="info-div-text-container">
-                    <div class='hidden'>When you match a park, information about htat park will appear here</div>
-                    <div class="info-box text-small">
-                        <div class="">Campgrounds
-                            <ul id="campgrounds-ul"></ul>
-                        </div>
-                        <div id="">Trails
-                            <ul id="trails-ul"></ul>
+                    <div id="initial-info-box">Information will display here upon a successful match.</div>
+                    <div id="info-display" class="info-box text-small hidden">
+                        <div>
+                            <div class="">Campgrounds
+                                <ul id="campgrounds-ul"></ul>
+                            </div>
+                            <div id="">Trails
+                                <ul id="trails-ul"></ul>
+                            </div>
                         </div>
                     </div>
                 </div>

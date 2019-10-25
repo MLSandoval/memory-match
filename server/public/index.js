@@ -4,7 +4,7 @@ const cardImageURLArray = [
     'assets/images/CardImages/DeathValley1.png',
     'assets/images/CardImages/GrandCanyon1.png',
     'assets/images/CardImages/JoshuaTree1.png',
-    'assets/images/CardImages/Seqoia1.png',
+    'assets/images/CardImages/Sequoia1.png',
     'assets/images/CardImages/SmokyMountains1.png',
     'assets/images/CardImages/YellowstoneLogo1.png',
     'assets/images/CardImages/Yosemite1.png'
@@ -15,7 +15,7 @@ const parkImageURLArray = [
     'assets/images/MatchImages/DeathValley600.png',
     'assets/images/MatchImages/GrandCanyon600.png',
     'assets/images/MatchImages/JoshuaTreeImage600.png',
-    'assets/images/MatchImages/SeqoiaImage600.png',
+    'assets/images/MatchImages/SequoiaImage600.png',
     'assets/images/MatchImages/SmokyMountainsImage600.png',
     'assets/images/MatchImages/YellowstoneImage600.png',
     'assets/images/MatchImages/YosemiteImage600.png'
@@ -24,8 +24,6 @@ const parkImageURLArray = [
 const DOMElements = {};
 let flippedStatus = [];
 let stats = null;
-
-
 
 $(document).ready(function(){
     createCards(cardImageURLArray, parkImageURLArray);
@@ -120,80 +118,124 @@ const checkMatch = (flippedCards) => {
 
     }else{
         // console.log('they match!', flippedCards)
+        let match = $(flippedCards[1]).attr('match-image');
         $(flippedCards[0]).off('click', flipCard);
         $(flippedCards[1]).off('click', flipCard);
         stats.attempts++;
         stats.matches++;
-        let match = displayMatchImage($(flippedCards[1]).attr('match-image'));
-        
+        hideInitialText();
         fetchMatchData(match);
+        console.log('console.log directly before displayMatchImage is called.');
+        displayMatchImage(match);
+        
     }
     flippedStatus = [];
     updateStats();
 }
 
 const displayMatchImage = (imageURL) => {
+    // debugger;
     if(!DOMElements.matchImage){
-        DOMElements.matchImage = $('.image-square').after();
-        console.log($('.image-square').after());
+        DOMElements.matchImage = $('#image-square');
+        console.log($('#image-square').after());
+        DOMElements.matchImage.fadeOut(750, ()=>{
+            DOMElements.matchImage.css({
+                'background-image': `url(${imageURL})`,
+                'background-color': 'white',
+                'border': '1px solid white'
+            });
+            DOMElements.matchImage.fadeIn(750, () => {
+                console.log('inside the if condition fade in callback for image square, before the backround image is changed.');
+            })
+        })
+        
+    }else{
+        DOMElements.matchImage.fadeOut(400, ()=>{
+            console.log('inside the else condition fadein callback');
+            DOMElements.matchImage.fadeIn(400).css({
+                'background-image': `url(${imageURL})`,
+                'border': '1px solid white'
+            });
+        });
     }
 
-    DOMElements.matchImage.css({
-        'background-image': `url(${imageURL})`,
-        'background-color': 'transparent',
-        border: '1px solid white'
-    });
+    console.log('DOMElements.matchImage', DOMElements.matchImage);
+    
+    
     return imageURL;
+}
+
+const hideInitialText = () => {
+    if (!DOMElements.imageCaption) {
+        DOMElements.imageCaption = $('#image-caption');
+        DOMElements.initialInstructionsText = $('#initial-instructions-text');
+        DOMElements.initialInfoBox = $('#initial-info-box');
+        DOMElements.infoDisplay = $('#info-display');
+    }
+
+    DOMElements.initialInstructionsText.fadeOut(1500);
+    DOMElements.imageCaption.fadeIn(1500);
+    DOMElements.initialInfoBox.fadeOut(750, ()=>{
+        DOMElements.infoDisplay.fadeIn(750);
+    });
+    
 }
 
 const fetchMatchData = (searchTarget) =>{
     if(!DOMElements.infoCampgrounds){
         DOMElements.infoCampgrounds = $('#campgrounds-ul');
         DOMElements.infoTrails = $('#trails-ul');
-    }else{
-        DOMElements.infoTrails.html('');
-        DOMElements.infoCampgrounds.html('');
     }
 
     let lat;
     let lon;
+    let caption;
 
     switch(searchTarget){
         case 'assets/images/MatchImages/ArchesImage600.png':
             lat = 38.733;
             lon = -109.592514;
+            caption = 'Arches National Park, Utah';
             break;
         case 'assets/images/MatchImages/CraterLakeImage600.png':
             lat = 42.9446;
             lon = -122.1090;
+            caption = 'Crater Lake, Oregon';
             break;
         case 'assets/images/MatchImages/DeathValley600.png':
             lat = 36.5323;
             lon = -116.9325;
+            caption = 'Death Valley, California';
             break;
         case 'assets/images/MatchImages/GrandCanyon600.png':
             lat = 36.1070;
             lon = -112.1130;
+            caption = 'Grand Canyon, Arizona';
             break;
         case 'assets/images/MatchImages/JoshuaTreeImage600.png':
             lat = 33.8818;
             lon = -115.9006;
+            caption = 'Joshua Tree National Park, California';
             break;
-        case 'assets/images/MatchImages/SeqoiaImage600.png':
+        case 'assets/images/MatchImages/SequoiaImage600.png':
             lat = 36.4864;
             lon = -118.5658;
+            caption = 'Sequoia National Park, California';
             break;
         case 'assets/images/MatchImages/SmokyMountainsImage600.png':
             lat = 35.6117;
             lon = -83.4895;
+            caption = 'Smoky Mountains National Park, Tennessee';
             break;
         case 'assets/images/MatchImages/YellowstoneImage600.png':
             lat = 44.4280;
             lon = -110.5885;
+            caption = 'Yellowstone National Park, Wyoming';
             break;
         case 'assets/images/MatchImages/YosemiteImage600.png':
             lat = 37.8651;
             lon = -119.5383;
+            caption = 'Yosemite National Park, California';
             break;
         default: console.log('No matching search target.');
     }
@@ -206,7 +248,9 @@ const fetchMatchData = (searchTarget) =>{
     })
     .then(result => result.json())
     .then(result => {
+        DOMElements.infoCampgrounds.html('');
         appendCampgrounds(result);
+        // displayParkCaption(caption);
     })
     .catch(error => console.log(' campgrounds fetch error: ', error));
 
@@ -218,13 +262,15 @@ const fetchMatchData = (searchTarget) =>{
     })
     .then(result => result.json())
     .then(result => {
+        DOMElements.infoTrails.html('');
         appendTrails(result);
+        displayParkCaption(caption);
     })
     .catch(error => console.log('trails fetch error: ', error));
 }
 
-const appendCampgrounds = (campground) =>{
-    campground.campgrounds.forEach((element) => {
+const appendCampgrounds = (data) =>{
+    data.campgrounds.forEach((element) => {
         const name = element.name;
         const hyperlink = element.url;
 
@@ -238,8 +284,8 @@ const appendCampgrounds = (campground) =>{
     });
 }
 
-const appendTrails = (trail) =>{
-    trail.trails.forEach((element) => {
+const appendTrails = (data) =>{
+    data.trails.forEach((element) => {
         const name = element.name;
         const hyperlink = element.url;
 
@@ -251,6 +297,11 @@ const appendTrails = (trail) =>{
         li.append(anchor);
         DOMElements.infoTrails.append(li);
     });
+}
+
+const displayParkCaption = (caption) => {
+    
+    DOMElements.imageCaption.removeClass('hidden').text(caption);
 }
 
 const updateStats = () =>{
