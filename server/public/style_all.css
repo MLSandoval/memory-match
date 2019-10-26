@@ -83,6 +83,16 @@ header{
     display: flex;
     flex-direction: column;
 }
+.background-square{
+    height: 0;
+    width: 100%;
+    margin-bottom: 2.5%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-bottom: 100%;
+    background-color: rgba(255, 255, 255, 0.356);
+}
 .image-square{
     height: 0;
     width: 100%;
@@ -92,16 +102,6 @@ header{
     background-repeat: no-repeat;
     background-position: center;
     padding-bottom: 100%;
-}
-.background-square{
-     height: 0;
-    width: 100%;
-    margin-bottom: 2.5%;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    padding-bottom: 100%;
-    background-color: rgba(255, 255, 255, 0.356);
 }
 /* .image-square:after{
     content: "";
@@ -232,6 +232,27 @@ header{
 
 
 .modal{
+    height:100%;
+    width: 100%;  
+}
+.final-match-column{
+    border: 2px solid white;
+    height: 84%;
+    width: 175px;
+    display: flex;
+    flex-direction: column;
+}
+.final-match-caption{
+    height: 10%;
+    width:100%;
+    border: 2px solid red;
+}
+.final-match-image-square{
+    width: 100%;
+    padding-bottom: 100%;
+    border: 2px yellow solid;
+}
+.modal-body{
     position: absolute;
     bottom: 0;
     left:0;
@@ -246,9 +267,7 @@ header{
         1px 1px 0 rgb(255, 255, 255);
     z-index: 2;
 }
-.modal-body{
-    position:relative;
-}
+
 .modal-text{
     /* position:absolute; */
     /* top: 2%; */

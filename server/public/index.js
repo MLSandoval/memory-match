@@ -24,6 +24,7 @@ const parkImageURLArray = [
 const DOMElements = {};
 let flippedStatus = [];
 let stats = null;
+let finalMatchCaption = null;
 
 $(document).ready(function(){
     createCards(cardImageURLArray, parkImageURLArray);
@@ -35,6 +36,7 @@ $(document).ready(function(){
 
 const assignClickHandlers = () => {
     $('.card-container').on('click', flipCard); 
+    // $('#modalButton').on('click', resetGame);
 }
 
 const createCards = (cardImages, matchImages) => {
@@ -61,16 +63,16 @@ const createCards = (cardImages, matchImages) => {
 }
 
 const shuffleCardsArr = () => {
-    let m = DOMElements.cards.length;
-    let t;
-    let i;
+    let max = DOMElements.cards.length;
+    let temp;
+    let index;
 
-    while (m) {
-        i = Math.floor(Math.random() * m--);
+    while (max) {
+        index = Math.floor(Math.random() * max--);
 
-        t = DOMElements.cards[m];
-        DOMElements.cards[m] = DOMElements.cards[i];
-        DOMElements.cards[i] = t;
+        temp = DOMElements.cards[max];
+        DOMElements.cards[max] = DOMElements.cards[index];
+        DOMElements.cards[index] = temp;
     }
 }
 
@@ -165,22 +167,17 @@ const displayMatchImage = (imageURL) => {
                 'background-color': 'white',
                 'border': '1px solid white'
             });
-            DOMElements.matchImage.fadeIn(350, () => {
-                console.log('inside the if condition fade in callback for image square, before the backround image is changed.');
-            })
+            DOMElements.matchImage.fadeIn(350);
         })
         
     }else{
         DOMElements.matchImage.fadeOut(350, ()=>{
-            console.log('inside the else condition fadein callback');
             DOMElements.matchImage.fadeIn(350).css({
                 'background-image': `url(${imageURL})`,
                 'border': '1px solid white'
             });
         });
     }
-
-    console.log('DOMElements.matchImage', DOMElements.matchImage);
     return imageURL;
 }
 
@@ -324,7 +321,10 @@ const appendTrails = (data) =>{
 }
 
 const displayParkCaption = (caption) => {
-    
+    if(stats.matches === 9){
+        finalMatchCaption = caption;
+    }
+
     DOMElements.imageCaption.fadeIn(250, () => {
         DOMElements.imageCaption.text(caption);
     })
@@ -351,20 +351,27 @@ const updateStats = () =>{
     DOMElements.stats.attempts.text(`Attempts: ${stats.attempts}`);
     DOMElements.stats.gamesPlayed.text(`Games Played: ${stats.gamesPlayed}`);
     DOMElements.stats.matches.text(`Matches: ${stats.matches}`);
-
-   
 }
 
 const displayModal = () => {
-    $('.game-container').fadeOut(1000).delay(1500, ()=>{
-        $('.modal').fadeIn(2000, showFinalMatchData).toggleClass('hidden');
+    $('.game-container').fadeOut(2000).delay(1500, ()=>{
+        showFinalMatchData();
+        $('.modal').fadeIn(2000);
         
     });
     
 }
 
-const showFinalMatchData = () =>{
-    console.log('show final match function reached');
+const showFinalMatchData = () => {
+    let finalMatchImage = DOMElements.matchImage.css('background-image');
+    console.log('background image final match: ', finalMatchImage);
+    $('#final-match-caption').text(finalMatchCaption);
+    $('#final-match-image-square').css({
+        'background-color': 'rgba(245, 245, 245, 0.26)',
+        'background-image': finalMatchImage
+    });
+    console.log('parks and campground element: ', DOMElements.trailsAndCampgrounds);
+    // $('#final-match-info').html(DOMElements.trailsAndCampgrounds);
 }
 
 //image slider code//
