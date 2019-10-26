@@ -16,11 +16,11 @@
 </head>
 </head>
 <body>
-    <div class="game-container">
+    <div id="game-container" class="game-container">
         <header class="rounded-corners">
             <p class="header-text">National Parks Matching Game</p>
         </header>
-        <div class="stats-container">
+        <div id="stats-container" class="stats-container">
             <div class="stats-attempts rounded-corners stats-bubble">
                 <p class="stats-text" id="attempts-text">Attempts: null</p>
             </div>
@@ -64,20 +64,6 @@
         </div>
     </div>
 
-    <!-- Card Flip HTML Structure Example
-    <div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
-            </div>
-            <div class="flip-card-back">
-                <h1>John Doe</h1>
-                <p>Architect & Engineer</p>
-                <p>We love that guy</p>
-            </div>
-        </div>
-    </div> -->
-
     <!-- Image slider code -->
     <!-- <div class="slider container">
         <div class="image active"></div>
@@ -120,6 +106,11 @@
     </div> -->
 
     <div class="modal hidden">
+        <div id="final-match-column" class="final-match-column rounded-corners">
+            <div id="final-match-caption" class="final-match-caption rounded-corners"></div>
+            <div id="final-match-image-square" class="final-match-image-square rounded-corners image-square"></div>
+            <div id="final-match-info" class="final-match-info rounded-corners info-div"></div>
+        </div>
         <div class="modal-body">
             <p class="modal-text">
                 Oh heck yea, check that out. Unreal beauty. 
@@ -127,7 +118,7 @@
                 Now get out there, and explore your national parks.
                 National parks yalllll
             </p>
-            <button class="modal-button rounded-corners">Play again?</button>
+            <button id="modal-button" class="modal-button rounded-corners">Play again?</button>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
