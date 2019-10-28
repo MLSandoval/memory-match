@@ -21,6 +21,18 @@ const parkImageURLArray = [
     'assets/images/MatchImages/YosemiteImage600.png'
 ];
 
+const bgParkImages = [
+    'assets/images/BGs/Arches.jpg',
+    'assets/images/BGs/CraterLakeResized.jpg',
+    'assets/images/BGs/DeathValleyResized.jpg',
+    'assets/images/BGs/GrandCanyon.jpg',
+    'assets/images/BGs/JoshuaTreeRezised.jpg',
+    'assets/images/BGs/SequoiaResized.jpg',
+    'assets/images/BGs/SmokyMountains.jpg',
+    'assets/images/BGs/YellowStone.jpg',
+    'assets/images/BGs/Yosemite.jpg'
+];
+
 const DOMElements = {};
 let flippedStatus = [];
 let stats = null;
@@ -354,24 +366,44 @@ const updateStats = () =>{
 }
 
 const displayModal = () => {
-    $('.game-container').fadeOut(2000).delay(1500, ()=>{
-        showFinalMatchData();
-        $('.modal').fadeIn(2000);
-        
+    showFinalMatchData();
+    $('#game-container').delay(1500).fadeOut(1500, ()=>{
+        $('#modal').delay(1500).fadeIn(1000);
     });
     
 }
 
 const showFinalMatchData = () => {
-    let finalMatchImage = DOMElements.matchImage.css('background-image');
-    console.log('background image final match: ', finalMatchImage);
     $('#final-match-caption').text(finalMatchCaption);
-    $('#final-match-image-square').css({
-        'background-color': 'rgba(245, 245, 245, 0.26)',
-        'background-image': finalMatchImage
+    $('#final-match-info').html(DOMElements.trailsAndCampgrounds);
+
+    if(!DOMElements.modal){
+        DOMElements.modal = $('#modal');
+    };
+
+    let finalMatchParkURL = DOMElements.matchImage.css('background-image');
+    let parkIndex;
+    parkImageURLArray.forEach((element, index) => {
+        console.log('does: ', finalMatchParkURL);
+        console.log('include: ', element);
+        if(finalMatchParkURL.includes(element)){ 
+            console.log('THE INCLUDES WAS TRUE');
+            parkIndex = index;
+        }
     });
-    console.log('parks and campground element: ', DOMElements.trailsAndCampgrounds);
-    // $('#final-match-info').html(DOMElements.trailsAndCampgrounds);
+
+    DOMElements.modal.css({
+        'background': `url(${bgParkImages[parkIndex]})`,
+        'background-size': 'cover',
+        'background-repeat': 'no-repeat',
+        'background-position': 'center',
+        'display': 'flex'
+    });
+    
+    // $('#final-match-image-square').css({
+    //     'background-color': 'rgba(245, 245, 245, 0.26)',
+    //     'background-image': finalMatchImage
+    // });
 }
 
 //image slider code//

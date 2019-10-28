@@ -17,7 +17,7 @@ body{
     position:relative;
     padding: 5px;
     font-size: 1rem;
-    background: url("./assets/images/BGs/VolcanoesNationalPark.jpg") no-repeat center center;
+    background: url("./assets/images/BGs/PurpleMountains.jpg") no-repeat center center;
     margin: auto;
     padding: 0;
     font-family: 'Oxygen', sans-serif;
@@ -234,6 +234,8 @@ header{
 .modal{
     height:100%;
     width: 100%;  
+    /* display:flex; */
+    flex-direction: row;
 }
 .final-match-column{
     border: 2px solid white;
