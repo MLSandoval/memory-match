@@ -34,6 +34,7 @@ const bgParkImages = [
 ];
 
 const DOMElements = {};
+DOMElements.gameContainer = $('#game-container');
 let flippedStatus = [];
 let stats = null;
 let finalMatchCaption = null;
@@ -60,7 +61,7 @@ const createCards = (cardImages, matchImages) => {
         let cardContainer = $("<div>").addClass('card-container').attr('match-image', matchImages[i]);
         let cardBack = $("<div>").addClass('card card-back').css('background-image', `url('assets/images/CardImages/CardBack1.png')`);
         let cardFace = $("<div>").addClass('card card-face').css('background-image', `url('${cardImages[i]}')`);
-        // console.log('cardFace: ', cardFace);
+        
      
         cardContainer.append(cardBack, cardFace);
         cardsArr.push(cardContainer);
@@ -131,7 +132,6 @@ const checkMatch = (flippedCards) => {
         stats.attempts++;
 
     }else{
-        // console.log('they match!', flippedCards)
         let match = $(flippedCards[1]).attr('match-image');
         $(flippedCards[0]).off('click', flipCard);
         $(flippedCards[1]).off('click', flipCard);
@@ -140,10 +140,7 @@ const checkMatch = (flippedCards) => {
         
         fetchMatchData(match);
         
-        console.log('console.log directly before displayMatchImage is called.');
         displayMatchImage(match);
-        // hideInitialText();
-        
     }
     flippedStatus = [];
     updateStats();
@@ -172,7 +169,6 @@ const displayMatchImage = (imageURL) => {
     // debugger;
     if(!DOMElements.matchImage){
         DOMElements.matchImage = $('#image-square');
-        console.log($('#image-square').after());
         DOMElements.matchImage.fadeOut(350, ()=>{
             DOMElements.matchImage.css({
                 'background-image': `url(${imageURL})`,
@@ -283,6 +279,8 @@ const fetchMatchData = (searchTarget) =>{
 
 const appendCampgrounds = (data) =>{
     DOMElements.infoCampgrounds.fadeOut(400, () => {
+        // debugger;
+        // if(stats.matches === 9){return;};
         DOMElements.infoCampgrounds.html('');
 
         data.campgrounds.forEach((element) => {
@@ -318,12 +316,7 @@ const appendTrails = (data) =>{
             li.append(anchor);
             DOMElements.infoTrails.append(li);
         });
-        if(!DOMElements.trailsAndCampgrounds){
-            DOMElements.trailsAndCampgrounds = $('ul');
-            console.log('trails and campgrounds element: ', DOMElements.trailsAndCampgrounds);
-        }
-        // DOMElements.infoCampgrounds.fadeIn(400);
-        // DOMElements.infoTrails.fadeIn(400);
+        if(!DOMElements.trailsAndCampgrounds) DOMElements.trailsAndCampgrounds = $('ul');
         DOMElements.trailsAndCampgrounds.fadeIn(400);
     });
     
@@ -366,30 +359,29 @@ const updateStats = () =>{
 }
 
 const displayModal = () => {
-    showFinalMatchData();
-    $('#game-container').delay(1500).fadeOut(1500, ()=>{
-        $('#modal').delay(1500).fadeIn(1000);
+    // debugger;
+    console.log('displayModal called.');
+    setModalBG();
+    setFinalMatchData();
+    DOMElements.gameContainer.fadeOut(2000, () => {
+        
+        DOMElements.modal.fadeIn(2000, () => {
+            DOMElements.modal.css('display', 'flex');
+        });
+            // showFinalMatchData();
     });
-    
 }
 
-const showFinalMatchData = () => {
-    $('#final-match-caption').text(finalMatchCaption);
-    $('#final-match-info').html(DOMElements.trailsAndCampgrounds);
-
-    if(!DOMElements.modal){
-        DOMElements.modal = $('#modal');
-    };
+const setModalBG = () => {
+    console.log('setModalBg called.');
+    if (!DOMElements.modal) DOMElements.modal = $('#modal');
+  
 
     let finalMatchParkURL = DOMElements.matchImage.css('background-image');
     let parkIndex;
+
     parkImageURLArray.forEach((element, index) => {
-        console.log('does: ', finalMatchParkURL);
-        console.log('include: ', element);
-        if(finalMatchParkURL.includes(element)){ 
-            console.log('THE INCLUDES WAS TRUE');
-            parkIndex = index;
-        }
+        if (finalMatchParkURL.includes(element)) parkIndex = index;
     });
 
     DOMElements.modal.css({
@@ -397,9 +389,24 @@ const showFinalMatchData = () => {
         'background-size': 'cover',
         'background-repeat': 'no-repeat',
         'background-position': 'center',
-        'display': 'flex'
+        // 'display': 'flex'
     });
-    
+}
+
+const setFinalMatchData = () => {
+    console.log('showFinalMatchData called.');
+    if(!DOMElements.modalCaption){
+        DOMElements.modalCaption = $('#final-match-caption');
+        DOMElements.finalMatchInfo = $('#final-match-info');
+        // DOMElements.finalMatchInfoContainer = $('#final-match-info-container');
+    }
+    DOMElements.modalCaption.text(finalMatchCaption);
+    let infoClone = $('#camp, #trail').clone().addClass('text-small').appendTo(DOMElements.finalMatchInfo);
+    console.log('infoClone: ', infoClone);
+    // DOMElements.finalMatchInfo.append(infoClone);
+
+    // DOMElements.finalMatchInfoContainer.fadeIn(2000);
+
     // $('#final-match-image-square').css({
     //     'background-color': 'rgba(245, 245, 245, 0.26)',
     //     'background-image': finalMatchImage
