@@ -33,6 +33,19 @@ const bgParkImages = [
     'assets/images/BGs/Yosemite.jpg'
 ];
 
+const parkQuotes = [
+    '"Travel makes one modest. You see what a tiny place you occupy in the world." \n - Gustave Flaubert',
+    '"Traveling - it leaves you speechless, then turns you into a storyteller." \n - Ibn Battuta',
+    '"I only went out for a walk, and finally concluded to stay out till sundown, for going out, I found, was really going in." \n - John Muir',
+    '"Another glorious day, the air as delicious to the lungs as nectar to the tongue." \n - John Muir',
+    '"The clearest way into the Universe is through a forest wilderness." \n - John Muir',
+    '"This grand show is eternal. It is always sunrise somewhere; the dew is never all dried at once; a shower is forever falling; vapor ever rising." \n - John Muir',
+    '"Adventure is worthwhile." \n - Aesop',
+    '"We travel not to escape life, but for life not to escape us." \n - Anonymous',
+    '"The world is a book, and those who do not travel read only one page." \n - Saint Augustine',
+    '"Not all those who wander are lost." \n - J.R.R. Tolkien'
+];
+
 const DOMElements = {};
 DOMElements.gameContainer = $('#game-container');
 let flippedStatus = [];
@@ -140,29 +153,10 @@ const checkMatch = (flippedCards) => {
         
         fetchMatchData(match);
         
-        displayMatchImage(match);
+        // displayMatchImage(match);
     }
     flippedStatus = [];
     updateStats();
-}
-
-const hideInitialText = () => {
-    if (!DOMElements.imageCaption) {
-        DOMElements.imageCaption = $('#image-caption');
-        DOMElements.initialInstructionsText = $('#initial-instructions-text');
-        DOMElements.initialInfoBox = $('#initial-info-box');
-        DOMElements.infoDisplay = $('#info-box');
-    }
-
-    DOMElements.initialInstructionsText.fadeOut(500, () => {
-        DOMElements.imageCaption.fadeIn(500);
-    });
-    // DOMElements.initialInstructionsText.fadeOut(250);
-
-    DOMElements.initialInfoBox.fadeOut(500, () => {
-        DOMElements.infoDisplay.fadeIn(500);
-    });
-    // DOMElements.initialInfoBox.fadeOut(250);
 }
 
 const displayMatchImage = (imageURL) => {
@@ -174,10 +168,8 @@ const displayMatchImage = (imageURL) => {
                 'background-image': `url(${imageURL})`,
                 'background-color': 'white',
                 'border': '1px solid white'
-            });
-            DOMElements.matchImage.fadeIn(350);
-        })
-        
+            }).fadeIn(250);
+        }); 
     }else{
         DOMElements.matchImage.fadeOut(350, ()=>{
             DOMElements.matchImage.fadeIn(350).css({
@@ -186,7 +178,6 @@ const displayMatchImage = (imageURL) => {
             });
         });
     }
-    return imageURL;
 }
 
 const fetchMatchData = (searchTarget) =>{
@@ -258,7 +249,6 @@ const fetchMatchData = (searchTarget) =>{
     .then(result => {
         
         appendCampgrounds(result);
-        // displayParkCaption(caption);
     })
     .catch(error => console.log('Campgrounds fetch error: ', error));
 
@@ -271,7 +261,7 @@ const fetchMatchData = (searchTarget) =>{
     .then(result => result.json())
     .then(result => {
         
-        appendTrails(result);
+        appendTrails(result, searchTarget);
         displayParkCaption(caption);
     })
     .catch(error => console.log('Trails fetch error: ', error));
@@ -295,13 +285,10 @@ const appendCampgrounds = (data) =>{
             li.append(anchor);
             DOMElements.infoCampgrounds.append(li); 
         });
-
-        
     })
-    // hideInitialText();
 }
 
-const appendTrails = (data) =>{
+const appendTrails = (data, match) =>{
     DOMElements.infoTrails.html('');
     DOMElements.infoTrails.fadeOut(400, () => {
         data.trails.forEach((element) => {
@@ -320,9 +307,29 @@ const appendTrails = (data) =>{
         DOMElements.trailsAndCampgrounds.fadeIn(400);
     });
     
-    if(stats.matches === 1){
-        hideInitialText();
-    };
+    if(stats.matches === 1) hideInitialText();
+    
+    displayMatchImage(match);
+}
+
+const hideInitialText = () => {
+    if (!DOMElements.imageCaption) {
+        DOMElements.imageCaption = $('#image-caption');
+        DOMElements.initialInstructionsText = $('#initial-instructions-text');
+        DOMElements.initialInfoBox = $('#initial-info-box');
+        DOMElements.infoDisplay = $('#info-box');
+    }
+
+    DOMElements.initialInstructionsText.fadeOut(250, () => {
+        DOMElements.initialInstructionsText.addClass('hidden');
+        // DOMElements.imageCaption.fadeIn(500);
+    });
+    // DOMElements.initialInstructionsText.fadeOut(250);
+
+    DOMElements.initialInfoBox.fadeOut(250, () => {
+        DOMElements.infoDisplay.fadeIn(250);
+    });
+    // DOMElements.initialInfoBox.fadeOut(250);
 }
 
 const displayParkCaption = (caption) => {
@@ -363,9 +370,9 @@ const displayModal = () => {
     console.log('displayModal called.');
     setModalBG();
     setFinalMatchData();
-    DOMElements.gameContainer.fadeOut(2000, () => {
+    DOMElements.gameContainer.fadeOut(1000, () => {
         
-        DOMElements.modal.fadeIn(2000, () => {
+        DOMElements.modal.fadeIn(1000, () => {
             DOMElements.modal.css('display', 'flex');
         });
             // showFinalMatchData();
@@ -412,6 +419,10 @@ const setFinalMatchData = () => {
     //     'background-image': finalMatchImage
     // });
 }
+
+const resetGame = () => {
+    DOMElements.gameContainer.fadeIn(2000);
+};
 
 //image slider code//
 // $(function(){

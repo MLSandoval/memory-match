@@ -7,10 +7,10 @@ html{
 body{
     /* color: rgb(71, 70, 70); */
      text-shadow:
-        -1px -1px 0 rgb(255, 255, 255, 0.397),
-        1px -1px 0 rgb(255, 255, 255, 0.397),
-        -1px 1px 0 rgb(255, 255, 255, 0.397),
-        1px 1px 0 rgba(255, 255, 255, 0.397);
+        -1px -1px 0 rgb(255, 255, 255, 0.2),
+        1px -1px 0 rgb(255, 255, 255, 0.2),
+        -1px 1px 0 rgb(255, 255, 255, 0.2),
+        1px 1px 0 rgba(255, 255, 255, 0.2);
     height:100vh;
     width: 100vw;
     max-width: 1400px;
@@ -103,6 +103,7 @@ header{
     width: 100%;
     position: relative;
     margin-bottom: 2.5%;
+    text-align: center;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -250,16 +251,20 @@ header{
     height:25%;
     width: 100%;
     /* background-color: rgba(247, 73, 73, 0.50); */
-    color: black;
-    text-shadow:
+    /* color: black; */
+    /* text-shadow:
         -1px -1px 0 rgb(255, 255, 255),
         1px -1px 0 rgb(255, 255, 255),
         -1px 1px 0 rgb(255, 255, 255),
-        1px 1px 0 rgb(255, 255, 255);
+        1px 1px 0 rgb(255, 255, 255); */
     z-index: 2;
 }
 
 .final-match-info{
+    /* position:absolute;
+    top: 1%;
+    left: 1%; */
+    padding-left: 1%;
     overflow: scroll;
 
 }
@@ -275,8 +280,8 @@ header{
 
 .modal-button{
     position: absolute;
-    bottom:0;
-    right:0;
+    bottom:4%;
+    right:1%;
     border: 1px rgb(187, 0, 0) solid;
     margin-right: 5px;
 }
