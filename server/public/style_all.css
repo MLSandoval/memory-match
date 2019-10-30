@@ -246,10 +246,16 @@ header{
 .modal-body{
     display: flex;
     flex-direction: row;
+    margin: auto;
     position: absolute;
-    bottom: 0;
-    height:25%;
-    width: 100%;
+    bottom: 1%;
+    right: 1%;
+    height: 18%;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 98%;
+    /* background-color: rgba(255, 255, 255, 0.50); */
+    margin-bottom: 0;
     /* background-color: rgba(247, 73, 73, 0.50); */
     /* color: black; */
     /* text-shadow:
@@ -266,16 +272,24 @@ header{
     left: 1%; */
     padding-left: 1%;
     overflow: scroll;
-
+    width: 27%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.50);
+    
+   
+  
 }
 
 .modal-text{
     /* position:absolute; */
     /* top: 2%; */
-    margin:auto;
-    padding:5px;
+    width: 70%;
+    /* margin:auto; */
+    padding: 4px;
+    /* height: 100%; */
     font-size: 1rem;
     text-align: center;
+    background-color: rgba(255, 255, 255, 0.350);
 }
 
 .modal-button{

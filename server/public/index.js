@@ -370,6 +370,7 @@ const displayModal = () => {
     console.log('displayModal called.');
     setModalBG();
     setFinalMatchData();
+    setEndQuote();
     DOMElements.gameContainer.fadeOut(1000, () => {
         
         DOMElements.modal.fadeIn(1000, () => {
@@ -418,6 +419,22 @@ const setFinalMatchData = () => {
     //     'background-color': 'rgba(245, 245, 245, 0.26)',
     //     'background-image': finalMatchImage
     // });
+}
+
+const setEndQuote = () => {
+    
+    let max = parkQuotes.length;
+    let temp;
+    let index;
+
+    while (max) {
+        index = Math.floor(Math.random() * max--);
+
+        temp = parkQuotes[max];
+        parkQuotes[max] = parkQuotes[index];
+        parkQuotes[index] = temp;
+    }
+    $('#modal-text').text(parkQuotes[0]);
 }
 
 const resetGame = () => {
