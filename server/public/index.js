@@ -21,7 +21,33 @@ const parkImageURLArray = [
     'assets/images/MatchImages/YosemiteImage600.png'
 ];
 
+const bgParkImages = [
+    'assets/images/BGs/Arches.jpg',
+    'assets/images/BGs/CraterLakeResized.jpg',
+    'assets/images/BGs/DeathValleyResized.jpg',
+    'assets/images/BGs/GrandCanyon.jpg',
+    'assets/images/BGs/JoshuaTreeRezised.jpg',
+    'assets/images/BGs/SequoiaResized.jpg',
+    'assets/images/BGs/SmokyMountains.jpg',
+    'assets/images/BGs/YellowStone.jpg',
+    'assets/images/BGs/Yosemite.jpg'
+];
+
+const parkQuotes = [
+    '"Travel makes one modest. You see what a tiny place you occupy in the world." \n - Gustave Flaubert',
+    '"Traveling - it leaves you speechless, then turns you into a storyteller." \n - Ibn Battuta',
+    '"I only went out for a walk, and finally concluded to stay out till sundown, for going out, I found, was really going in." \n - John Muir',
+    '"Another glorious day, the air as delicious to the lungs as nectar to the tongue." \n - John Muir',
+    '"The clearest way into the Universe is through a forest wilderness." \n - John Muir',
+    '"This grand show is eternal. It is always sunrise somewhere; the dew is never all dried at once; a shower is forever falling; vapor ever rising." \n - John Muir',
+    '"Adventure is worthwhile." \n - Aesop',
+    '"We travel not to escape life, but for life not to escape us." \n - Anonymous',
+    '"The world is a book, and those who do not travel read only one page." \n - Saint Augustine',
+    '"Not all those who wander are lost." \n - J.R.R. Tolkien'
+];
+
 const DOMElements = {};
+DOMElements.gameContainer = $('#game-container');
 let flippedStatus = [];
 let stats = null;
 let finalMatchCaption = null;
@@ -48,7 +74,7 @@ const createCards = (cardImages, matchImages) => {
         let cardContainer = $("<div>").addClass('card-container').attr('match-image', matchImages[i]);
         let cardBack = $("<div>").addClass('card card-back').css('background-image', `url('assets/images/CardImages/CardBack1.png')`);
         let cardFace = $("<div>").addClass('card card-face').css('background-image', `url('${cardImages[i]}')`);
-        // console.log('cardFace: ', cardFace);
+        
      
         cardContainer.append(cardBack, cardFace);
         cardsArr.push(cardContainer);
@@ -119,7 +145,6 @@ const checkMatch = (flippedCards) => {
         stats.attempts++;
 
     }else{
-        // console.log('they match!', flippedCards)
         let match = $(flippedCards[1]).attr('match-image');
         $(flippedCards[0]).off('click', flipCard);
         $(flippedCards[1]).off('click', flipCard);
@@ -128,48 +153,23 @@ const checkMatch = (flippedCards) => {
         
         fetchMatchData(match);
         
-        console.log('console.log directly before displayMatchImage is called.');
-        displayMatchImage(match);
-        // hideInitialText();
-        
+        // displayMatchImage(match);
     }
     flippedStatus = [];
     updateStats();
-}
-
-const hideInitialText = () => {
-    if (!DOMElements.imageCaption) {
-        DOMElements.imageCaption = $('#image-caption');
-        DOMElements.initialInstructionsText = $('#initial-instructions-text');
-        DOMElements.initialInfoBox = $('#initial-info-box');
-        DOMElements.infoDisplay = $('#info-box');
-    }
-
-    DOMElements.initialInstructionsText.fadeOut(500, () => {
-        DOMElements.imageCaption.fadeIn(500);
-    });
-    // DOMElements.initialInstructionsText.fadeOut(250);
-
-    DOMElements.initialInfoBox.fadeOut(500, () => {
-        DOMElements.infoDisplay.fadeIn(500);
-    });
-    // DOMElements.initialInfoBox.fadeOut(250);
 }
 
 const displayMatchImage = (imageURL) => {
     // debugger;
     if(!DOMElements.matchImage){
         DOMElements.matchImage = $('#image-square');
-        console.log($('#image-square').after());
         DOMElements.matchImage.fadeOut(350, ()=>{
             DOMElements.matchImage.css({
                 'background-image': `url(${imageURL})`,
                 'background-color': 'white',
                 'border': '1px solid white'
-            });
-            DOMElements.matchImage.fadeIn(350);
-        })
-        
+            }).fadeIn(250);
+        }); 
     }else{
         DOMElements.matchImage.fadeOut(350, ()=>{
             DOMElements.matchImage.fadeIn(350).css({
@@ -178,7 +178,6 @@ const displayMatchImage = (imageURL) => {
             });
         });
     }
-    return imageURL;
 }
 
 const fetchMatchData = (searchTarget) =>{
@@ -250,7 +249,6 @@ const fetchMatchData = (searchTarget) =>{
     .then(result => {
         
         appendCampgrounds(result);
-        // displayParkCaption(caption);
     })
     .catch(error => console.log('Campgrounds fetch error: ', error));
 
@@ -263,7 +261,7 @@ const fetchMatchData = (searchTarget) =>{
     .then(result => result.json())
     .then(result => {
         
-        appendTrails(result);
+        appendTrails(result, searchTarget);
         displayParkCaption(caption);
     })
     .catch(error => console.log('Trails fetch error: ', error));
@@ -271,6 +269,8 @@ const fetchMatchData = (searchTarget) =>{
 
 const appendCampgrounds = (data) =>{
     DOMElements.infoCampgrounds.fadeOut(400, () => {
+        // debugger;
+        // if(stats.matches === 9){return;};
         DOMElements.infoCampgrounds.html('');
 
         data.campgrounds.forEach((element) => {
@@ -285,13 +285,10 @@ const appendCampgrounds = (data) =>{
             li.append(anchor);
             DOMElements.infoCampgrounds.append(li); 
         });
-
-        
     })
-    // hideInitialText();
 }
 
-const appendTrails = (data) =>{
+const appendTrails = (data, match) =>{
     DOMElements.infoTrails.html('');
     DOMElements.infoTrails.fadeOut(400, () => {
         data.trails.forEach((element) => {
@@ -306,18 +303,33 @@ const appendTrails = (data) =>{
             li.append(anchor);
             DOMElements.infoTrails.append(li);
         });
-        if(!DOMElements.trailsAndCampgrounds){
-            DOMElements.trailsAndCampgrounds = $('ul');
-            console.log('trails and campgrounds element: ', DOMElements.trailsAndCampgrounds);
-        }
-        // DOMElements.infoCampgrounds.fadeIn(400);
-        // DOMElements.infoTrails.fadeIn(400);
+        if(!DOMElements.trailsAndCampgrounds) DOMElements.trailsAndCampgrounds = $('ul');
         DOMElements.trailsAndCampgrounds.fadeIn(400);
     });
     
-    if(stats.matches === 1){
-        hideInitialText();
-    };
+    if(stats.matches === 1) hideInitialText();
+    
+    displayMatchImage(match);
+}
+
+const hideInitialText = () => {
+    if (!DOMElements.imageCaption) {
+        DOMElements.imageCaption = $('#image-caption');
+        DOMElements.initialInstructionsText = $('#initial-instructions-text');
+        DOMElements.initialInfoBox = $('#initial-info-box');
+        DOMElements.infoDisplay = $('#info-box');
+    }
+
+    DOMElements.initialInstructionsText.fadeOut(250, () => {
+        DOMElements.initialInstructionsText.addClass('hidden');
+        // DOMElements.imageCaption.fadeIn(500);
+    });
+    // DOMElements.initialInstructionsText.fadeOut(250);
+
+    DOMElements.initialInfoBox.fadeOut(250, () => {
+        DOMElements.infoDisplay.fadeIn(250);
+    });
+    // DOMElements.initialInfoBox.fadeOut(250);
 }
 
 const displayParkCaption = (caption) => {
@@ -354,25 +366,63 @@ const updateStats = () =>{
 }
 
 const displayModal = () => {
-    $('.game-container').fadeOut(2000).delay(1500, ()=>{
-        showFinalMatchData();
-        $('.modal').fadeIn(2000);
+    // debugger;
+    console.log('displayModal called.');
+    setModalBG();
+    setFinalMatchData();
+    DOMElements.gameContainer.fadeOut(1000, () => {
         
+        DOMElements.modal.fadeIn(1000, () => {
+            DOMElements.modal.css('display', 'flex');
+        });
+            // showFinalMatchData();
     });
-    
 }
 
-const showFinalMatchData = () => {
-    let finalMatchImage = DOMElements.matchImage.css('background-image');
-    console.log('background image final match: ', finalMatchImage);
-    $('#final-match-caption').text(finalMatchCaption);
-    $('#final-match-image-square').css({
-        'background-color': 'rgba(245, 245, 245, 0.26)',
-        'background-image': finalMatchImage
+const setModalBG = () => {
+    console.log('setModalBg called.');
+    if (!DOMElements.modal) DOMElements.modal = $('#modal');
+  
+
+    let finalMatchParkURL = DOMElements.matchImage.css('background-image');
+    let parkIndex;
+
+    parkImageURLArray.forEach((element, index) => {
+        if (finalMatchParkURL.includes(element)) parkIndex = index;
     });
-    console.log('parks and campground element: ', DOMElements.trailsAndCampgrounds);
-    // $('#final-match-info').html(DOMElements.trailsAndCampgrounds);
+
+    DOMElements.modal.css({
+        'background': `url(${bgParkImages[parkIndex]})`,
+        'background-size': 'cover',
+        'background-repeat': 'no-repeat',
+        'background-position': 'center',
+        // 'display': 'flex'
+    });
 }
+
+const setFinalMatchData = () => {
+    console.log('showFinalMatchData called.');
+    if(!DOMElements.modalCaption){
+        DOMElements.modalCaption = $('#final-match-caption');
+        DOMElements.finalMatchInfo = $('#final-match-info');
+        // DOMElements.finalMatchInfoContainer = $('#final-match-info-container');
+    }
+    DOMElements.modalCaption.text(finalMatchCaption);
+    let infoClone = $('#camp, #trail').clone().addClass('text-small').appendTo(DOMElements.finalMatchInfo);
+    console.log('infoClone: ', infoClone);
+    // DOMElements.finalMatchInfo.append(infoClone);
+
+    // DOMElements.finalMatchInfoContainer.fadeIn(2000);
+
+    // $('#final-match-image-square').css({
+    //     'background-color': 'rgba(245, 245, 245, 0.26)',
+    //     'background-image': finalMatchImage
+    // });
+}
+
+const resetGame = () => {
+    DOMElements.gameContainer.fadeIn(2000);
+};
 
 //image slider code//
 // $(function(){

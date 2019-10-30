@@ -2,6 +2,7 @@
 require_once('./api_creds.php');
 require_once('error.php');
 
+header('Access-Control-Allow-Origin: http://localhost');
 header('Content-Type: application/json');
 set_exception_handler('error_handler');
 
