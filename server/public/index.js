@@ -62,7 +62,9 @@ $(document).ready(function(){
 
 const assignClickHandlers = () => {
     $('.card-container').on('click', flipCard); 
-    // $('#modalButton').on('click', resetGame);
+    $('#modal-button').on('click', resetGame);
+    // $('#modalButton').hover(hoverResetButton);
+
 }
 
 const createCards = (cardImages, matchImages) => {
@@ -75,7 +77,6 @@ const createCards = (cardImages, matchImages) => {
         let cardBack = $("<div>").addClass('card card-back').css('background-image', `url('assets/images/CardImages/CardBack1.png')`);
         let cardFace = $("<div>").addClass('card card-face').css('background-image', `url('${cardImages[i]}')`);
         
-     
         cardContainer.append(cardBack, cardFace);
         cardsArr.push(cardContainer);
     }
@@ -135,6 +136,7 @@ const flipCard = (event) => {
             console.log('flipped status error');
     }
 }
+
 const checkMatch = (flippedCards) => {
     let card1 = flippedCards[0].children[1];
     let card2 = flippedCards[1].children[1];
@@ -371,10 +373,12 @@ const displayModal = () => {
     setModalBG();
     setFinalMatchData();
     setEndQuote();
+    
     DOMElements.gameContainer.fadeOut(1000, () => {
         
         DOMElements.modal.fadeIn(1000, () => {
             DOMElements.modal.css('display', 'flex');
+            getAndSetHeight();
         });
             // showFinalMatchData();
     });
@@ -421,7 +425,17 @@ const setFinalMatchData = () => {
     // });
 }
 
+const getAndSetHeight = () =>{
+    let height = DOMElements.finalMatchInfo.height();
+    console.log('element height: ', height);
+    DOMElements.textWrapper.height(height);
+}
+
 const setEndQuote = () => {
+    if (!DOMElements.modalText) {
+        DOMElements.modalText = $('#modal-text');
+        DOMElements.textWrapper = $('#text-wrapper');
+    };
     
     let max = parkQuotes.length;
     let temp;
@@ -434,10 +448,23 @@ const setEndQuote = () => {
         parkQuotes[max] = parkQuotes[index];
         parkQuotes[index] = temp;
     }
-    $('#modal-text').text(parkQuotes[0]);
+    DOMElements.modalText.text(parkQuotes[0]);
+}
+
+const hoverResetButton = () => {
+    console.log('this on hover: ', this);
 }
 
 const resetGame = () => {
+    console.log('resetGame called.')
+    DOMElements.cards.forEach((element)=>{
+        $(element).removeClass('is-flipped').on('click', flipCard);
+    });
+    // shuffleCardsArr();
+    stats.attempts = 0;
+    stats.matches = 0;
+    updateStats();
+    DOMElements.modal.fadeOut(1500);
     DOMElements.gameContainer.fadeIn(2000);
 };
 

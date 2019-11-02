@@ -6,11 +6,11 @@ html{
 }
 body{
     /* color: rgb(71, 70, 70); */
-     text-shadow:
-        -1px -1px 0 rgb(255, 255, 255, 0.2),
-        1px -1px 0 rgb(255, 255, 255, 0.2),
-        -1px 1px 0 rgb(255, 255, 255, 0.2),
-        1px 1px 0 rgba(255, 255, 255, 0.2);
+    text-shadow:
+        -.5px -.5px 0 rgb(255, 255, 255, 0.2),
+        .5px -.5px 0 rgb(255, 255, 255, 0.2),
+        -.5px .5px 0 rgb(255, 255, 255, 0.2),
+        .5px .5px 0 rgba(255, 255, 255, 0.2);
     height:100vh;
     width: 100vw;
     max-width: 1400px;
@@ -26,7 +26,6 @@ body{
     margin: auto;
     padding: 0;
     font-family: 'Oxygen', sans-serif;
-
 }
 .game-container{
     height: 93%;
@@ -127,7 +126,8 @@ header{
     background-color: rgba(255, 255, 255, 0.50);
     flex: 1 1 auto;
     margin-bottom: 0;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: hidden scroll;
 }
 .info-div-text-container{
     padding:3%;
@@ -271,25 +271,37 @@ header{
     top: 1%;
     left: 1%; */
     padding-left: 1%;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
     width: 27%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.50);
-    
-   
-  
+    background-color: rgba(255, 255, 255, 0.35);
+}
+.text-wrapper{
+    display:flex;
+    justify-content: center;
+    /* align-items: baseline; */
+    /* align-content: center; */
+    /* vertical-align: middle; */
+    width: 70%;
+    background-color: rgba(255, 255, 255, 0.35);
+    max-height: 100%;
 }
 
 .modal-text{
     /* position:absolute; */
+    align-self: center;
     /* top: 2%; */
-    width: 70%;
+    /* flex: 1 1 auto; */
+    /* width: 70%; */
+    /* vertical-align: middle; */
     /* margin:auto; */
-    padding: 4px;
-    /* height: 100%; */
+    /* padding: 0; */
+    margin: 0;
+    /* height: inherit; */
     font-size: 1rem;
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.350);
+    /* background-color: rgba(255, 255, 255, 0.35); */
 }
 
 .modal-button{
@@ -298,6 +310,11 @@ header{
     right:1%;
     border: 1px rgb(187, 0, 0) solid;
     margin-right: 5px;
+    opacity: 50%;
+    /* z-index: 150; */
+}
+.modal-button:hover{
+    opacity:100%;
 }
 
 .rounded-corners{
