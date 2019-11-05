@@ -62,7 +62,9 @@ $(document).ready(function(){
 
 const assignClickHandlers = () => {
     $('.card-container').on('click', flipCard); 
-    // $('#modalButton').on('click', resetGame);
+    $('#modal-button').on('click', resetGame);
+    // $('#modalButton').hover(hoverResetButton);
+
 }
 
 const createCards = (cardImages, matchImages) => {
@@ -75,7 +77,6 @@ const createCards = (cardImages, matchImages) => {
         let cardBack = $("<div>").addClass('card card-back').css('background-image', `url('assets/images/CardImages/CardBack1.png')`);
         let cardFace = $("<div>").addClass('card card-face').css('background-image', `url('${cardImages[i]}')`);
         
-     
         cardContainer.append(cardBack, cardFace);
         cardsArr.push(cardContainer);
     }
@@ -135,7 +136,9 @@ const flipCard = (event) => {
             console.log('flipped status error');
     }
 }
+
 const checkMatch = (flippedCards) => {
+    // debugger;
     let card1 = flippedCards[0].children[1];
     let card2 = flippedCards[1].children[1];
 
@@ -143,7 +146,6 @@ const checkMatch = (flippedCards) => {
         $(flippedCards[0]).toggleClass('is-flipped');
         $(flippedCards[1]).toggleClass('is-flipped');
         stats.attempts++;
-
     }else{
         let match = $(flippedCards[1]).attr('match-image');
         $(flippedCards[0]).off('click', flipCard);
@@ -152,32 +154,9 @@ const checkMatch = (flippedCards) => {
         stats.matches++;
         
         fetchMatchData(match);
-        
-        // displayMatchImage(match);
     }
     flippedStatus = [];
     updateStats();
-}
-
-const displayMatchImage = (imageURL) => {
-    // debugger;
-    if(!DOMElements.matchImage){
-        DOMElements.matchImage = $('#image-square');
-        DOMElements.matchImage.fadeOut(350, ()=>{
-            DOMElements.matchImage.css({
-                'background-image': `url(${imageURL})`,
-                'background-color': 'white',
-                'border': '1px solid white'
-            }).fadeIn(250);
-        }); 
-    }else{
-        DOMElements.matchImage.fadeOut(350, ()=>{
-            DOMElements.matchImage.fadeIn(350).css({
-                'background-image': `url(${imageURL})`,
-                'border': '1px solid white'
-            });
-        });
-    }
 }
 
 const fetchMatchData = (searchTarget) =>{
@@ -320,16 +299,36 @@ const hideInitialText = () => {
         DOMElements.infoDisplay = $('#info-box');
     }
 
-    DOMElements.initialInstructionsText.fadeOut(250, () => {
-        DOMElements.initialInstructionsText.addClass('hidden');
-        // DOMElements.imageCaption.fadeIn(500);
-    });
+    setTimeout(()=>{
+        DOMElements.initialInstructionsText.fadeOut(250)
+    }, 0);
     // DOMElements.initialInstructionsText.fadeOut(250);
 
     DOMElements.initialInfoBox.fadeOut(250, () => {
         DOMElements.infoDisplay.fadeIn(250);
     });
     // DOMElements.initialInfoBox.fadeOut(250);
+}
+
+const displayMatchImage = (imageURL) => {
+    // debugger;
+    if (!DOMElements.matchImage || stats.matches === 1) {
+        DOMElements.matchImage = $('#image-square');
+        DOMElements.matchImage.fadeOut(350, () => {
+            DOMElements.matchImage.css({
+                'background-image': `url(${imageURL})`,
+                'background-color': 'white',
+                'border': '1px solid white'
+            }).fadeIn(250);
+        });
+    } else {
+        DOMElements.matchImage.fadeOut(350, () => {
+            DOMElements.matchImage.fadeIn(350).css({
+                'background-image': `url(${imageURL})`,
+                'border': '1px solid white'
+            });
+        });
+    }
 }
 
 const displayParkCaption = (caption) => {
@@ -366,21 +365,20 @@ const updateStats = () =>{
 }
 
 const displayModal = () => {
-    // debugger;
-    console.log('displayModal called.');
     setModalBG();
     setFinalMatchData();
+    setEndQuote();
+    
     DOMElements.gameContainer.fadeOut(1000, () => {
-        
         DOMElements.modal.fadeIn(1000, () => {
             DOMElements.modal.css('display', 'flex');
+            getAndSetHeight();
         });
-            // showFinalMatchData();
     });
 }
 
 const setModalBG = () => {
-    console.log('setModalBg called.');
+
     if (!DOMElements.modal) DOMElements.modal = $('#modal');
   
 
@@ -401,7 +399,6 @@ const setModalBG = () => {
 }
 
 const setFinalMatchData = () => {
-    console.log('showFinalMatchData called.');
     if(!DOMElements.modalCaption){
         DOMElements.modalCaption = $('#final-match-caption');
         DOMElements.finalMatchInfo = $('#final-match-info');
@@ -409,7 +406,6 @@ const setFinalMatchData = () => {
     }
     DOMElements.modalCaption.text(finalMatchCaption);
     let infoClone = $('#camp, #trail').clone().addClass('text-small').appendTo(DOMElements.finalMatchInfo);
-    console.log('infoClone: ', infoClone);
     // DOMElements.finalMatchInfo.append(infoClone);
 
     // DOMElements.finalMatchInfoContainer.fadeIn(2000);
@@ -420,26 +416,85 @@ const setFinalMatchData = () => {
     // });
 }
 
+const getAndSetHeight = () =>{
+    let height = DOMElements.finalMatchInfo.height();
+    DOMElements.textWrapper.height(height);
+}
+
+const setEndQuote = () => {
+    if (!DOMElements.modalText) {
+        DOMElements.modalText = $('#modal-text');
+        DOMElements.textWrapper = $('#text-wrapper');
+    };
+    
+    let max = parkQuotes.length;
+    let temp;
+    let index;
+
+    while (max) {
+        index = Math.floor(Math.random() * max--);
+
+        temp = parkQuotes[max];
+        parkQuotes[max] = parkQuotes[index];
+        parkQuotes[index] = temp;
+    }
+    DOMElements.modalText.text(parkQuotes[0]);
+}
+
+const hoverResetButton = () => {
+    console.log('this on hover: ', this);
+}
+
 const resetGame = () => {
-    DOMElements.gameContainer.fadeIn(2000);
+    DOMElements.cards.forEach((element)=>{
+        $(element).removeClass('is-flipped').on('click', flipCard);
+    });
+    // // DOMElements.imageCaption.css('display', '').addClass('hidden');
+    // DOMElements.imageCaption.fadeOut();
+
+    // // DOMElements.matchImage.css('display', '').addClass('hidden');
+    // DOMElements.matchImage.fadeOut();
+
+    // // DOMElements.initialInstructionsText.css('display', '').removeClass('hidden');
+    // // DOMElements.initialInstructionsText.removeClass('hidden');
+    // DOMElements.initialInstructionsText.fadeIn();
+
+    // // DOMElements.initialInfoBox.css('display', '').removeClass('hidden');
+    // // DOMElements.initialInfoBox.removeClass('hidden');
+    // DOMElements.initialInfoBox.fadeIn();
+
+    // // DOMElements.infoDisplay.css('display', '').addClass('hidden');
+    // DOMElements.infoDisplay.fadeOut();
+    
+    
+    // shuffleCardsArr();
+    stats.attempts = 0;
+    stats.matches = 0;
+    updateStats();
+
+    DOMElements.modal.fadeOut(1500, ()=>{
+        // DOMElements.imageCaption.css('display', '').addClass('hidden');
+        DOMElements.imageCaption.fadeOut(0);
+
+        // DOMElements.matchImage.css('display', '').addClass('hidden');
+        DOMElements.matchImage.fadeOut(0, ()=>{
+            DOMElements.initialInstructionsText.fadeIn(0);
+        });
+
+        DOMElements.infoDisplay.fadeOut(0, ()=>{
+            DOMElements.initialInfoBox.fadeIn(0);
+        });
+
+        // DOMElements.initialInstructionsText.css('display', '').removeClass('hidden');
+        // DOMElements.initialInstructionsText.removeClass('hidden');
+        
+
+        // DOMElements.initialInfoBox.css('display', '').removeClass('hidden');
+        // DOMElements.initialInfoBox.removeClass('hidden');
+        
+
+        // DOMElements.infoDisplay.css('display', '').addClass('hidden');
+        DOMElements.gameContainer.fadeIn(1000);
+    });
+    
 };
-
-//image slider code//
-// $(function(){
-//     autoslide();
-// });
-
-// function autoslide() {
-//     if (!$('.slider .active').is(':last-child')) {
-//         $('.slider .active').delay(3000).fadeOut(2000, function () {
-//             $(this).removeClass('active').next().addClass('active').fadeIn();
-//             autoslide();
-//             console.log(this);
-//         })
-//     } else {
-//         $('.slider .active').removeClass('active').delay(3000).fadeOut(2000, function () {
-//             $('.slider .image').eq(0).addClass('active').fadeOut(2000);
-//             autoslide();
-//         })
-//     }
-// };

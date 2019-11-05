@@ -33,17 +33,15 @@
         </div>
         <div class="info-container">
             <div class="rounded-corners background-square">
-                <div class="initial-instructions-text image-square" id="initial-instructions-text">Click cards to reveal their face, match two cards
-                    to reveal a picture of the corresponding national park and learn about their top campsites and trails in the box
-                    below.</div>
+                <div class="initial-instructions-text image-square" id="initial-instructions-text">Click cards to reveal their faces, match two cards
+                    to reveal a photo of the corresponding National Park and a list of their top campgrounds and hiking trails!</div>
                 <div class="image-square rounded-corners" id="image-square">
-                    
                     <div id="image-caption" class="image-caption hidden"></div>
                 </div>
             </div>
             <div class="info-div rounded-corners">
-                <div class="info-div-text-container">
-                    <div id="initial-info-box">Information will display here upon a successful match.</div>
+                <div class="info-div-text-container text-style-med">
+                    <div id="initial-info-box" class="text-small">Make a match to see information about the park displayed here</div>
                     <div id="info-box" class="info-box hidden">
                         <div id="info-display" class="info-box text-small">
                             <div class="list-container">
@@ -110,17 +108,18 @@
 
     <div id="modal" class="modal hidden">
         <div id="final-match-caption" class="final-match-caption rounded-corners ">Final Match Caption</div>
-        <div class="modal-body">
-            
+        <div class="modal-body rounded-corners">
             <!-- <div id="final-match-image-square" class="final-match-image-square rounded-corners image-square"></div> -->
-            <div id="final-match-info" class="final-match-info rounded-corners info-div ">Final Match Info</div>
-            <div id="final-match-info-container" class="final-match-column rounded-corners hidden">Final Match Info Container</div>
-            <p class="modal-text">
-                Oh heck yea, check that out. Unreal beauty. 
-                You definitely want some of that.
-                Now get out there, and explore your national parks.
-                National parks yalllll
-            </p>
+            <div id="final-match-info" class="final-match-info rounded-corners">Final Match Info</div>
+            <!-- <div id="final-match-info-container" class="final-match-column rounded-corners hidden">Final Match Info Container</div> -->
+            <div id="text-wrapper" class="text-wrapper rounded-corners">
+                <p id="modal-text" class="modal-text rounded-corners">
+                    Oh heck yea, check that out. Unreal beauty.
+                    You definitely want some of that.
+                    Now get out there, and explore your national parks.
+                    National parks yalllll
+                </p>
+            </div>
             <button id="modal-button" class="modal-button rounded-corners">Play again?</button>
         </div>
     </div>
