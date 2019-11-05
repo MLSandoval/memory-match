@@ -63,8 +63,6 @@ $(document).ready(function(){
 const assignClickHandlers = () => {
     $('.card-container').on('click', flipCard); 
     $('#modal-button').on('click', resetGame);
-    // $('#modalButton').hover(hoverResetButton);
-
 }
 
 const createCards = (cardImages, matchImages) => {
@@ -76,11 +74,9 @@ const createCards = (cardImages, matchImages) => {
         let cardContainer = $("<div>").addClass('card-container').attr('match-image', matchImages[i]);
         let cardBack = $("<div>").addClass('card card-back').css('background-image', `url('assets/images/CardImages/CardBack1.png')`);
         let cardFace = $("<div>").addClass('card card-face').css('background-image', `url('${cardImages[i]}')`);
-        
         cardContainer.append(cardBack, cardFace);
         cardsArr.push(cardContainer);
     }
-
     DOMElements.cards = cardsArr;
     DOMElements.cardRows = [
         $('.card-row1'), 
@@ -128,7 +124,6 @@ const flipCard = (event) => {
             if(!$(event.currentTarget).hasClass('is-flipped')) {
                 $(event.currentTarget).toggleClass('is-flipped');
                 flippedStatus[1] = event.currentTarget;
-              
                 setTimeout(() => {checkMatch(flippedStatus)}, 800);
             }
             break;
@@ -138,7 +133,6 @@ const flipCard = (event) => {
 }
 
 const checkMatch = (flippedCards) => {
-    // debugger;
     let card1 = flippedCards[0].children[1];
     let card2 = flippedCards[1].children[1];
 
@@ -152,7 +146,6 @@ const checkMatch = (flippedCards) => {
         $(flippedCards[1]).off('click', flipCard);
         stats.attempts++;
         stats.matches++;
-        
         fetchMatchData(match);
     }
     flippedStatus = [];
@@ -164,7 +157,6 @@ const fetchMatchData = (searchTarget) =>{
         DOMElements.infoCampgrounds = $('#campgrounds-ul');
         DOMElements.infoTrails = $('#trails-ul');
     }
-
     let lat;
     let lon;
     let caption;
@@ -248,14 +240,10 @@ const fetchMatchData = (searchTarget) =>{
 
 const appendCampgrounds = (data) =>{
     DOMElements.infoCampgrounds.fadeOut(400, () => {
-        // debugger;
-        // if(stats.matches === 9){return;};
         DOMElements.infoCampgrounds.html('');
-
         data.campgrounds.forEach((element) => {
             const name = element.name;
             const hyperlink = element.url;
-
             let li = $('<li>');
             let anchor = $('<a>').text(name).attr({
                 'href': hyperlink,
@@ -273,7 +261,6 @@ const appendTrails = (data, match) =>{
         data.trails.forEach((element) => {
             const name = element.name;
             const hyperlink = element.url;
-
             let li = $('<li>');
             let anchor = $('<a>').text(name).attr({
                 'href': hyperlink,
@@ -287,7 +274,6 @@ const appendTrails = (data, match) =>{
     });
     
     if(stats.matches === 1) hideInitialText();
-    
     displayMatchImage(match);
 }
 
@@ -298,29 +284,24 @@ const hideInitialText = () => {
         DOMElements.initialInfoBox = $('#initial-info-box');
         DOMElements.infoDisplay = $('#info-box');
     }
-
-    setTimeout(()=>{
-        DOMElements.initialInstructionsText.fadeOut(250)
-    }, 0);
-    // DOMElements.initialInstructionsText.fadeOut(250);
-
     DOMElements.initialInfoBox.fadeOut(250, () => {
         DOMElements.infoDisplay.fadeIn(250);
     });
-    // DOMElements.initialInfoBox.fadeOut(250);
 }
 
 const displayMatchImage = (imageURL) => {
-    // debugger;
     if (!DOMElements.matchImage || stats.matches === 1) {
-        DOMElements.matchImage = $('#image-square');
-        DOMElements.matchImage.fadeOut(350, () => {
-            DOMElements.matchImage.css({
-                'background-image': `url(${imageURL})`,
-                'background-color': 'white',
-                'border': '1px solid white'
-            }).fadeIn(250);
+        DOMElements.initialInstructionsText.fadeOut(250, ()=>{
+            DOMElements.matchImage = $('#image-square');
+            DOMElements.matchImage.fadeOut(350, () => {
+                DOMElements.matchImage.css({
+                    'background-image': `url(${imageURL})`,
+                    'background-color': 'white',
+                    'border': '1px solid white'
+                }).fadeIn(250);
+            });
         });
+        
     } else {
         DOMElements.matchImage.fadeOut(350, () => {
             DOMElements.matchImage.fadeIn(350).css({
@@ -393,8 +374,7 @@ const setModalBG = () => {
         'background': `url(${bgParkImages[parkIndex]})`,
         'background-size': 'cover',
         'background-repeat': 'no-repeat',
-        'background-position': 'center',
-        // 'display': 'flex'
+        'background-position': 'center'
     });
 }
 
@@ -402,18 +382,9 @@ const setFinalMatchData = () => {
     if(!DOMElements.modalCaption){
         DOMElements.modalCaption = $('#final-match-caption');
         DOMElements.finalMatchInfo = $('#final-match-info');
-        // DOMElements.finalMatchInfoContainer = $('#final-match-info-container');
     }
     DOMElements.modalCaption.text(finalMatchCaption);
     let infoClone = $('#camp, #trail').clone().addClass('text-small').appendTo(DOMElements.finalMatchInfo);
-    // DOMElements.finalMatchInfo.append(infoClone);
-
-    // DOMElements.finalMatchInfoContainer.fadeIn(2000);
-
-    // $('#final-match-image-square').css({
-    //     'background-color': 'rgba(245, 245, 245, 0.26)',
-    //     'background-image': finalMatchImage
-    // });
 }
 
 const getAndSetHeight = () =>{
@@ -449,52 +420,21 @@ const resetGame = () => {
     DOMElements.cards.forEach((element)=>{
         $(element).removeClass('is-flipped').on('click', flipCard);
     });
-    // // DOMElements.imageCaption.css('display', '').addClass('hidden');
-    // DOMElements.imageCaption.fadeOut();
-
-    // // DOMElements.matchImage.css('display', '').addClass('hidden');
-    // DOMElements.matchImage.fadeOut();
-
-    // // DOMElements.initialInstructionsText.css('display', '').removeClass('hidden');
-    // // DOMElements.initialInstructionsText.removeClass('hidden');
-    // DOMElements.initialInstructionsText.fadeIn();
-
-    // // DOMElements.initialInfoBox.css('display', '').removeClass('hidden');
-    // // DOMElements.initialInfoBox.removeClass('hidden');
-    // DOMElements.initialInfoBox.fadeIn();
-
-    // // DOMElements.infoDisplay.css('display', '').addClass('hidden');
-    // DOMElements.infoDisplay.fadeOut();
-    
     
     // shuffleCardsArr();
     stats.attempts = 0;
     stats.matches = 0;
     updateStats();
 
-    DOMElements.modal.fadeOut(1500, ()=>{
-        // DOMElements.imageCaption.css('display', '').addClass('hidden');
+    DOMElements.modal.fadeOut(1500, () => {
+        DOMElements.finalMatchInfo.html('');
         DOMElements.imageCaption.fadeOut(0);
-
-        // DOMElements.matchImage.css('display', '').addClass('hidden');
-        DOMElements.matchImage.fadeOut(0, ()=>{
+        DOMElements.matchImage.fadeOut(0, () => {
             DOMElements.initialInstructionsText.fadeIn(0);
         });
-
-        DOMElements.infoDisplay.fadeOut(0, ()=>{
+        DOMElements.infoDisplay.fadeOut(0, () => {
             DOMElements.initialInfoBox.fadeIn(0);
         });
-
-        // DOMElements.initialInstructionsText.css('display', '').removeClass('hidden');
-        // DOMElements.initialInstructionsText.removeClass('hidden');
-        
-
-        // DOMElements.initialInfoBox.css('display', '').removeClass('hidden');
-        // DOMElements.initialInfoBox.removeClass('hidden');
-        
-
-        // DOMElements.infoDisplay.css('display', '').addClass('hidden');
         DOMElements.gameContainer.fadeIn(1000);
     });
-    
 };
