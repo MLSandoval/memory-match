@@ -1,23 +1,25 @@
 html{
-    background-color: green;
+    background-color: rgb(26, 114, 196);
 }
 body{
-    font-size: 1.75rem;
+    font-size: 3rem;
     position: absolute;
-    top:15%;
-
+    top:0;
+    max-width: 100%;
+    max-height: 100%;
+    background-size: cover;
 }
 .game-container{
     padding-top:0;
 }
 .text-small{
-    font-size: 1rem;
+    font-size: 2rem;
 }
 .image-caption{
     font-size: 1rem;
 }
 .initial-info-box{
-    padding-top: 13%;
+    padding-top: 8.5%;
     font-size: 1.75rem;
 }
 .info-box{
@@ -25,7 +27,6 @@ body{
     padding-top: 3%;
 }
 .info-div-text-container{
-    /* align-items: center; */
     padding: 0%;
 }
 .card-container{
@@ -36,7 +37,7 @@ body{
     font-size: 1.5rem;
 }
 .header-text{
-    font-size: 3rem;
+    font-size: 4rem;
 }
 .modal-button{
     height: 22.5%;
