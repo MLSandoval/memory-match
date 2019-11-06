@@ -13,14 +13,14 @@ body{
     padding-top:0;
 }
 .text-small{
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 .image-caption{
     font-size: 1rem;
 }
 .initial-info-box{
     padding-top: 8.5%;
-    font-size: 1.75rem;
+    font-size: 3rem;
 }
 .info-box{
     padding-left: 3%;
@@ -30,11 +30,11 @@ body{
     padding: 0%;
 }
 .card-container{
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
 }
 .modal-text{
-    font-size: 1.5rem;
+    font-size: 2.5rem;
 }
 .header-text{
     font-size: 4rem;
@@ -42,5 +42,5 @@ body{
 .modal-button{
     height: 22.5%;
     width: 12%;
-    font-size: 1rem;
+    font-size: 2rem;
 }
