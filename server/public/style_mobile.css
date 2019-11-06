@@ -3,6 +3,7 @@ html{
     display:flex;
     justify-content: space-around;
     align-content: center;
+    /* align-items: center; */
 }
 body{
     text-shadow:
@@ -114,16 +115,21 @@ header{
     overflow-y: scroll;
 }
 .info-div-text-container{
-    padding:3%;
-    display:flex;
-    justify-content: space-around;
+    padding-left: 3%;
+    padding-top: 3%;
+    /* display:flex; */
+    /* justify-content: space-around; */
     height:100%;
 }
 .info-box{
-    text-align: left;
-    position:relative;
     width: 100%;
-}.list-container{
+    text-align: left;
+}
+.info-display{
+    width:100%;
+    position: relative;
+}
+.list-container{
     width: 100%;
     position: absolute;
     top: 0;
@@ -131,7 +137,6 @@ header{
 }
 .list-headers{
     width:100%;
-
 }
 .card-area{
     height: 80%;
