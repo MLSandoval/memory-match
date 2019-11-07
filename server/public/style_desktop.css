@@ -2,7 +2,7 @@ html{
     background-color: rgb(26, 114, 196);
 }
 body{
-    font-size: 3rem;
+    font-size: 2.75rem;
     position: absolute;
     top:0;
     max-width: 100%;
@@ -13,13 +13,17 @@ body{
     padding-top:0;
 }
 .text-small{
+    font-size: 2rem;
+}
+.initial-instructions-text{
     font-size: 2.5rem;
+    padding-top: 6%;
 }
 .image-caption{
-    font-size: 1rem;
+    font-size: 2.5rem;
 }
 .initial-info-box{
-    padding-top: 7.5%;
+    padding-top: 7%;
     font-size: 3rem;
 }
 .info-box{
@@ -34,10 +38,10 @@ body{
     width: 200px;
 }
 .modal-text{
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 .header-text{
-    font-size: 4rem;
+    font-size: 3.75rem;
 }
 .modal-button{
     height: 22.5%;

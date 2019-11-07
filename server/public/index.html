@@ -7,9 +7,9 @@
     <title>Memory Match</title>
     <link href="https://fonts.googleapis.com/css?family=Oxygen&display=swap" rel="stylesheet">  
     <link rel="stylesheet" href="style_mobile.css">
-    <link rel="stylesheet" media="screen and (min-width: 813px)" href="style_tablet.css" />
-    <link rel="stylesheet" media="screen and (min-width: 1025px)" href="style_desktop.css" />
-</head>
+    <link rel="stylesheet" media="screen and (min-width: 813px)" href="style_tablet.css"/>
+    <link rel="stylesheet" media="screen and (min-width: 1025px)" href="style_desktop.css"/>
+    <!-- <link rel="stylesheet" media="screen and (orientation: portrait)" href="style_portait.css"/> -->
 </head>
 <body>
     <div id="game-container" class="game-container">
@@ -60,13 +60,40 @@
             <div class="card-row3 card-row"></div>
         </div>
     </div>
+    <div id="modal" class="modal hidden">
+        <div id="final-match-caption" class="final-match-caption rounded-corners ">Final Match Caption</div>
+        <div class="modal-body rounded-corners">
+            <div id="final-match-info" class="final-match-info rounded-corners">Final Match Info</div>
+            <div id="text-wrapper" class="text-wrapper rounded-corners">
+                <p id="modal-text" class="modal-text rounded-corners">
+                    Oh heck yea, check that out. Unreal beauty.
+                    You definitely want some of that.
+                    Now get out there, and explore your national parks.
+                    National parks yalllll
+                </p>
+            </div>
+            <button id="modal-button" class="modal-button rounded-corners">Play again?</button>
+        </div>
+    </div>
+    <!-- <div id="portrait-modal" class="portait-modal" style="visibility: hidden;"> -->
+    <div id="portrait-modal" class="portrait-modal">
+        <div class="portait-modal-content">
+            <div class="rewind-image"> </div>
+            <p class="portrait-text">Please turn to landscape orientation</p>
+        </div>
+    </div>
     <div class="bg-images" style="display: none;">
         <img src="./assets/images/BGs/Arches.jpg" alt="">
+        <img src="./assets/images/BGs/CraterLakeResized.jpg" alt="">
+        <img src="./assets/images/BGs/DeathValleyResized.jpg" alt="">
         <img src="./assets/images/BGs/GrandCanyon.jpg" alt="">
+        <img src="./assets/images/BGs/JoshuaTreeRezised.jpg" alt="">
         <img src="./assets/images/BGs/SmokyMountains.jpg" alt="">
         <img src="./assets/images/BGs/PurpleMountains.jpg" alt="">
+        <img src="./assets/images/BGs/SequoiaResized.jpg" alt="">
         <img src="./assets/images/BGs/YellowStone.jpg" alt="">
         <img src="./assets/images/BGs/Yosemite.jpg" alt="">
+        <img src="./assets/images/BGs/portrait_orientation_bg.jpg" alt="">
     </div>
     <div class="card-images" style="display: none;">
         <img src="assets/images/CardImages/Arches1.png" alt="">
@@ -79,23 +106,6 @@
         <img src="assets/images/CardImages/SmokyMountains1.png" alt="">
         <img src="assets/images/CardImages/YellowstoneLogo1.png" alt="">
         <img src="assets/images/CardImages/Yosemite1.png" alt="">
-    </div>
-    <div id="modal" class="modal hidden">
-        <div id="final-match-caption" class="final-match-caption rounded-corners ">Final Match Caption</div>
-        <div class="modal-body rounded-corners">
-            <!-- <div id="final-match-image-square" class="final-match-image-square rounded-corners image-square"></div> -->
-            <div id="final-match-info" class="final-match-info rounded-corners">Final Match Info</div>
-            <!-- <div id="final-match-info-container" class="final-match-column rounded-corners hidden">Final Match Info Container</div> -->
-            <div id="text-wrapper" class="text-wrapper rounded-corners">
-                <p id="modal-text" class="modal-text rounded-corners">
-                    Oh heck yea, check that out. Unreal beauty.
-                    You definitely want some of that.
-                    Now get out there, and explore your national parks.
-                    National parks yalllll
-                </p>
-            </div>
-            <button id="modal-button" class="modal-button rounded-corners">Play again?</button>
-        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

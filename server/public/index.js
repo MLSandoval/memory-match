@@ -53,6 +53,7 @@ let stats = null;
 let finalMatchCaption = null;
 
 $(document).ready(function(){
+    // checkOrientation();
     createCards(cardImageURLArray, parkImageURLArray);
     // shuffleCardsArr();
     appendCardsToDom();
@@ -63,6 +64,22 @@ $(document).ready(function(){
 const assignClickHandlers = () => {
     $('.card-container').on('click', flipCard); 
     $('#modal-button').on('click', resetGame);
+    
+}
+
+const checkOrientation = () =>{
+    if(!DOMElements.portraitModal) DOMElements.portraitModal = $('#portrait-modal');
+    if(window.orientation === 0){
+        DOMElements.portraitModal.css('visibility', 'visible');
+    };
+    window.onorientationchange = () => {
+        console.log('Orientation changed: ', window.orientation);
+        if (window.orientation === 90) {
+            DOMElements.portraitModal.css('visibility', 'hidden');
+        } else {
+            DOMElements.portraitModal.css('visibility', 'visible');
+        };
+    };
 }
 
 const createCards = (cardImages, matchImages) => {
@@ -337,7 +354,7 @@ const updateStats = () =>{
 
     if (stats.matches === 9) {
         stats.gamesPlayed++;
-        setTimeout(displayModal, 1500);
+        setTimeout(displayModal, 1000);
     }
 
     DOMElements.stats.attempts.text(`Attempts: ${stats.attempts}`);

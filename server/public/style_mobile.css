@@ -249,6 +249,36 @@ header{
     font-size: 1rem;
     text-align: center;
 }
+.portrait-modal{
+    position: absolute;
+    top:0;
+    left: 0;
+    height:100%;
+    width:100%;
+    background-image: url("./assets/images/BGs/portrait_orientation_bg.jpg");
+    background-size: cover;
+    visibility: hidden;
+}
+.rewind-image{
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: rotate(-190deg) translate(40%, 50%);
+    height: 175px;
+    width: 175px;
+    background-image: url(./assets/images/doubleArrowCircle.png);
+    background-size: contain;
+    filter: brightness(83%) sepia(9) saturate(107) hue-rotate(201deg);
+}
+.portrait-text{
+    position: absolute;
+    top: 37%;
+    left: 50%;
+    width: 23%;
+    text-align: center;
+    font-size: .9rem;
+    transform: translate(-50%, -50%);
+}
 .rounded-corners{
     border-radius: 10px;
 }
@@ -260,4 +290,9 @@ header{
 }
 button:hover{
     cursor: pointer;
+}
+@media screen and (orientation: portrait){
+    .portrait-modal{
+        visibility: visible;
+    }
 }
