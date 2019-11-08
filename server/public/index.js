@@ -354,7 +354,7 @@ const updateStats = () =>{
 
     if (stats.matches === 9) {
         stats.gamesPlayed++;
-        setTimeout(displayModal, 1000);
+        setTimeout(displayModal, 1250);
     }
 
     DOMElements.stats.attempts.text(`Attempts: ${stats.attempts}`);
@@ -363,9 +363,9 @@ const updateStats = () =>{
 }
 
 const displayModal = () => {
-    setModalBG();
     setFinalMatchData();
     setEndQuote();
+    setModalBG();
     
     DOMElements.gameContainer.fadeOut(1000, () => {
         DOMElements.modal.fadeIn(1000, () => {
@@ -401,7 +401,7 @@ const setFinalMatchData = () => {
         DOMElements.finalMatchInfo = $('#final-match-info');
     }
     DOMElements.modalCaption.text(finalMatchCaption);
-    let infoClone = $('#camp, #trail').clone().addClass('text-small').appendTo(DOMElements.finalMatchInfo);
+    $('#camp, #trail').clone().css('opacity', '1').addClass('text-small').appendTo(DOMElements.finalMatchInfo);
 }
 
 const getAndSetHeight = () =>{

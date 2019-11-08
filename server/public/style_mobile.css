@@ -13,8 +13,8 @@ body{
         .5px .5px 0 rgba(255, 255, 255, 0.2);
     height:100vh;
     width: 100vw;
-    max-width: 1400px;
-    max-height: 817px;
+    /* max-width: 1400px;
+    max-height: 817px; */
     overflow: hidden;
     position:relative;
     padding: 5px;
@@ -210,7 +210,6 @@ header{
     justify-content: space-evenly;
     width: 98%;
     margin-bottom: 0;
-    z-index: 2;
 }
 .final-match-info{
     padding-left: 1%;
@@ -232,6 +231,9 @@ header{
     margin: 0;
     font-size: 1rem;
     text-align: center;
+}
+.list-headers.campgrounds-ul{
+    opacity: 100%;
 }
 .modal-button{
     position: absolute;
@@ -264,14 +266,14 @@ header{
 .rewind-image{
     position: absolute;
     top: 16%;
-    left: 51.5%;
+    left: 52%;
     transform: rotate(-232deg) translate(20%, 50%);
     height: 425px;
     width: 425px;
     background-image: url(./assets/images/doubleArrowCircle.png);
     background-size: contain;
     filter: brightness(83%) sepia(9) saturate(107) hue-rotate(201deg);
-    overflow:hidden;
+    overflow: hidden;
 }
 .portrait-text{
     position: absolute;
@@ -284,6 +286,7 @@ header{
     background: -webkit-linear-gradient(#9dcef5, #10243c);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-shadow: none;
 }
 .rounded-corners{
     border-radius: 10px;
@@ -297,8 +300,21 @@ header{
 button:hover{
     cursor: pointer;
 }
+
 @media screen and (orientation: portrait){
     .portrait-modal{
         visibility: visible;
+    }
+    .modal-body{
+        display: none;
+    }
+}
+@media screen and (orientation:portrait) and (min-height: 1023px){
+    .portrait-text {
+        font-size: 3.9rem;
+    }
+    .rewind-image{
+        height: 700px;
+        width: 700px;
     }
 }
