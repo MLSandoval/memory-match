@@ -54,7 +54,7 @@ let finalMatchCaption = null;
 
 $(document).ready(function(){
     createCards(cardImageURLArray, parkImageURLArray);
-    shuffleCardsArr();
+    // shuffleCardsArr();
     appendCardsToDom();
     assignClickHandlers();
     updateStats();
@@ -85,6 +85,7 @@ const createCards = (cardImages, matchImages) => {
 }
 
 const shuffleCardsArr = () => {
+    console.log('shuffle cards called.');
     let max = DOMElements.cards.length;
     let temp;
     let index;
@@ -366,6 +367,7 @@ const setFinalMatchData = () => {
     }
     DOMElements.modalCaption.text(finalMatchCaption);
     $('#camp, #trail').clone().css('opacity', '1').addClass('text-small').appendTo(DOMElements.finalMatchInfo);
+    DOMElements.trailsAndCampgrounds.css('opcaity', '1');
 }
 
 const getAndSetHeight = () =>{
@@ -396,10 +398,15 @@ const hoverResetButton = () => {
 }
 
 const resetGame = () => {
-    DOMElements.cards.forEach((element)=>{
+    
+    // DOMElements.cardRows[0].html('');
+    // DOMElements.cardRows[1].html('');
+    // DOMElements.cardRows[2].html('');
+    // shuffleCardsArr();
+    // appendCardsToDom();
+    DOMElements.cards.forEach((element) => {
         $(element).removeClass('is-flipped').on('click', flipCard);
     });
-    shuffleCardsArr();
     stats.attempts = 0;
     stats.matches = 0;
     updateStats();

@@ -173,6 +173,12 @@ header{
     background-position: center;
     backface-visibility: hidden;
 }
+.card-container:hover{
+    cursor: pointer;
+}
+.card-face{
+    cursor: default;
+}
 .card-face{
     transform: rotateY(180deg);
 }
@@ -280,6 +286,9 @@ header{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: none;
+}
+#trails-ul, #campgrounds-ul{
+    opacity:1 !important
 }
 .rounded-corners{
     border-radius: 10px;
