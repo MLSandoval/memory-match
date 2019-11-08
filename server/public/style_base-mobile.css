@@ -1,9 +1,7 @@
 html{
-    background-color: orange;
     display:flex;
     justify-content: space-around;
     align-content: center;
-    /* align-items: center; */
 }
 body{
     text-shadow:
@@ -13,8 +11,6 @@ body{
         .5px .5px 0 rgba(255, 255, 255, 0.2);
     height:100vh;
     width: 100vw;
-    max-width: 1400px;
-    max-height: 817px;
     overflow: hidden;
     position:relative;
     padding: 5px;
@@ -48,7 +44,6 @@ header{
 .header-text{
     margin:0;
     font-size: 2rem;
-
 }
 .stats-container{
     height: 10%;
@@ -117,8 +112,6 @@ header{
 .info-div-text-container{
     padding-left: 3%;
     padding-top: 3%;
-    /* display:flex; */
-    /* justify-content: space-around; */
     height:100%;
 }
 .info-box{
@@ -210,7 +203,6 @@ header{
     justify-content: space-evenly;
     width: 98%;
     margin-bottom: 0;
-    z-index: 2;
 }
 .final-match-info{
     padding-left: 1%;
@@ -232,6 +224,9 @@ header{
     margin: 0;
     font-size: 1rem;
     text-align: center;
+}
+.list-headers.campgrounds-ul{
+    opacity: 100%;
 }
 .modal-button{
     position: absolute;
@@ -258,26 +253,33 @@ header{
     background-image: url("./assets/images/BGs/portrait_orientation_bg.jpg");
     background-size: cover;
     visibility: hidden;
+    overflow:hidden;
+
 }
 .rewind-image{
     position: absolute;
-    top: 38%;
-    left: 50%;
-    transform: rotate(-190deg) translate(40%, 50%);
-    height: 175px;
-    width: 175px;
+    top: 16%;
+    left: 52%;
+    transform: rotate(-232deg) translate(20%, 50%);
+    height: 425px;
+    width: 425px;
     background-image: url(./assets/images/doubleArrowCircle.png);
     background-size: contain;
     filter: brightness(83%) sepia(9) saturate(107) hue-rotate(201deg);
+    overflow: hidden;
 }
 .portrait-text{
     position: absolute;
-    top: 37%;
+    top: 33%;
     left: 50%;
-    width: 23%;
+    width: 40%;
     text-align: center;
-    font-size: .9rem;
+    font-size: 1.9rem;
     transform: translate(-50%, -50%);
+    background: -webkit-linear-gradient(#9dcef5, #10243c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
 }
 .rounded-corners{
     border-radius: 10px;
@@ -291,8 +293,21 @@ header{
 button:hover{
     cursor: pointer;
 }
+
 @media screen and (orientation: portrait){
     .portrait-modal{
         visibility: visible;
+    }
+    .modal-body{
+        display: none;
+    }
+}
+@media screen and (orientation:portrait) and (min-height: 1023px){
+    .portrait-text {
+        font-size: 3.9rem;
+    }
+    .rewind-image{
+        height: 700px;
+        width: 700px;
     }
 }

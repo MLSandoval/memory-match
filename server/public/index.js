@@ -53,9 +53,8 @@ let stats = null;
 let finalMatchCaption = null;
 
 $(document).ready(function(){
-    // checkOrientation();
     createCards(cardImageURLArray, parkImageURLArray);
-    // shuffleCardsArr();
+    shuffleCardsArr();
     appendCardsToDom();
     assignClickHandlers();
     updateStats();
@@ -64,28 +63,11 @@ $(document).ready(function(){
 const assignClickHandlers = () => {
     $('.card-container').on('click', flipCard); 
     $('#modal-button').on('click', resetGame);
-    
-}
-
-const checkOrientation = () =>{
-    if(!DOMElements.portraitModal) DOMElements.portraitModal = $('#portrait-modal');
-    if(window.orientation === 0){
-        DOMElements.portraitModal.css('visibility', 'visible');
-    };
-    window.onorientationchange = () => {
-        console.log('Orientation changed: ', window.orientation);
-        if (window.orientation === 90) {
-            DOMElements.portraitModal.css('visibility', 'hidden');
-        } else {
-            DOMElements.portraitModal.css('visibility', 'visible');
-        };
-    };
 }
 
 const createCards = (cardImages, matchImages) => {
     cardImages = cardImages.concat(cardImages);
     matchImages = matchImages.concat(matchImages);
-
     let cardsArr = [];
     for(let i = 0; i < cardImages.length; i++){
         let cardContainer = $("<div>").addClass('card-container').attr('match-image', matchImages[i]);
@@ -106,10 +88,8 @@ const shuffleCardsArr = () => {
     let max = DOMElements.cards.length;
     let temp;
     let index;
-
     while (max) {
         index = Math.floor(Math.random() * max--);
-
         temp = DOMElements.cards[max];
         DOMElements.cards[max] = DOMElements.cards[index];
         DOMElements.cards[index] = temp;
@@ -152,7 +132,6 @@ const flipCard = (event) => {
 const checkMatch = (flippedCards) => {
     let card1 = flippedCards[0].children[1];
     let card2 = flippedCards[1].children[1];
-
     if ($(card1).css('background-image') !== $(card2).css('background-image')){
         $(flippedCards[0]).toggleClass('is-flipped');
         $(flippedCards[1]).toggleClass('is-flipped');
@@ -177,7 +156,6 @@ const fetchMatchData = (searchTarget) =>{
     let lat;
     let lon;
     let caption;
-
     switch(searchTarget){
         case 'assets/images/MatchImages/ArchesImage600.png':
             lat = 38.733;
@@ -226,7 +204,6 @@ const fetchMatchData = (searchTarget) =>{
             break;
         default: console.log('No matching search target.');
     }
-  
     fetch(`../proxy_campgrounds.php?lat=${lat}&lon=${lon}`, {
         method: 'GET',
         headers: {
@@ -239,7 +216,6 @@ const fetchMatchData = (searchTarget) =>{
         appendCampgrounds(result);
     })
     .catch(error => console.log('Campgrounds fetch error: ', error));
-
     fetch(`../proxy_trails.php?lat=${lat}&lon=${lon}`, {
         method: 'GET',
         headers: {
@@ -289,7 +265,6 @@ const appendTrails = (data, match) =>{
         if(!DOMElements.trailsAndCampgrounds) DOMElements.trailsAndCampgrounds = $('ul');
         DOMElements.trailsAndCampgrounds.fadeIn(400);
     });
-    
     if(stats.matches === 1) hideInitialText();
     displayMatchImage(match);
 }
@@ -318,7 +293,6 @@ const displayMatchImage = (imageURL) => {
                 }).fadeIn(250);
             });
         });
-        
     } else {
         DOMElements.matchImage.fadeOut(350, () => {
             DOMElements.matchImage.fadeIn(350).css({
@@ -330,13 +304,11 @@ const displayMatchImage = (imageURL) => {
 }
 
 const displayParkCaption = (caption) => {
-    if(stats.matches === 9){
-        finalMatchCaption = caption;
-    }
-
+    if(stats.matches === 9) finalMatchCaption = caption;
+    
     DOMElements.imageCaption.fadeIn(250, () => {
         DOMElements.imageCaption.text(caption);
-    })
+    });
 }
 
 const updateStats = () =>{
@@ -350,23 +322,20 @@ const updateStats = () =>{
         DOMElements.stats.attempts = $('#attempts-text');
         DOMElements.stats.gamesPlayed = $('#games-played-text');
         DOMElements.stats.matches = $('#matches-text');
-    }
-
+    };
     if (stats.matches === 9) {
         stats.gamesPlayed++;
-        setTimeout(displayModal, 1000);
-    }
-
+        setTimeout(displayModal, 1250);
+    };
     DOMElements.stats.attempts.text(`Attempts: ${stats.attempts}`);
     DOMElements.stats.gamesPlayed.text(`Games Played: ${stats.gamesPlayed}`);
     DOMElements.stats.matches.text(`Matches: ${stats.matches}`);
 }
 
 const displayModal = () => {
-    setModalBG();
     setFinalMatchData();
     setEndQuote();
-    
+    setModalBG();
     DOMElements.gameContainer.fadeOut(1000, () => {
         DOMElements.modal.fadeIn(1000, () => {
             DOMElements.modal.css('display', 'flex');
@@ -376,17 +345,12 @@ const displayModal = () => {
 }
 
 const setModalBG = () => {
-
     if (!DOMElements.modal) DOMElements.modal = $('#modal');
-  
-
     let finalMatchParkURL = DOMElements.matchImage.css('background-image');
     let parkIndex;
-
     parkImageURLArray.forEach((element, index) => {
         if (finalMatchParkURL.includes(element)) parkIndex = index;
     });
-
     DOMElements.modal.css({
         'background': `url(${bgParkImages[parkIndex]})`,
         'background-size': 'cover',
@@ -401,7 +365,7 @@ const setFinalMatchData = () => {
         DOMElements.finalMatchInfo = $('#final-match-info');
     }
     DOMElements.modalCaption.text(finalMatchCaption);
-    let infoClone = $('#camp, #trail').clone().addClass('text-small').appendTo(DOMElements.finalMatchInfo);
+    $('#camp, #trail').clone().css('opacity', '1').addClass('text-small').appendTo(DOMElements.finalMatchInfo);
 }
 
 const getAndSetHeight = () =>{
@@ -414,11 +378,9 @@ const setEndQuote = () => {
         DOMElements.modalText = $('#modal-text');
         DOMElements.textWrapper = $('#text-wrapper');
     };
-    
     let max = parkQuotes.length;
     let temp;
     let index;
-
     while (max) {
         index = Math.floor(Math.random() * max--);
 
@@ -437,12 +399,10 @@ const resetGame = () => {
     DOMElements.cards.forEach((element)=>{
         $(element).removeClass('is-flipped').on('click', flipCard);
     });
-    
-    // shuffleCardsArr();
+    shuffleCardsArr();
     stats.attempts = 0;
     stats.matches = 0;
     updateStats();
-
     DOMElements.modal.fadeOut(1500, () => {
         DOMElements.finalMatchInfo.html('');
         DOMElements.imageCaption.fadeOut(0);
