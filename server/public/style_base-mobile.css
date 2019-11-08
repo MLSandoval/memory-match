@@ -1,9 +1,7 @@
 html{
-    background-color: orange;
     display:flex;
     justify-content: space-around;
     align-content: center;
-    /* align-items: center; */
 }
 body{
     text-shadow:
@@ -13,8 +11,6 @@ body{
         .5px .5px 0 rgba(255, 255, 255, 0.2);
     height:100vh;
     width: 100vw;
-    /* max-width: 1400px;
-    max-height: 817px; */
     overflow: hidden;
     position:relative;
     padding: 5px;
@@ -48,7 +44,6 @@ header{
 .header-text{
     margin:0;
     font-size: 2rem;
-
 }
 .stats-container{
     height: 10%;
@@ -117,8 +112,6 @@ header{
 .info-div-text-container{
     padding-left: 3%;
     padding-top: 3%;
-    /* display:flex; */
-    /* justify-content: space-around; */
     height:100%;
 }
 .info-box{
