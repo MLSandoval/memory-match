@@ -173,6 +173,12 @@ header{
     background-position: center;
     backface-visibility: hidden;
 }
+.card-container:hover{
+    cursor: pointer;
+}
+.card-face{
+    cursor: default;
+}
 .card-face{
     transform: rotateY(180deg);
 }
@@ -225,9 +231,9 @@ header{
     font-size: 1rem;
     text-align: center;
 }
-.list-headers.campgrounds-ul{
+/* .list-headers.campgrounds-ul{
     opacity: 100%;
-}
+} */
 .modal-button{
     position: absolute;
     bottom:4%;
@@ -280,6 +286,9 @@ header{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: none;
+}
+.final-match-info>.list-headers>#trails-ul #campgrounds-ul{
+    opacity:1 !important
 }
 .rounded-corners{
     border-radius: 10px;

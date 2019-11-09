@@ -85,6 +85,7 @@ const createCards = (cardImages, matchImages) => {
 }
 
 const shuffleCardsArr = () => {
+    console.log('shuffle cards called.');
     let max = DOMElements.cards.length;
     let temp;
     let index;
@@ -211,11 +212,11 @@ const fetchMatchData = (searchTarget) =>{
         }
     })
     .then(result => result.json())
-    .then(result => {
-        
+    .then(result => {  
         appendCampgrounds(result);
     })
     .catch(error => console.log('Campgrounds fetch error: ', error));
+
     fetch(`../proxy_trails.php?lat=${lat}&lon=${lon}`, {
         method: 'GET',
         headers: {
@@ -224,9 +225,7 @@ const fetchMatchData = (searchTarget) =>{
     })
     .then(result => result.json())
     .then(result => {
-        
-        appendTrails(result, searchTarget);
-        displayParkCaption(caption);
+        appendTrails(result, searchTarget, caption);
     })
     .catch(error => console.log('Trails fetch error: ', error));
 }
@@ -248,7 +247,7 @@ const appendCampgrounds = (data) =>{
     })
 }
 
-const appendTrails = (data, match) =>{
+const appendTrails = (data, match, caption) =>{
     DOMElements.infoTrails.html('');
     DOMElements.infoTrails.fadeOut(400, () => {
         data.trails.forEach((element) => {
@@ -266,7 +265,7 @@ const appendTrails = (data, match) =>{
         DOMElements.trailsAndCampgrounds.fadeIn(400);
     });
     if(stats.matches === 1) hideInitialText();
-    displayMatchImage(match);
+    displayMatchImage(match, caption);
 }
 
 const hideInitialText = () => {
@@ -281,11 +280,12 @@ const hideInitialText = () => {
     });
 }
 
-const displayMatchImage = (imageURL) => {
+const displayMatchImage = (imageURL, caption) => {
     if (!DOMElements.matchImage || stats.matches === 1) {
         DOMElements.initialInstructionsText.fadeOut(250, ()=>{
             DOMElements.matchImage = $('#image-square');
             DOMElements.matchImage.fadeOut(350, () => {
+                setParkCaption(caption);
                 DOMElements.matchImage.css({
                     'background-image': `url(${imageURL})`,
                     'background-color': 'white',
@@ -295,6 +295,7 @@ const displayMatchImage = (imageURL) => {
         });
     } else {
         DOMElements.matchImage.fadeOut(350, () => {
+            setParkCaption(caption);
             DOMElements.matchImage.fadeIn(350).css({
                 'background-image': `url(${imageURL})`,
                 'border': '1px solid white'
@@ -303,12 +304,10 @@ const displayMatchImage = (imageURL) => {
     }
 }
 
-const displayParkCaption = (caption) => {
+const setParkCaption = (caption) => {
+    console.log('display park caption called: ', caption);
     if(stats.matches === 9) finalMatchCaption = caption;
-    
-    DOMElements.imageCaption.fadeIn(250, () => {
-        DOMElements.imageCaption.text(caption);
-    });
+    DOMElements.imageCaption.text(caption);  
 }
 
 const updateStats = () =>{
@@ -366,6 +365,7 @@ const setFinalMatchData = () => {
     }
     DOMElements.modalCaption.text(finalMatchCaption);
     $('#camp, #trail').clone().css('opacity', '1').addClass('text-small').appendTo(DOMElements.finalMatchInfo);
+    DOMElements.trailsAndCampgrounds.css('opcaity', '1');
 }
 
 const getAndSetHeight = () =>{
@@ -396,16 +396,20 @@ const hoverResetButton = () => {
 }
 
 const resetGame = () => {
-    DOMElements.cards.forEach((element)=>{
+    
+    DOMElements.cardRows[0].html('');
+    DOMElements.cardRows[1].html('');
+    DOMElements.cardRows[2].html('');
+    shuffleCardsArr();
+    appendCardsToDom();
+    DOMElements.cards.forEach((element) => {
         $(element).removeClass('is-flipped').on('click', flipCard);
     });
-    shuffleCardsArr();
     stats.attempts = 0;
     stats.matches = 0;
     updateStats();
     DOMElements.modal.fadeOut(1500, () => {
         DOMElements.finalMatchInfo.html('');
-        DOMElements.imageCaption.fadeOut(0);
         DOMElements.matchImage.fadeOut(0, () => {
             DOMElements.initialInstructionsText.fadeIn(0);
         });
