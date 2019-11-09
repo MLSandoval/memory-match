@@ -231,9 +231,9 @@ header{
     font-size: 1rem;
     text-align: center;
 }
-.list-headers.campgrounds-ul{
+/* .list-headers.campgrounds-ul{
     opacity: 100%;
-}
+} */
 .modal-button{
     position: absolute;
     bottom:4%;
@@ -287,7 +287,7 @@ header{
     -webkit-text-fill-color: transparent;
     text-shadow: none;
 }
-#trails-ul, #campgrounds-ul{
+.final-match-info>.list-headers>#trails-ul #campgrounds-ul{
     opacity:1 !important
 }
 .rounded-corners{
