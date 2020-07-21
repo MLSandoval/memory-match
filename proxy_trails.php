@@ -16,7 +16,7 @@ $lon = $_GET['lon'];
 
 $curl = curl_init();
 $dataURL = 'https://www.hikingproject.com/data/get-trails?lat=' . $lat . 
-    '&lon=' . $lon . '&maxDistance=40&maxResults=10&key=' . $TrailsApiKey;
+    '&lon=' . $lon . '&maxDistance=40&maxResults=10&key=' . $_ENV["API_KEY"];
 
 curl_setopt_array($curl, array(
     CURLOPT_RETURNTRANSFER => true,
