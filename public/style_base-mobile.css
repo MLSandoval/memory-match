@@ -280,7 +280,7 @@ header{
     font-size: 1.9rem;
     transform: translate(-50%, -50%);
     background: -webkit-linear-gradient(#9dcef5, #10243c);
-    background-clip: text;
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: none;
 }
