@@ -335,7 +335,7 @@ const setFinalMatchData = () => {
     }
     DOMElements.modalCaption.text(finalMatchCaption);
     $('#trail').clone().css('opacity', '1').addClass('text-small').appendTo(DOMElements.finalMatchInfo);
-    DOMElements.trailsAndCampgrounds.css('opacity', '1');
+    DOMElements.trailsAndCampgrounds.css('opacity', '1 !important');
 }
 
 const getAndSetHeight = () =>{

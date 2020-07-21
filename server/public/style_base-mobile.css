@@ -231,9 +231,6 @@ header{
     font-size: 1rem;
     text-align: center;
 }
-/* .list-headers.campgrounds-ul{
-    opacity: 100%;
-} */
 .modal-button{
     position: absolute;
     bottom:4%;
@@ -283,7 +280,7 @@ header{
     font-size: 1.9rem;
     transform: translate(-50%, -50%);
     background: -webkit-linear-gradient(#9dcef5, #10243c);
-    -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: none;
 }
