@@ -54,7 +54,7 @@ let finalMatchCaption = null;
 
 $(document).ready(function(){
     createCards(cardImageURLArray, parkImageURLArray);
-    shuffleCardsArr();
+    // shuffleCardsArr();
     appendCardsToDom();
     assignClickHandlers();
     updateStats();
@@ -150,8 +150,7 @@ const checkMatch = (flippedCards) => {
 }
 
 const fetchMatchData = (searchTarget) =>{
-    if(!DOMElements.infoCampgrounds){
-        DOMElements.infoCampgrounds = $('#campgrounds-ul');
+    if(!DOMElements.infoTrails){
         DOMElements.infoTrails = $('#trails-ul');
     }
     let lat;
@@ -205,18 +204,6 @@ const fetchMatchData = (searchTarget) =>{
             break;
         default: console.log('No matching search target.');
     }
-    fetch(`../proxy_campgrounds.php?lat=${lat}&lon=${lon}`, {
-        method: 'GET',
-        headers: {
-            'content-type': 'application/json'
-        }
-    })
-    .then(result => result.json())
-    .then(result => {  
-        appendCampgrounds(result);
-    })
-    .catch(error => console.log('Campgrounds fetch error: ', error));
-
     fetch(`../proxy_trails.php?lat=${lat}&lon=${lon}`, {
         method: 'GET',
         headers: {
@@ -228,23 +215,6 @@ const fetchMatchData = (searchTarget) =>{
         appendTrails(result, searchTarget, caption);
     })
     .catch(error => console.log('Trails fetch error: ', error));
-}
-
-const appendCampgrounds = (data) =>{
-    DOMElements.infoCampgrounds.fadeOut(400, () => {
-        DOMElements.infoCampgrounds.html('');
-        data.campgrounds.forEach((element) => {
-            const name = element.name;
-            const hyperlink = element.url;
-            let li = $('<li>');
-            let anchor = $('<a>').text(name).attr({
-                'href': hyperlink,
-                'target': '_blank'
-            });
-            li.append(anchor);
-            DOMElements.infoCampgrounds.append(li); 
-        });
-    })
 }
 
 const appendTrails = (data, match, caption) =>{
@@ -262,6 +232,8 @@ const appendTrails = (data, match, caption) =>{
             DOMElements.infoTrails.append(li);
         });
         if(!DOMElements.trailsAndCampgrounds) DOMElements.trailsAndCampgrounds = $('ul');
+        if(stats.matches === 9)
+            DOMElements.trailsAndCampgrounds.css('opactiy', 0)
         DOMElements.trailsAndCampgrounds.fadeIn(400);
     });
     if(stats.matches === 1) hideInitialText();
@@ -364,8 +336,8 @@ const setFinalMatchData = () => {
         DOMElements.finalMatchInfo = $('#final-match-info');
     }
     DOMElements.modalCaption.text(finalMatchCaption);
-    $('#camp, #trail').clone().css('opacity', '1').addClass('text-small').appendTo(DOMElements.finalMatchInfo);
-    DOMElements.trailsAndCampgrounds.css('opcaity', '1');
+    $('#trail').clone().css('opacity', '1').addClass('text-small').appendTo(DOMElements.finalMatchInfo);
+    DOMElements.trailsAndCampgrounds.css('opacity', '1');
 }
 
 const getAndSetHeight = () =>{
