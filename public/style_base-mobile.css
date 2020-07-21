@@ -266,7 +266,7 @@ header{
     transform: rotate(-232deg) translate(20%, 50%);
     height: 425px;
     width: 425px;
-    background-image: url(./assets/images/doubleArrowCircle.png);
+    background-image: url("./assets/images/doubleArrowCircle.png");
     background-size: contain;
     filter: brightness(83%) sepia(9) saturate(107) hue-rotate(201deg);
     overflow: hidden;
