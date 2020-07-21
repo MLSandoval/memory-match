@@ -85,7 +85,6 @@ const createCards = (cardImages, matchImages) => {
 }
 
 const shuffleCardsArr = () => {
-    console.log('shuffle cards called.');
     let max = DOMElements.cards.length;
     let temp;
     let index;
@@ -126,7 +125,7 @@ const flipCard = (event) => {
             }
             break;
         default: 
-            console.log('flipped status error');
+            console.error('flipped status error');
     }
 }
 
@@ -203,7 +202,7 @@ const fetchMatchData = (searchTarget) =>{
             lon = -119.5383;
             caption = 'Yosemite National Park, California';
             break;
-        default: console.log('No matching search target.');
+        default: console.error('No matching search target.');
     }
     fetch(`../proxy_campgrounds.php?lat=${lat}&lon=${lon}`, {
         method: 'GET',
@@ -215,7 +214,7 @@ const fetchMatchData = (searchTarget) =>{
     .then(result => {  
         appendCampgrounds(result);
     })
-    .catch(error => console.log('Campgrounds fetch error: ', error));
+    .catch(error => console.error('Campgrounds fetch error: ', error));
 
     fetch(`../proxy_trails.php?lat=${lat}&lon=${lon}`, {
         method: 'GET',
@@ -227,7 +226,7 @@ const fetchMatchData = (searchTarget) =>{
     .then(result => {
         appendTrails(result, searchTarget, caption);
     })
-    .catch(error => console.log('Trails fetch error: ', error));
+    .catch(error => console.error('Trails fetch error: ', error));
 }
 
 const appendCampgrounds = (data) =>{
@@ -305,7 +304,6 @@ const displayMatchImage = (imageURL, caption) => {
 }
 
 const setParkCaption = (caption) => {
-    console.log('display park caption called: ', caption);
     if(stats.matches === 9) finalMatchCaption = caption;
     DOMElements.imageCaption.text(caption);  
 }
@@ -365,7 +363,7 @@ const setFinalMatchData = () => {
     }
     DOMElements.modalCaption.text(finalMatchCaption);
     $('#camp, #trail').clone().css('opacity', '1').addClass('text-small').appendTo(DOMElements.finalMatchInfo);
-    DOMElements.trailsAndCampgrounds.css('opcaity', '1');
+    DOMElements.trailsAndCampgrounds.css('opacity', '1');
 }
 
 const getAndSetHeight = () =>{
@@ -389,10 +387,6 @@ const setEndQuote = () => {
         parkQuotes[index] = temp;
     }
     DOMElements.modalText.text(parkQuotes[0]);
-}
-
-const hoverResetButton = () => {
-    console.log('this on hover: ', this);
 }
 
 const resetGame = () => {
