@@ -1,8 +1,7 @@
 <?php
-require_once('./api_creds.php');
 require_once('error.php');
 
-header('Access-Control-Allow-Origin: https://natl-park-match.herokuapp.com/*');
+header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 set_exception_handler('error_handler');
 
@@ -26,6 +25,5 @@ curl_setopt_array($curl, array(
 $output = curl_exec($curl);
 curl_close($curl);
 
-print(curl_error($curl));
 print($output);
 ?>
