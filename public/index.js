@@ -203,7 +203,7 @@ const fetchMatchData = (searchTarget) =>{
             break;
         default: console.error('No matching search target');
     }
-    fetch(`proxy_trails.php?lat=${lat}&lon=${lon}`, {
+    fetch(`./proxy_trails.php?lat=${lat}&lon=${lon}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json'
