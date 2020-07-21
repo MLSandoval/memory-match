@@ -54,7 +54,7 @@ let finalMatchCaption = null;
 
 $(document).ready(function(){
     createCards(cardImageURLArray, parkImageURLArray);
-    // shuffleCardsArr();
+    shuffleCardsArr();
     appendCardsToDom();
     assignClickHandlers();
     updateStats();
@@ -85,7 +85,6 @@ const createCards = (cardImages, matchImages) => {
 }
 
 const shuffleCardsArr = () => {
-    console.log('shuffle cards called.');
     let max = DOMElements.cards.length;
     let temp;
     let index;
@@ -126,7 +125,7 @@ const flipCard = (event) => {
             }
             break;
         default: 
-            console.log('flipped status error');
+            console.error('Flipped status error');
     }
 }
 
@@ -202,7 +201,7 @@ const fetchMatchData = (searchTarget) =>{
             lon = -119.5383;
             caption = 'Yosemite National Park, California';
             break;
-        default: console.log('No matching search target.');
+        default: console.error('No matching search target');
     }
     fetch(`../proxy_trails.php?lat=${lat}&lon=${lon}`, {
         method: 'GET',
@@ -214,7 +213,7 @@ const fetchMatchData = (searchTarget) =>{
     .then(result => {
         appendTrails(result, searchTarget, caption);
     })
-    .catch(error => console.log('Trails fetch error: ', error));
+    .catch(error => console.error('Trails fetch error: ', error));
 }
 
 const appendTrails = (data, match, caption) =>{
@@ -277,7 +276,6 @@ const displayMatchImage = (imageURL, caption) => {
 }
 
 const setParkCaption = (caption) => {
-    console.log('display park caption called: ', caption);
     if(stats.matches === 9) finalMatchCaption = caption;
     DOMElements.imageCaption.text(caption);  
 }
@@ -361,10 +359,6 @@ const setEndQuote = () => {
         parkQuotes[index] = temp;
     }
     DOMElements.modalText.text(parkQuotes[0]);
-}
-
-const hoverResetButton = () => {
-    console.log('this on hover: ', this);
 }
 
 const resetGame = () => {
