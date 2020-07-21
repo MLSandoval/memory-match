@@ -1,36 +1,36 @@
 const cardImageURLArray = [
-    './assets/images/CardImages/Arches1.png',
-    './assets/images/CardImages/CraterLake1.png',
-    './assets/images/CardImages/DeathValley1.png',
-    './assets/images/CardImages/GrandCanyon1.png',
-    './assets/images/CardImages/JoshuaTree1.png',
-    './assets/images/CardImages/Sequoia1.png',
-    './assets/images/CardImages/SmokyMountains1.png',
-    './assets/images/CardImages/YellowstoneLogo1.png',
-    './assets/images/CardImages/Yosemite1.png'
+    'public/assets/images/CardImages/Arches1.png',
+    'public/assets/images/CardImages/CraterLake1.png',
+    'public/assets/images/CardImages/DeathValley1.png',
+    'public/assets/images/CardImages/GrandCanyon1.png',
+    'public/assets/images/CardImages/JoshuaTree1.png',
+    'public/assets/images/CardImages/Sequoia1.png',
+    'public/assets/images/CardImages/SmokyMountains1.png',
+    'public/assets/images/CardImages/YellowstoneLogo1.png',
+    'public/assets/images/CardImages/Yosemite1.png'
 ];
 const parkImageURLArray = [
-    './assets/images/MatchImages/ArchesImage600.png',
-    './assets/images/MatchImages/CraterLakeImage600.png',
-    './assets/images/MatchImages/DeathValley600.png',
-    './assets/images/MatchImages/GrandCanyon600.png',
-    './assets/images/MatchImages/JoshuaTreeImage600.png',
-    './assets/images/MatchImages/SequoiaImage600.png',
-    './assets/images/MatchImages/SmokyMountainsImage600.png',
-    './assets/images/MatchImages/YellowstoneImage600.png',
-    './assets/images/MatchImages/YosemiteImage600.png'
+    'public/assets/images/MatchImages/ArchesImage600.png',
+    'public/assets/images/MatchImages/CraterLakeImage600.png',
+    'public/assets/images/MatchImages/DeathValley600.png',
+    'public/assets/images/MatchImages/GrandCanyon600.png',
+    'public/assets/images/MatchImages/JoshuaTreeImage600.png',
+    'public/assets/images/MatchImages/SequoiaImage600.png',
+    'public/assets/images/MatchImages/SmokyMountainsImage600.png',
+    'public/assets/images/MatchImages/YellowstoneImage600.png',
+    'public/assets/images/MatchImages/YosemiteImage600.png'
 ];
 
 const bgParkImages = [
-    './assets/images/BGs/Arches.jpg',
-    './assets/images/BGs/CraterLakeResized.jpg',
-    './assets/images/BGs/DeathValleyResized.jpg',
-    './assets/images/BGs/GrandCanyon.jpg',
-    './assets/images/BGs/JoshuaTreeRezised.jpg',
-    './assets/images/BGs/SequoiaResized.jpg',
-    './assets/images/BGs/SmokyMountains.jpg',
-    './assets/images/BGs/YellowStone.jpg',
-    './assets/images/BGs/Yosemite.jpg'
+    'public/assets/images/BGs/Arches.jpg',
+    'public/assets/images/BGs/CraterLakeResized.jpg',
+    'public/assets/images/BGs/DeathValleyResized.jpg',
+    'public/assets/images/BGs/GrandCanyon.jpg',
+    'public/assets/images/BGs/JoshuaTreeRezised.jpg',
+    'public/assets/images/BGs/SequoiaResized.jpg',
+    'public/assets/images/BGs/SmokyMountains.jpg',
+    'public/assets/images/BGs/YellowStone.jpg',
+    'public/assets/images/BGs/Yosemite.jpg'
 ];
 
 const parkQuotes = [
@@ -71,7 +71,7 @@ const createCards = (cardImages, matchImages) => {
     let cardsArr = [];
     for(let i = 0; i < cardImages.length; i++){
         let cardContainer = $("<div>").addClass('card-container').attr('match-image', matchImages[i]);
-        let cardBack = $("<div>").addClass('card card-back').css('background-image', `url('./assets/images/CardImages/CardBack1.png')`);
+        let cardBack = $("<div>").addClass('card card-back').css('background-image', `url('public/assets/images/CardImages/CardBack1.png')`);
         let cardFace = $("<div>").addClass('card card-face').css('background-image', `url('${cardImages[i]}')`);
         cardContainer.append(cardBack, cardFace);
         cardsArr.push(cardContainer);
@@ -156,47 +156,47 @@ const fetchMatchData = (searchTarget) =>{
     let lon;
     let caption;
     switch(searchTarget){
-        case './assets/images/MatchImages/ArchesImage600.png':
+        case 'public/assets/images/MatchImages/ArchesImage600.png':
             lat = 38.733;
             lon = -109.592514;
             caption = 'Arches National Park, Utah';
             break;
-        case './assets/images/MatchImages/CraterLakeImage600.png':
+        case 'public/assets/images/MatchImages/CraterLakeImage600.png':
             lat = 42.9446;
             lon = -122.1090;
             caption = 'Crater Lake, Oregon';
             break;
-        case './assets/images/MatchImages/DeathValley600.png':
+        case 'public/assets/images/MatchImages/DeathValley600.png':
             lat = 36.5323;
             lon = -116.9325;
             caption = 'Death Valley, California';
             break;
-        case './assets/images/MatchImages/GrandCanyon600.png':
+        case 'public/assets/images/MatchImages/GrandCanyon600.png':
             lat = 36.1070;
             lon = -112.1130;
             caption = 'Grand Canyon, Arizona';
             break;
-        case './assets/images/MatchImages/JoshuaTreeImage600.png':
+        case 'public/assets/images/MatchImages/JoshuaTreeImage600.png':
             lat = 33.8818;
             lon = -115.9006;
             caption = 'Joshua Tree National Park, California';
             break;
-        case './assets/images/MatchImages/SequoiaImage600.png':
+        case 'public/assets/images/MatchImages/SequoiaImage600.png':
             lat = 36.4864;
             lon = -118.5658;
             caption = 'Sequoia National Park, California';
             break;
-        case './assets/images/MatchImages/SmokyMountainsImage600.png':
+        case 'public/assets/images/MatchImages/SmokyMountainsImage600.png':
             lat = 35.6117;
             lon = -83.4895;
             caption = 'Smoky Mountains National Park, Tennessee';
             break;
-        case './assets/images/MatchImages/YellowstoneImage600.png':
+        case 'public/assets/images/MatchImages/YellowstoneImage600.png':
             lat = 44.4280;
             lon = -110.5885;
             caption = 'Yellowstone National Park, Wyoming';
             break;
-        case './assets/images/MatchImages/YosemiteImage600.png':
+        case 'public/assets/images/MatchImages/YosemiteImage600.png':
             lat = 37.8651;
             lon = -119.5383;
             caption = 'Yosemite National Park, California';
