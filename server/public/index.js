@@ -85,7 +85,6 @@ const createCards = (cardImages, matchImages) => {
 }
 
 const shuffleCardsArr = () => {
-    console.log('shuffle cards called.');
     let max = DOMElements.cards.length;
     let temp;
     let index;
@@ -126,7 +125,7 @@ const flipCard = (event) => {
             }
             break;
         default: 
-            console.log('flipped status error');
+            console.error('Flipped status error');
     }
 }
 
@@ -150,8 +149,7 @@ const checkMatch = (flippedCards) => {
 }
 
 const fetchMatchData = (searchTarget) =>{
-    if(!DOMElements.infoCampgrounds){
-        DOMElements.infoCampgrounds = $('#campgrounds-ul');
+    if(!DOMElements.infoTrails){
         DOMElements.infoTrails = $('#trails-ul');
     }
     let lat;
@@ -203,20 +201,8 @@ const fetchMatchData = (searchTarget) =>{
             lon = -119.5383;
             caption = 'Yosemite National Park, California';
             break;
-        default: console.log('No matching search target.');
+        default: console.error('No matching search target');
     }
-    fetch(`../proxy_campgrounds.php?lat=${lat}&lon=${lon}`, {
-        method: 'GET',
-        headers: {
-            'content-type': 'application/json'
-        }
-    })
-    .then(result => result.json())
-    .then(result => {  
-        appendCampgrounds(result);
-    })
-    .catch(error => console.log('Campgrounds fetch error: ', error));
-
     fetch(`../proxy_trails.php?lat=${lat}&lon=${lon}`, {
         method: 'GET',
         headers: {
@@ -227,24 +213,7 @@ const fetchMatchData = (searchTarget) =>{
     .then(result => {
         appendTrails(result, searchTarget, caption);
     })
-    .catch(error => console.log('Trails fetch error: ', error));
-}
-
-const appendCampgrounds = (data) =>{
-    DOMElements.infoCampgrounds.fadeOut(400, () => {
-        DOMElements.infoCampgrounds.html('');
-        data.campgrounds.forEach((element) => {
-            const name = element.name;
-            const hyperlink = element.url;
-            let li = $('<li>');
-            let anchor = $('<a>').text(name).attr({
-                'href': hyperlink,
-                'target': '_blank'
-            });
-            li.append(anchor);
-            DOMElements.infoCampgrounds.append(li); 
-        });
-    })
+    .catch(error => console.error('Trails fetch error: ', error));
 }
 
 const appendTrails = (data, match, caption) =>{
@@ -262,6 +231,8 @@ const appendTrails = (data, match, caption) =>{
             DOMElements.infoTrails.append(li);
         });
         if(!DOMElements.trailsAndCampgrounds) DOMElements.trailsAndCampgrounds = $('ul');
+        if(stats.matches === 9)
+            DOMElements.trailsAndCampgrounds.css('opactiy', 0)
         DOMElements.trailsAndCampgrounds.fadeIn(400);
     });
     if(stats.matches === 1) hideInitialText();
@@ -305,7 +276,6 @@ const displayMatchImage = (imageURL, caption) => {
 }
 
 const setParkCaption = (caption) => {
-    console.log('display park caption called: ', caption);
     if(stats.matches === 9) finalMatchCaption = caption;
     DOMElements.imageCaption.text(caption);  
 }
@@ -364,8 +334,8 @@ const setFinalMatchData = () => {
         DOMElements.finalMatchInfo = $('#final-match-info');
     }
     DOMElements.modalCaption.text(finalMatchCaption);
-    $('#camp, #trail').clone().css('opacity', '1').addClass('text-small').appendTo(DOMElements.finalMatchInfo);
-    DOMElements.trailsAndCampgrounds.css('opcaity', '1');
+    $('#trail').clone().css('opacity', '1').addClass('text-small').appendTo(DOMElements.finalMatchInfo);
+    DOMElements.trailsAndCampgrounds.css('opacity', '1');
 }
 
 const getAndSetHeight = () =>{
@@ -389,10 +359,6 @@ const setEndQuote = () => {
         parkQuotes[index] = temp;
     }
     DOMElements.modalText.text(parkQuotes[0]);
-}
-
-const hoverResetButton = () => {
-    console.log('this on hover: ', this);
 }
 
 const resetGame = () => {
