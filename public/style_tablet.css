@@ -10,9 +10,12 @@ body{
 .image-caption{
     font-size: 1rem;
 }
+.initial-instructions-text{
+    font-size: 1.6rem;
+}
 .initial-info-box{
     padding-top: 13%;
-    font-size: 1.75rem;
+    font-size: 1.6rem;
 }
 .info-box{
     padding-left: 3%;

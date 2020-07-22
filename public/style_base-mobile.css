@@ -16,6 +16,7 @@ body{
     padding: 5px;
     font-size: 1rem;
     background: url("./assets/images/BGs/PurpleMountains.jpg") no-repeat center center;
+    background-size: cover;
     margin: auto;
     padding: 0;
     font-family: 'Oxygen', sans-serif;
