@@ -264,6 +264,7 @@ header{
     border: 1px rgb(187, 0, 0) solid;
     margin-right: 5px;
     opacity: 50%;
+    white-space: nowrap;
 }
 .modal-button:hover{
     opacity:100%;
